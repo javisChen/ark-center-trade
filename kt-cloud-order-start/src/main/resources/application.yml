@@ -30,4 +30,4 @@ spring:
     allow-bean-definition-overriding: true
 # mybatis
 mybatis-plus:
-  mapper-locations: classpath:com/kt/cloud/dao/*.xml
+  mapper-locations: classpath:com/kt/cloud/order/dao/mapper/xml/*.xml
