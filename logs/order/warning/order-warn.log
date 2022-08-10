@@ -1,0 +1,6 @@
+2022-08-10 23:44:09.928 [WARN ] [cip:192.168.31.21][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-10 23:44:11.268 [WARN ] [cip:192.168.31.21][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-10 23:44:11.288 [WARN ] [cip:192.168.31.21][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-10 23:44:22.546 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-10 23:44:23.032 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-10 23:44:23.105 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void

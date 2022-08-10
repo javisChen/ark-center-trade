@@ -1,11 +1,8 @@
 package com.kt.cloud.order.module.order.dto.request;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.kt.cloud.order.module.orderitem.dto.request.OrderItemUpdateReqDTO;
@@ -23,7 +20,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "OrderUpdateReqDTO对象", description = "订单表")
-public class OrderUpdateReqDTO implements Serializable {
+public class OrderCreateDTO implements Serializable {
 
     @ApiModelProperty(value = "订单类型 enums[SHOP,商城订单,1]", required = true)
     @NotNull(message = "订单类型 enums[SHOP,商城订单,1]不能为空")
@@ -32,10 +29,6 @@ public class OrderUpdateReqDTO implements Serializable {
     @ApiModelProperty(value = "下单渠道 enums[PC,PC,1;APP,APP,2;MINI,小程序,3]", required = true)
     @NotNull(message = "下单渠道 enums[PC,PC,1;APP,APP,2;MINI,小程序,3]不能为空")
     private Integer orderChannel;
-
-    @ApiModelProperty(value = "订单状态 enums[PENDING_PAY,待支付,1;PENDING_DELIVER,待发货,2;PENDING_RECEIVE,待收货,3;PENDING_EVALUATE,待评价,4;SUCCESS,交易成功,5]", required = true)
-    @NotNull(message = "订单状态 enums[PENDING_PAY,待支付,1;PENDING_DELIVER,待发货,2;PENDING_RECEIVE,待收货,3;PENDING_EVALUATE,待评价,4;SUCCESS,交易成功,5]不能为空")
-    private Integer orderStatus;
 
     @ApiModelProperty(value = "买家ID", required = true)
     @NotNull(message = "买家ID不能为空")

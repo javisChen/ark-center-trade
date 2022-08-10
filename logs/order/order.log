@@ -1,0 +1,38 @@
+2022-08-10 23:44:09.448 [INFO ] [cip:192.168.31.21][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-10 23:44:09.928 [WARN ] [cip:192.168.31.21][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-10 23:44:09.990 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-10 23:44:09.990 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-10 23:44:11.268 [WARN ] [cip:192.168.31.21][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-10 23:44:11.288 [WARN ] [cip:192.168.31.21][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-10 23:44:11.544 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-10 23:44:11.597 [INFO ] [cip:192.168.31.21][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-10 23:44:12.784 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-10 23:44:12.787 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-10 23:44:12.828 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 31ms. Found 0 Redis repository interfaces.
+2022-08-10 23:44:13.148 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=2c8612f8-1c4f-3ced-a006-8b43091d4574
+2022-08-10 23:44:14.320 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-10 23:44:14.332 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-10 23:44:14.332 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-10 23:44:14.333 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-10 23:44:14.438 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-10 23:44:14.439 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 2783 ms
+2022-08-10 23:44:14.600 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-10 23:44:14.607 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-10 23:44:15.328 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-10 23:44:17.035 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-10 23:44:18.114 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-10 23:44:18.124 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-10 23:44:18.558 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.w.a.CloudWebAutoConfiguration:40 - enable [kt-component-web-spring-boot-starter]
+2022-08-10 23:44:18.952 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.e.a.ExceptionAutoConfiguration:25 - enable [kt-component-exception-spring-boot-starter]
+2022-08-10 23:44:19.020 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:181 - Initializing ExecutorService 'applicationTaskExecutor'
+2022-08-10 23:44:19.214 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:181 - Initializing ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-10 23:44:19.296 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.k.c.c.a.CloudCommonAutoConfiguration:17 - enable [kt-component-common-spring-boot-starter]
+2022-08-10 23:44:20.614 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-10 23:44:20.614 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-10 23:44:21.387 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8085"]
+2022-08-10 23:44:21.463 [INFO ] [cip:192.168.31.21][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:220 - Tomcat started on port(s): 8085 (http) with context path ''
+2022-08-10 23:44:21.529 [INFO ] [cip:192.168.31.21][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:75 - nacos registry, DEFAULT_GROUP order 192.168.31.21:8085 register finished
+2022-08-10 23:44:22.546 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-10 23:44:23.032 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-10 23:44:23.105 [WARN ] [cip:192.168.31.21][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-10 23:44:23.334 [INFO ] [cip:192.168.31.21][xid:] [tid:main] com.kt.cloud.order.Application:61 - Started Application in 14.676 seconds (JVM running for 15.63)

@@ -1,6 +1,6 @@
 package com.kt.cloud.order.module.order.controller;
 
-import com.kt.cloud.order.module.order.dto.request.OrderUpdateReqDTO;
+import com.kt.cloud.order.module.order.dto.request.OrderCreateDTO;
 import com.kt.cloud.order.module.order.dto.request.OrderPageQueryReqDTO;
 import com.kt.cloud.order.module.order.dto.response.OrderRespDTO;
 import com.kt.cloud.order.module.order.service.OrderService;
@@ -26,7 +26,7 @@ import com.kt.component.web.base.BaseController;
  * @author EOP
  * @since 2022-08-09
  */
-@Api(tags = "订单表")
+@Api(tags = "订单服务")
 @Validated
 @RestController
 @RequestMapping("/v1/order")
@@ -40,13 +40,13 @@ public class OrderController extends BaseController {
 
     @ApiOperation(value = "创建订单")
     @PostMapping("/create")
-    public SingleResponse<Long> create(@RequestBody @Validated OrderUpdateReqDTO reqDTO) {
+    public SingleResponse<Long> create(@RequestBody @Validated OrderCreateDTO reqDTO) {
         return SingleResponse.ok(orderService.createOrder(reqDTO));
     }
 
     @ApiOperation(value = "修改订单")
     @PostMapping("/update")
-    public SingleResponse<Long> update(@RequestBody @Validated(ValidateGroup.Update.class) OrderUpdateReqDTO reqDTO) {
+    public SingleResponse<Long> update(@RequestBody @Validated(ValidateGroup.Update.class) OrderCreateDTO reqDTO) {
         return SingleResponse.ok(orderService.updateOrder(reqDTO));
     }
 
