@@ -28,6 +28,8 @@ spring:
     port: 6379
   main:
     allow-bean-definition-overriding: true
+  profiles:
+    active: dev
 # mybatis
 mybatis-plus:
   mapper-locations: classpath:com/kt/cloud/order/dao/mapper/xml/*.xml

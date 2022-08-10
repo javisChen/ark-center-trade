@@ -1,9 +1,15 @@
 package com.kt.cloud.order.module.order.service;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.poi.excel.ExcelUtil;
 import com.google.common.collect.Lists;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.kt.cloud.commodity.api.sku.request.SkuInfoGetReqDTO;
+import com.kt.cloud.commodity.api.sku.response.SkuRespDTO;
+import com.kt.cloud.order.acl.sku.SkuAclAdapter;
 import com.kt.cloud.order.dao.entity.OrderDO;
 import com.kt.cloud.order.dao.entity.OrderItemDO;
 import com.kt.cloud.order.dao.entity.ReceiveDO;
@@ -18,6 +24,7 @@ import com.kt.cloud.order.module.orderitem.service.OrderItemService;
 import com.kt.cloud.order.module.receive.dto.request.ReceiveCreateReqDTO;
 import com.kt.cloud.order.module.receive.service.ReceiveService;
 import com.kt.component.dto.PageResponse;
+import com.kt.component.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -26,6 +33,10 @@ import com.kt.component.orm.mybatis.base.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -41,44 +52,69 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
 
     private final ReceiveService receiveService;
     private final OrderItemService orderItemService;
+    private final SkuAclAdapter skuAclAdapter;
 
-    public OrderService(ReceiveService receiveService, OrderItemService orderItemService) {
+    public OrderService(ReceiveService receiveService, OrderItemService orderItemService, SkuAclAdapter skuAclAdapter) {
         this.receiveService = receiveService;
         this.orderItemService = orderItemService;
+        this.skuAclAdapter = skuAclAdapter;
     }
 
     @Transactional(rollbackFor = Throwable.class)
     public Long createOrder(OrderUpdateReqDTO reqDTO) {
 
         // 生成工单号
-        String code = IdUtil.getSnowflakeNextIdStr();
+        String orderCode = IdUtil.getSnowflakeNextIdStr();
         // 根据SKU_ID获取商品信息
+        List<OrderItemUpdateReqDTO> orderItems = reqDTO.getOrderItems();
+        List<Long> skuIds = CollUtil.map(orderItems, OrderItemUpdateReqDTO::getSkuId, true);
+        SkuInfoGetReqDTO skuInfoGetReqDTO = new SkuInfoGetReqDTO();
+        skuInfoGetReqDTO.setSkuIds(skuIds);
+        List<SkuRespDTO> skuInfoList = skuAclAdapter.getSkuInfoList(skuInfoGetReqDTO);
+        Map<Long, SkuRespDTO> skuMap = Optional
+                .ofNullable(skuInfoList)
+                .orElseThrow(() -> new BizException("SKU列表为空"))
+                .stream()
+                .collect(Collectors.toMap(SkuRespDTO::getId, Function.identity()));
         // 计算各项价格
-
-        // 计算订单总价格
-        Integer amount = 0;
+        List<OrderItemDO> orderItemList = Lists.newArrayList();
+        Integer totalAmount = 0;
+        for (OrderItemUpdateReqDTO orderItem :orderItems) {
+            OrderItemDO orderItemDO = new OrderItemDO();
+            SkuRespDTO skuRespDTO = skuMap.get(orderItemDO.getSkuId());
+            orderItemDO.setOrderCode(orderCode);
+            orderItemDO.setPrice(skuRespDTO.getSalesPrice());
+            orderItemDO.setPicUrl(skuRespDTO.getMainPicture());
+            int amount = skuRespDTO.getSalesPrice() * orderItem.getQuantity();
+            totalAmount += amount;
+            orderItemDO.setExpectAmount(amount);
+            // todo 后期开发计算优惠券等方法
+            orderItemDO.setActualAmount(amount);
+            orderItemDO.setQuantity(orderItem.getQuantity());
+            orderItemList.add(orderItemDO);
+        }
         // 组装订单数据
-        OrderDO orderDO = assembleOrderDO(reqDTO, code, amount);
+        OrderDO orderDO = assembleOrderDO(reqDTO, orderCode, totalAmount);
         // 保存订单
         Long orderId = saveOrder(orderDO);
         // 保存订单明细
         saveOrderItems(reqDTO, orderDO);
-
         // 保存收货信息
         saveReceive(reqDTO, orderId);
         return orderId;
     }
 
     @NotNull
-    private OrderDO assembleOrderDO(OrderUpdateReqDTO reqDTO, String code, Integer amount) {
+    private OrderDO assembleOrderDO(OrderUpdateReqDTO reqDTO, String code, Integer totalAmount) {
         OrderDO orderDO = new OrderDO();
         orderDO.setCode(code);
         orderDO.setOrderType(reqDTO.getOrderType());
         orderDO.setOrderChannel(reqDTO.getOrderChannel());
         orderDO.setOrderStatus(OrderDO.OrderStatus.PENDING_PAY.getValue());
         orderDO.setPayStatus(OrderDO.PayStatus.PENDING_PAY.getValue());
-        orderDO.setExpectAmount(amount);
-        orderDO.setActualAmount(amount);
+        orderDO.setExpectAmount(totalAmount);
+        orderDO.setActualAmount(totalAmount);
+        // todo 开发运费功能
         orderDO.setFreightAmount(0);
         orderDO.setBuyerRemark(reqDTO.getBuyerRemark());
         orderDO.setBuyerId(reqDTO.getBuyerId());

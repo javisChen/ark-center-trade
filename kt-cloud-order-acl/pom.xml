@@ -13,13 +13,22 @@
     <artifactId>kt-cloud-order-acl</artifactId>
 
     <properties>
+        <kt-cloud-commodity-api.version>1.0.0-SNAPSHOT</kt-cloud-commodity-api.version>
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.kt.cloud</groupId>
             <artifactId>kt-cloud-order-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.kt.cloud</groupId>
+            <artifactId>kt-cloud-commodity-api</artifactId>
+            <version>${kt-cloud-commodity-api.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
