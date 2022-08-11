@@ -67,4 +67,12 @@ public class OrderItemDO extends BaseEntity {
     @TableField("pic_url")
     private String picUrl;
 
+    /**
+     * SKU销售参数JSON
+     */
+    @TableField("spec_data")
+    private String specData;
+
+
+
 }
