@@ -1,0 +1,379 @@
+2022-08-22 16:46:25.812 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 16:46:26.296 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 16:46:26.297 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 16:46:26.529 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 16:46:30.847 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 16:46:30.853 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 16:46:30.874 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 16:46:30.878 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 16:46:32.054 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-22 16:46:32.059 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-22 16:46:32.098 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 23ms. Found 0 Redis repository interfaces.
+2022-08-22 16:46:32.415 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=75781b0a-6379-343c-a2eb-b87f098c6cf9
+2022-08-22 16:46:33.223 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-22 16:46:33.241 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-22 16:46:33.242 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-22 16:46:33.242 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-22 16:46:33.435 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-22 16:46:33.436 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 2535 ms
+2022-08-22 16:46:33.539 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-22 16:46:33.543 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-22 16:46:34.176 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-22 16:46:36.442 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-22 16:46:42.993 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-22 16:46:43.004 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-22 16:46:43.208 [WARN ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:559 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orderPayNotifyMQProcessor' defined in file [C:\Code\kt\kt-cloud-order\kt-cloud-order-service\target\classes\com\kt\cloud\order\module\order\mq\consumer\OrderPayNotifyMQProcessor.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.kt.component.mq.core.serializer.MessageCodec' available
+2022-08-22 16:46:43.211 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2071 - {dataSource-1} closing ...
+2022-08-22 16:46:43.222 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2144 - {dataSource-1} closed
+2022-08-22 16:46:43.242 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2022-08-22 16:46:43.277 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.a.l.ConditionEvaluationReportLoggingListener:136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-22 16:46:43.301 [ERROR] [cip:10.222.16.125][xid:] [tid:main] o.s.b.d.LoggingFailureAnalysisReporter:40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'com.kt.component.mq.core.serializer.MessageCodec' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.kt.component.mq.core.serializer.MessageCodec' in your configuration.
+
+2022-08-22 16:46:44.282 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:108 - [HttpClientBeanHolder] Start destroying common HttpClient
+2022-08-22 17:14:27.524 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 17:14:28.144 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:14:28.145 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:14:28.322 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 17:14:32.329 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 17:14:32.351 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 17:14:32.368 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 17:14:32.375 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 17:14:34.337 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-22 17:14:34.342 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-22 17:14:34.401 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 41ms. Found 0 Redis repository interfaces.
+2022-08-22 17:14:34.859 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=a98c0e5c-efc8-3777-b567-a1189a3e5560
+2022-08-22 17:14:36.061 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-22 17:14:36.077 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:14:36.078 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-22 17:14:36.078 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-22 17:14:36.259 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-22 17:14:36.261 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 3847 ms
+2022-08-22 17:14:36.343 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-22 17:14:36.347 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-22 17:14:36.789 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-22 17:14:38.357 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-22 17:14:39.339 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-22 17:14:39.349 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-22 17:14:39.445 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.MQIntegrationListenAutoConfiguration:19 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:14:39.663 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.w.a.CloudWebAutoConfiguration:40 - enable [kt-component-web-spring-boot-starter]
+2022-08-22 17:14:39.980 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.e.a.ExceptionAutoConfiguration:25 - enable [kt-component-exception-spring-boot-starter]
+2022-08-22 17:14:40.041 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:181 - Initializing ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:14:40.516 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:181 - Initializing ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:14:40.561 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.CloudCommonAutoConfiguration:17 - enable [kt-component-common-spring-boot-starter]
+2022-08-22 17:14:40.571 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.RocketMQAutoConfiguration:22 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:14:40.630 [WARN ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:559 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rocketMessageService' defined in class path resource [com/kt/component/mq/integration/autoconfigure/RocketMQAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.kt.component.mq.rocket.RocketMQMessageService]: Factory method 'rocketMessageService' threw exception; nested exception is java.lang.NullPointerException: Cannot invoke "com.kt.component.mq.rocket.configuation.RocketMQConfiguration$Producer.getGroup()" because "producer" is null
+2022-08-22 17:14:40.631 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:218 - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:14:40.638 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2071 - {dataSource-1} closing ...
+2022-08-22 17:14:40.648 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2144 - {dataSource-1} closed
+2022-08-22 17:14:40.666 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2022-08-22 17:14:40.698 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.a.l.ConditionEvaluationReportLoggingListener:136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-22 17:14:40.725 [ERROR] [cip:10.222.16.125][xid:] [tid:main] o.s.boot.SpringApplication:834 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rocketMessageService' defined in class path resource [com/kt/component/mq/integration/autoconfigure/RocketMQAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.kt.component.mq.rocket.RocketMQMessageService]: Factory method 'rocketMessageService' threw exception; nested exception is java.lang.NullPointerException: Cannot invoke "com.kt.component.mq.rocket.configuation.RocketMQConfiguration$Producer.getGroup()" because "producer" is null
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1181)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:755)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:402)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1247)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1236)
+	at com.kt.cloud.order.Application.main(Application.java:17)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.kt.component.mq.rocket.RocketMQMessageService]: Factory method 'rocketMessageService' threw exception; nested exception is java.lang.NullPointerException: Cannot invoke "com.kt.component.mq.rocket.configuation.RocketMQConfiguration$Producer.getGroup()" because "producer" is null
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:652)
+	... 20 common frames omitted
+Caused by: java.lang.NullPointerException: Cannot invoke "com.kt.component.mq.rocket.configuation.RocketMQConfiguration$Producer.getGroup()" because "producer" is null
+	at com.kt.component.mq.rocket.RocketMQMessageService.initProducer(RocketMQMessageService.java:31)
+	at com.kt.component.mq.rocket.RocketMQMessageService.<init>(RocketMQMessageService.java:25)
+	at com.kt.component.mq.integration.autoconfigure.RocketMQAutoConfiguration.rocketMessageService(RocketMQAutoConfiguration.java:34)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 21 common frames omitted
+2022-08-22 17:14:41.667 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:136 - [NotifyCenter] Start destroying Publisher
+2022-08-22 17:14:41.668 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:153 - [NotifyCenter] Destruction of the end
+2022-08-22 17:14:41.671 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:108 - [HttpClientBeanHolder] Start destroying common HttpClient
+2022-08-22 17:14:41.672 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:114 - [HttpClientBeanHolder] Destruction of the end
+2022-08-22 17:24:45.776 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 17:24:46.239 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:24:46.240 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:24:46.409 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 17:24:48.560 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 17:24:48.567 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 17:24:48.580 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 17:24:48.585 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 17:24:49.744 [ERROR] [cip:10.222.16.125][xid:] [tid:main] o.s.boot.SpringApplication:834 - Application run failed
+java.lang.IllegalStateException: Error processing condition on com.kt.component.mq.integration.autoconfigure.RocketMQAutoConfiguration.rocketMessageService
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:60)
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForBeanMethod(ConfigurationClassBeanDefinitionReader.java:184)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:144)
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:332)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:237)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:280)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:707)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:533)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:755)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:402)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1247)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1236)
+	at com.kt.cloud.order.Application.main(Application.java:17)
+Caused by: java.lang.IllegalStateException: The name or value attribute of @ConditionalOnProperty must be specified
+	at org.springframework.util.Assert.state(Assert.java:76)
+	at org.springframework.boot.autoconfigure.condition.OnPropertyCondition$Spec.getNames(OnPropertyCondition.java:129)
+	at org.springframework.boot.autoconfigure.condition.OnPropertyCondition$Spec.<init>(OnPropertyCondition.java:122)
+	at org.springframework.boot.autoconfigure.condition.OnPropertyCondition.determineOutcome(OnPropertyCondition.java:88)
+	at org.springframework.boot.autoconfigure.condition.OnPropertyCondition.getMatchOutcome(OnPropertyCondition.java:55)
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47)
+	... 18 common frames omitted
+2022-08-22 17:24:49.748 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:136 - [NotifyCenter] Start destroying Publisher
+2022-08-22 17:24:49.748 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:108 - [HttpClientBeanHolder] Start destroying common HttpClient
+2022-08-22 17:24:49.749 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:153 - [NotifyCenter] Destruction of the end
+2022-08-22 17:24:49.749 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:114 - [HttpClientBeanHolder] Destruction of the end
+2022-08-22 17:26:00.689 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 17:26:01.428 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:26:01.429 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:26:01.581 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 17:26:05.801 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 17:26:05.811 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 17:26:05.827 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 17:26:05.835 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 17:26:07.153 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-22 17:26:07.157 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-22 17:26:07.191 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces.
+2022-08-22 17:26:07.434 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=250e7471-9015-3bef-8943-7031afce9e3b
+2022-08-22 17:26:08.080 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-22 17:26:08.090 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:26:08.090 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-22 17:26:08.091 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-22 17:26:08.222 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-22 17:26:08.222 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 2356 ms
+2022-08-22 17:26:08.303 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-22 17:26:08.308 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-22 17:26:08.824 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-22 17:26:10.772 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-22 17:26:11.518 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-22 17:26:11.527 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-22 17:26:11.622 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.MQIntegrationListenAutoConfiguration:19 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:26:11.774 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.w.a.CloudWebAutoConfiguration:40 - enable [kt-component-web-spring-boot-starter]
+2022-08-22 17:26:12.011 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.e.a.ExceptionAutoConfiguration:25 - enable [kt-component-exception-spring-boot-starter]
+2022-08-22 17:26:12.056 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:181 - Initializing ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:26:12.399 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:181 - Initializing ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:26:12.429 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.CloudCommonAutoConfiguration:17 - enable [kt-component-common-spring-boot-starter]
+2022-08-22 17:26:12.437 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.RocketMQAutoConfiguration:24 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:26:13.162 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:26:13.163 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:26:13.427 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:26:13.462 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:220 - Tomcat started on port(s): 8085 (http) with context path ''
+2022-08-22 17:26:13.479 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:75 - nacos registry, DEFAULT_GROUP order 10.222.16.125:8085 register finished
+2022-08-22 17:26:13.932 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:14.061 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:14.098 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:14.161 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:61 - Started Application in 15.168 seconds (JVM running for 16.337)
+2022-08-22 17:26:14.492 [ERROR] [cip:10.222.16.125][xid:] [tid:main] c.k.c.mq.integration.MQListenStarter:56 - [mq listen] processor: [com.kt.cloud.order.module.order.mq.consumer.OrderPayNotifyMQProcessor] listen error
+2022-08-22 17:26:14.494 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.a.l.ConditionEvaluationReportLoggingListener:136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-22 17:26:14.533 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:218 - Shutting down ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:26:14.539 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:94 - De-registering from Nacos Server now...
+2022-08-22 17:26:14.543 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:114 - De-registration finished.
+2022-08-22 17:26:15.211 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:218 - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:26:15.218 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2071 - {dataSource-1} closing ...
+2022-08-22 17:26:15.226 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2144 - {dataSource-1} closed
+2022-08-22 17:26:15.249 [ERROR] [cip:10.222.16.125][xid:] [tid:main] o.s.boot.SpringApplication:834 - Application run failed
+java.lang.IllegalStateException: Failed to execute ApplicationRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:786)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:773)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1247)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1236)
+	at com.kt.cloud.order.Application.main(Application.java:17)
+Caused by: com.kt.component.mq.exception.MQListenException: java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at com.kt.component.mq.integration.MQListenStarter.doListen(MQListenStarter.java:57)
+	at com.kt.component.mq.integration.MQListenStarter.lambda$startListen$0(MQListenStarter.java:38)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721)
+	at com.kt.component.mq.integration.MQListenStarter.startListen(MQListenStarter.java:38)
+	at com.kt.component.mq.integration.MQListenStarter.run(MQListenStarter.java:32)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:783)
+	... 5 common frames omitted
+Caused by: java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:679)
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:509)
+	at org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.updateTopicSubscribeInfoWhenSubscriptionChanged(DefaultMQPushConsumerImpl.java:871)
+	at org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.start(DefaultMQPushConsumerImpl.java:654)
+	at org.apache.rocketmq.client.consumer.DefaultMQPushConsumer.start(DefaultMQPushConsumer.java:698)
+	at com.kt.component.mq.rocket.listener.RocketMQListener.listen(RocketMQListener.java:49)
+	at com.kt.component.mq.integration.MQListenStarter.doListen(MQListenStarter.java:53)
+	... 10 common frames omitted
+Caused by: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at org.apache.rocketmq.remoting.netty.NettyRemotingClient.invokeSync(NettyRemotingClient.java:394)
+	at org.apache.rocketmq.client.impl.MQClientAPIImpl.getTopicRouteInfoFromNameServer(MQClientAPIImpl.java:1365)
+	at org.apache.rocketmq.client.impl.MQClientAPIImpl.getTopicRouteInfoFromNameServer(MQClientAPIImpl.java:1355)
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:622)
+	... 16 common frames omitted
+2022-08-22 17:26:29.723 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:136 - [NotifyCenter] Start destroying Publisher
+2022-08-22 17:26:29.723 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:108 - [HttpClientBeanHolder] Start destroying common HttpClient
+2022-08-22 17:26:29.724 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:153 - [NotifyCenter] Destruction of the end
+2022-08-22 17:26:29.724 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:114 - [HttpClientBeanHolder] Destruction of the end
+2022-08-22 17:26:34.499 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 17:26:34.845 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:26:34.845 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:26:34.956 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 17:26:36.565 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 17:26:36.570 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 17:26:36.580 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 17:26:36.584 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 17:26:37.436 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-22 17:26:37.439 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-22 17:26:37.469 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces.
+2022-08-22 17:26:37.729 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=250e7471-9015-3bef-8943-7031afce9e3b
+2022-08-22 17:26:38.337 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-22 17:26:38.349 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:26:38.349 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-22 17:26:38.349 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-22 17:26:38.497 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-22 17:26:38.497 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 1892 ms
+2022-08-22 17:26:38.590 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-22 17:26:38.595 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-22 17:26:39.087 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-22 17:26:40.789 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-22 17:26:41.586 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-22 17:26:41.599 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-22 17:26:41.695 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.MQIntegrationListenAutoConfiguration:19 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:26:41.893 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.w.a.CloudWebAutoConfiguration:40 - enable [kt-component-web-spring-boot-starter]
+2022-08-22 17:26:42.241 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.e.a.ExceptionAutoConfiguration:25 - enable [kt-component-exception-spring-boot-starter]
+2022-08-22 17:26:42.329 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:181 - Initializing ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:26:42.880 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:181 - Initializing ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:26:42.926 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.CloudCommonAutoConfiguration:17 - enable [kt-component-common-spring-boot-starter]
+2022-08-22 17:26:42.941 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.RocketMQAutoConfiguration:24 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:26:44.161 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:26:44.161 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:26:46.695 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:26:46.925 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:220 - Tomcat started on port(s): 8085 (http) with context path ''
+2022-08-22 17:26:47.700 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:75 - nacos registry, DEFAULT_GROUP order 10.222.16.125:8085 register finished
+2022-08-22 17:26:50.682 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:50.835 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:50.925 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:26:50.987 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:61 - Started Application in 17.578 seconds (JVM running for 18.651)
+2022-08-22 17:27:09.569 [ERROR] [cip:10.222.16.125][xid:] [tid:main] c.k.c.mq.integration.MQListenStarter:56 - [mq listen] processor: [com.kt.cloud.order.module.order.mq.consumer.OrderPayNotifyMQProcessor] listen error
+2022-08-22 17:27:09.574 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.a.l.ConditionEvaluationReportLoggingListener:136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-22 17:27:09.640 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:218 - Shutting down ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:27:09.647 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:94 - De-registering from Nacos Server now...
+2022-08-22 17:27:09.653 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:114 - De-registration finished.
+2022-08-22 17:27:09.966 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:218 - Shutting down ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:27:09.973 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2071 - {dataSource-1} closing ...
+2022-08-22 17:27:09.983 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:2144 - {dataSource-1} closed
+2022-08-22 17:27:10.018 [ERROR] [cip:10.222.16.125][xid:] [tid:main] o.s.boot.SpringApplication:834 - Application run failed
+java.lang.IllegalStateException: Failed to execute ApplicationRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:786)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:773)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:319)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1247)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1236)
+	at com.kt.cloud.order.Application.main(Application.java:17)
+Caused by: com.kt.component.mq.exception.MQListenException: java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at com.kt.component.mq.integration.MQListenStarter.doListen(MQListenStarter.java:57)
+	at com.kt.component.mq.integration.MQListenStarter.lambda$startListen$0(MQListenStarter.java:38)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721)
+	at com.kt.component.mq.integration.MQListenStarter.startListen(MQListenStarter.java:38)
+	at com.kt.component.mq.integration.MQListenStarter.run(MQListenStarter.java:32)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:783)
+	... 5 common frames omitted
+Caused by: java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:679)
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:509)
+	at org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.updateTopicSubscribeInfoWhenSubscriptionChanged(DefaultMQPushConsumerImpl.java:871)
+	at org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.start(DefaultMQPushConsumerImpl.java:654)
+	at org.apache.rocketmq.client.consumer.DefaultMQPushConsumer.start(DefaultMQPushConsumer.java:698)
+	at com.kt.component.mq.rocket.listener.RocketMQListener.listen(RocketMQListener.java:49)
+	at com.kt.component.mq.integration.MQListenStarter.doListen(MQListenStarter.java:53)
+	... 10 common frames omitted
+Caused by: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+	at org.apache.rocketmq.remoting.netty.NettyRemotingClient.invokeSync(NettyRemotingClient.java:394)
+	at org.apache.rocketmq.client.impl.MQClientAPIImpl.getTopicRouteInfoFromNameServer(MQClientAPIImpl.java:1365)
+	at org.apache.rocketmq.client.impl.MQClientAPIImpl.getTopicRouteInfoFromNameServer(MQClientAPIImpl.java:1355)
+	at org.apache.rocketmq.client.impl.factory.MQClientInstance.updateTopicRouteInfoFromNameServer(MQClientInstance.java:622)
+	... 16 common frames omitted
+2022-08-22 17:28:04.732 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:108 - [HttpClientBeanHolder] Start destroying common HttpClient
+2022-08-22 17:28:04.732 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:136 - [NotifyCenter] Start destroying Publisher
+2022-08-22 17:28:04.733 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-9] c.a.nacos.common.notify.NotifyCenter:153 - [NotifyCenter] Destruction of the end
+2022-08-22 17:28:04.733 [WARN ] [cip:10.222.16.125][xid:] [tid:Thread-2] c.a.n.c.http.HttpClientBeanHolder:114 - [HttpClientBeanHolder] Destruction of the end
+2022-08-22 17:28:09.647 [INFO ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.h.validator.internal.util.Version:21 - HV000001: Hibernate Validator 6.1.7.Final
+2022-08-22 17:28:09.994 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:28:09.994 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:28:10.105 [WARN ] [cip:10.222.16.125][xid:] [tid:background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder:127 - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-08-22 17:28:11.911 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order] & group[DEFAULT_GROUP]
+2022-08-22 17:28:11.915 [WARN ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.c.NacosPropertySourceBuilder:87 - Ignore the empty nacos configuration and get it based on dataId[order.yml] & group[DEFAULT_GROUP]
+2022-08-22 17:28:11.923 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.b.c.PropertySourceBootstrapConfiguration:112 - Located property source: [BootstrapPropertySource {name='bootstrapProperties-order-dev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-order,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-dev.yml,DEFAULT_GROUP'}]
+2022-08-22 17:28:11.927 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:652 - The following profiles are active: dev
+2022-08-22 17:28:12.800 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:249 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-08-22 17:28:12.802 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2022-08-22 17:28:12.829 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.d.r.c.RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces.
+2022-08-22 17:28:13.069 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.cloud.context.scope.GenericScope:295 - BeanFactory id=250e7471-9015-3bef-8943-7031afce9e3b
+2022-08-22 17:28:13.750 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:108 - Tomcat initialized with port(s): 8085 (http)
+2022-08-22 17:28:13.765 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:28:13.765 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardService:173 - Starting service [Tomcat]
+2022-08-22 17:28:13.766 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2022-08-22 17:28:13.942 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.c.c.C.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2022-08-22 17:28:13.942 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.s.c.ServletWebServerApplicationContext:285 - Root WebApplicationContext: initialization completed in 1993 ms
+2022-08-22 17:28:14.036 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.ServiceContextAutoConfiguration:22 - enable [kt-component-context-spring-boot-starter]
+2022-08-22 17:28:14.040 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.r.a.RedisCacheAutoConfiguration:23 - enable [kt-component-cache-redis-spring-boot-starter]
+2022-08-22 17:28:14.530 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.d.s.b.a.DruidDataSourceAutoConfigure:56 - Init DruidDataSource
+2022-08-22 17:28:16.011 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.alibaba.druid.pool.DruidDataSource:998 - {dataSource-1,defaultDataSource} inited
+2022-08-22 17:28:16.814 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.r.a.CloudFeignAutoConfiguration:21 - enable [kt-component-microservice-rpc-feign]
+2022-08-22 17:28:16.822 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.c.o.FeignClientFactoryBean:378 - For 'commodity' URL not provided. Will try picking an instance via load-balancing.
+2022-08-22 17:28:16.904 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.MQIntegrationListenAutoConfiguration:19 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:28:17.069 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.w.a.CloudWebAutoConfiguration:40 - enable [kt-component-web-spring-boot-starter]
+2022-08-22 17:28:17.355 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.e.a.ExceptionAutoConfiguration:25 - enable [kt-component-exception-spring-boot-starter]
+2022-08-22 17:28:17.408 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskExecutor:181 - Initializing ExecutorService 'applicationTaskExecutor'
+2022-08-22 17:28:17.828 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.s.c.ThreadPoolTaskScheduler:181 - Initializing ExecutorService 'Nacos-Watch-Task-Scheduler'
+2022-08-22 17:28:17.859 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.c.a.CloudCommonAutoConfiguration:17 - enable [kt-component-common-spring-boot-starter]
+2022-08-22 17:28:17.870 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.m.i.a.RocketMQAutoConfiguration:24 - enable [kt-component-mq-integration-spring-boot-starter]
+2022-08-22 17:28:18.629 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2022-08-22 17:28:18.629 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.n.p.a.s.c.ClientAuthPluginManager:56 - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2022-08-22 17:28:18.904 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.a.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8085"]
+2022-08-22 17:28:18.945 [INFO ] [cip:10.222.16.125][xid:] [tid:main] o.s.b.w.e.tomcat.TomcatWebServer:220 - Tomcat started on port(s): 8085 (http) with context path ''
+2022-08-22 17:28:18.961 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.a.c.n.r.NacosServiceRegistry:75 - nacos registry, DEFAULT_GROUP order 10.222.16.125:8085 register finished
+2022-08-22 17:28:19.424 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:28:19.568 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:28:19.613 [WARN ] [cip:10.222.16.125][xid:] [tid:main] s.d.s.r.o.OperationImplicitParameterReader:170 - Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void
+2022-08-22 17:28:19.661 [INFO ] [cip:10.222.16.125][xid:] [tid:main] com.kt.cloud.order.Application:61 - Started Application in 11.06 seconds (JVM running for 12.244)
+2022-08-22 17:28:34.178 [INFO ] [cip:10.222.16.125][xid:] [tid:main] c.k.c.mq.integration.MQListenStarter:54 - [mq listen] processor: [com.kt.cloud.order.module.order.mq.consumer.OrderPayNotifyMQProcessor] listen success
+2022-08-22 18:09:51.783 [INFO ] [cip:10.222.16.125][xid:] [tid:ConsumeMessageThread_1] c.k.c.o.m.o.m.c.OrderPayNotifyMQProcessor:23 - 接收支付通知 -> msgId:7F000001D0D027C170F0700B55CE0000, message:{"msgId":"3d0c77a9-264e-4c70-9ac8-b933602f5dc6","body":{"result":1,"payOrderCode":"1561656875469606914","outTradeCode":"1561656875469606912","tradeOrderCode":"1561656875469606913"}}
+2022-08-22 18:09:51.801 [INFO ] [cip:10.222.16.125][xid:] [tid:ConsumeMessageThread_1] c.k.c.m.c.p.StandardMQMessageProcessor:39 - [mq] message handle success
