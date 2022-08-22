@@ -2,6 +2,7 @@ package com.kt.cloud.order.module.order.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -86,18 +87,19 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         Map<Long, SkuRespDTO> skuMap = getSkuMap(orderItems);
 
         List<OrderItemDO> orderItemList = Lists.newArrayList();
-        for (OrderItemUpdateReqDTO orderItem :orderItems) {
+        for (OrderItemUpdateReqDTO orderItemDTO :orderItems) {
             OrderItemDO orderItemDO = new OrderItemDO();
-            SkuRespDTO skuRespDTO = skuMap.get(orderItem.getSkuId());
-            orderItemDO.setSkuId(orderItem.getSkuId());
+            SkuRespDTO skuRespDTO = skuMap.get(orderItemDTO.getSkuId());
+            orderItemDO.setSkuId(orderItemDTO.getSkuId());
             orderItemDO.setOrderCode(orderCode);
             orderItemDO.setPrice(skuRespDTO.getSalesPrice());
             orderItemDO.setPicUrl(skuRespDTO.getMainPicture());
-            int amount = skuRespDTO.getSalesPrice() * orderItem.getQuantity();
+            int amount = skuRespDTO.getSalesPrice() * orderItemDTO.getQuantity();
             orderItemDO.setExpectAmount(amount);
             // todo 后期开发计算优惠券等方法
             orderItemDO.setActualAmount(amount);
-            orderItemDO.setQuantity(orderItem.getQuantity());
+            orderItemDO.setQuantity(orderItemDTO.getQuantity());
+            orderItemDO.setSpecData(JSON.toJSONString(skuRespDTO.getSpecList()));
             orderItemList.add(orderItemDO);
         }
         return orderItemList;
