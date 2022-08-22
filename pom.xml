@@ -64,6 +64,13 @@
                 <artifactId>kt-cloud-order-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- MQ -->
+            <dependency>
+                <groupId>com.kt.mq</groupId>
+                <artifactId>kt-component-mq-integration-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- MQ -->
         </dependencies>
 
     </dependencyManagement>

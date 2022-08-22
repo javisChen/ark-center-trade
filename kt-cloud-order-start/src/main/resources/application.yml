@@ -5,3 +5,8 @@ spring:
     allow-bean-definition-overriding: true
   profiles:
     active: dev
+
+kt:
+  mq:
+    rocketmq:
+      server: localhost:9876

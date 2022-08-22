@@ -50,6 +50,13 @@
         </dependency>
         <!-- 服务自身工程依赖 -->
 
+        <!-- MQ -->
+        <dependency>
+            <groupId>com.kt.mq</groupId>
+            <artifactId>kt-component-mq-integration-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- MQ -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
