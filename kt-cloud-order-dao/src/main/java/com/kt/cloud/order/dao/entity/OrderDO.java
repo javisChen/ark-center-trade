@@ -3,8 +3,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kt.component.orm.mybatis.base.BaseEntity;
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
+
 import com.kt.component.common.enums.BasicEnums;
 import com.kt.component.common.enums.EnumUtils;
 import lombok.Data;
@@ -28,8 +27,8 @@ public class OrderDO extends BaseEntity {
     /**
      * 订单号
      */
-    @TableField("`code`")
-    private String code;
+    @TableField("`trade_no`")
+    private String tradeNo;
 
     /**
      * 订单类型 enums[SHOP,商城订单,1]

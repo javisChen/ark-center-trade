@@ -25,20 +25,6 @@ import com.kt.component.orm.mybatis.base.BaseEntity;
 @Service
 public class OrderItemService extends ServiceImpl<OrderItemMapper, OrderItemDO> implements IService<OrderItemDO> {
 
-    public Long createOrderItem(OrderItemUpdateReqDTO reqDTO) {
-        OrderItemDO entity = BeanConvertor.copy(reqDTO, OrderItemDO.class);
-        save(entity);
-        return entity.getId();
-    }
-
-    public PageResponse<OrderItemRespDTO> getPageList(OrderItemPageQueryReqDTO queryDTO) {
-        IPage<OrderItemRespDTO> page = lambdaQuery()
-                .orderByDesc(BaseEntity::getGmtCreate)
-                .page(new Page<>(queryDTO.getCurrent(), queryDTO.getSize()))
-                .convert(item -> BeanConvertor.copy(item, OrderItemRespDTO.class));
-        return BeanConvertor.copyPage(page, OrderItemRespDTO.class);
-    }
-
     public Long updateOrderItem(OrderItemUpdateReqDTO reqDTO) {
         OrderItemDO entity = BeanConvertor.copy(reqDTO, OrderItemDO.class);
         updateById(entity);

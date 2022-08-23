@@ -7,9 +7,8 @@ import com.google.common.collect.Lists;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kt.cloud.commodity.api.sku.request.SkuInfoGetReqDTO;
 import com.kt.cloud.commodity.api.sku.response.SkuRespDTO;
-import com.kt.cloud.order.acl.sku.SkuAclAdapter;
+import com.kt.cloud.order.acl.sku.SkuServiceFacade;
 import com.kt.cloud.order.dao.entity.OrderDO;
 import com.kt.cloud.order.dao.entity.OrderItemDO;
 import com.kt.cloud.order.dao.entity.ReceiveDO;
@@ -24,7 +23,6 @@ import com.kt.cloud.order.module.orderitem.service.OrderItemService;
 import com.kt.cloud.order.module.receive.dto.request.ReceiveCreateReqDTO;
 import com.kt.cloud.order.module.receive.service.ReceiveService;
 import com.kt.component.dto.PageResponse;
-import com.kt.component.exception.BizException;
 import com.kt.component.exception.ExceptionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -53,24 +50,24 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
 
     private final ReceiveService receiveService;
     private final OrderItemService orderItemService;
-    private final SkuAclAdapter skuAclAdapter;
+    private final SkuServiceFacade skuServiceFacade;
 
-    public OrderService(ReceiveService receiveService, OrderItemService orderItemService, SkuAclAdapter skuAclAdapter) {
+    public OrderService(ReceiveService receiveService, OrderItemService orderItemService, SkuServiceFacade skuServiceFacade) {
         this.receiveService = receiveService;
         this.orderItemService = orderItemService;
-        this.skuAclAdapter = skuAclAdapter;
+        this.skuServiceFacade = skuServiceFacade;
     }
 
     @Transactional(rollbackFor = Throwable.class)
     public Long createOrder(OrderCreateDTO reqDTO) {
         // 生成工单号
-        String orderCode = IdUtil.getSnowflakeNextIdStr();
+        String tradeNo = IdUtil.getSnowflakeNextIdStr();
         // 根据SKU_ID获取商品信息
-        List<OrderItemDO> orderItemList = assembleOrderItems(reqDTO, orderCode);
+        List<OrderItemDO> orderItemList = assembleOrderItems(reqDTO, tradeNo);
         // 计算总实付金额
         int totalAmount = orderItemList.stream().mapToInt(OrderItemDO::getActualAmount).sum();
         // 组装订单数据
-        OrderDO orderDO = assembleOrderDO(reqDTO, orderCode, totalAmount);
+        OrderDO orderDO = assembleOrderDO(reqDTO, tradeNo, totalAmount);
         // 保存订单
         Long orderId = saveOrder(orderDO);
         // 保存订单明细
@@ -108,9 +105,7 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
     @NotNull
     private Map<Long, SkuRespDTO> getSkuMap(List<OrderItemUpdateReqDTO> orderItems) {
         List<Long> skuIds = CollUtil.map(orderItems, OrderItemUpdateReqDTO::getSkuId, true);
-        SkuInfoGetReqDTO skuInfoGetReqDTO = new SkuInfoGetReqDTO();
-        skuInfoGetReqDTO.setSkuIds(skuIds);
-        List<SkuRespDTO> skuInfoList = skuAclAdapter.getSkuInfoList(skuInfoGetReqDTO);
+        List<SkuRespDTO> skuInfoList = skuServiceFacade.getSkuInfoList(skuIds);
         Assert.isTrue(CollUtil.isNotEmpty(skuInfoList), () -> ExceptionFactory.userException("SKU列表为空"));
         return skuInfoList
                 .stream()
@@ -118,9 +113,9 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
     }
 
     @NotNull
-    private OrderDO assembleOrderDO(OrderCreateDTO reqDTO, String code, Integer totalAmount) {
+    private OrderDO assembleOrderDO(OrderCreateDTO reqDTO, String tradeNo, Integer totalAmount) {
         OrderDO orderDO = new OrderDO();
-        orderDO.setCode(code);
+        orderDO.setTradeNo(tradeNo);
         orderDO.setOrderType(reqDTO.getOrderType());
         orderDO.setOrderChannel(reqDTO.getOrderChannel());
         orderDO.setOrderStatus(OrderDO.OrderStatus.PENDING_PAY.getValue());
@@ -144,13 +139,16 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         Long orderId = order.getId();
         for (OrderItemDO orderItem : orderItems) {
             orderItem.setOrderId(orderId);
-            orderItem.setOrderCode(order.getCode());
+            orderItem.setOrderCode(order.getTradeNo());
         }
         orderItemService.saveBatch(orderItems);
     }
 
     private void saveReceive(OrderCreateDTO reqDTO, Long orderId) {
-        receiveService.save(convertReceive(orderId, reqDTO.getReceiveInfo()));
+        ReceiveCreateReqDTO receiveInfo = reqDTO.getReceiveInfo();
+        if (receiveInfo != null) {
+            receiveService.save(convertReceive(orderId, receiveInfo));
+        }
     }
 
     private List<OrderItemDO> convertOrderItems(Long orderId, String orderCode, List<OrderItemUpdateReqDTO> orderItems) {

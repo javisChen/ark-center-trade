@@ -11,5 +11,5 @@ import org.springframework.cloud.openfeign.FeignClient;
         decode404 = true,
         configuration = {FeignCommonErrorDecoder.class}
 )
-public interface SkuAclApi extends SkuApi {
+public interface SkuServiceApi extends SkuApi {
 }
