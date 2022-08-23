@@ -1,4 +1,4 @@
-package com.kt.cloud.order.module.cartitem;
+package com.kt.cloud.order.module.cart;
 
 import com.alibaba.fastjson.JSON;
 import com.kt.cloud.commodity.api.sku.response.SkuRespDTO;
@@ -8,7 +8,7 @@ public class CartConvertor {
 
     public static CartItemDO convertFromSkuResp(SkuRespDTO respDTO, Long currentUserId) {
         CartItemDO cartItemDO = new CartItemDO();
-        cartItemDO.setBuyerId();
+        cartItemDO.setBuyerId(currentUserId);
         cartItemDO.setSkuId(respDTO.getId());
         cartItemDO.setPrice(respDTO.getSalesPrice());
         cartItemDO.setQuantity(1);

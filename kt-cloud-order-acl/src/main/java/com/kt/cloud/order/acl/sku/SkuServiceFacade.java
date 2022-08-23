@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.kt.cloud.commodity.api.sku.request.SkuInfoGetReqDTO;
 import com.kt.cloud.commodity.api.sku.response.SkuRespDTO;
 import com.kt.component.exception.BizException;
+import com.kt.component.exception.ExceptionFactory;
 import com.kt.component.microservice.rpc.util.RpcUtils;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,6 @@ public class SkuServiceFacade {
         if (CollUtil.isNotEmpty(skuInfoList)) {
             return skuInfoList.get(0);
         }
-        throw new BizException("SKU已失效或已下架");
+        throw ExceptionFactory.userException("SKU已失效或已下架");
     }
 }
