@@ -3,6 +3,7 @@ package com.kt.cloud.order.module.cartitem.controller;
 import com.kt.cloud.order.module.cartitem.dto.request.CartAddReqDTO;
 import com.kt.cloud.order.module.cartitem.dto.response.CartItemRespDTO;
 import com.kt.cloud.order.module.cartitem.service.CartService;
+import com.kt.component.dto.ServerResponse;
 import com.kt.component.dto.SingleResponse;
 import com.kt.component.validator.ValidateGroup;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,8 +45,9 @@ public class CartController extends BaseController {
 
     @ApiOperation(value = "选中购物车项")
     @PostMapping("/item/checked")
-    public SingleResponse<Long> checkedItem(@RequestBody @Validated(ValidateGroup.Update.class) CartAddReqDTO reqDTO) {
-        return SingleResponse.ok(cartService.updateCartItem(reqDTO));
+    public ServerResponse checkedItem(@RequestBody @Validated(ValidateGroup.Update.class) CartAddReqDTO reqDTO) {
+        cartService.updateCartItem(reqDTO);
+        return ServerResponse.ok();
     }
 
     @ApiOperation(value = "查询购物车表详情")
