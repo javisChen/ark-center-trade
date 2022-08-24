@@ -24,7 +24,7 @@ import com.kt.component.web.base.BaseController;
  * @author EOP
  * @since 2022-08-23
  */
-@Api(tags = "购物车表")
+@Api(tags = "购物车")
 @Validated
 @RestController
 @RequestMapping("/v1/cart")
