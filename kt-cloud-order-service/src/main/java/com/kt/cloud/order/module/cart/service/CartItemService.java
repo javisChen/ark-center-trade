@@ -11,11 +11,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.kt.cloud.order.module.cart.dto.response.CartItemRespDTO;
 import com.kt.component.context.core.ServiceContext;
 import com.kt.component.exception.ExceptionFactory;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.stereotype.Service;
 import com.kt.component.web.util.bean.BeanConvertor;
 import com.kt.component.orm.mybatis.base.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

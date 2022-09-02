@@ -1,9 +1,11 @@
 package com.kt.cloud.order.module.order.mq.consumer;
 
 import com.kt.cloud.order.module.order.mq.MQConst;
+import com.kt.cloud.order.module.order.service.OrderService;
+import com.kt.cloud.pay.api.dto.mq.MQPayNotifyDTO;
+import com.kt.component.mq.Message;
 import com.kt.component.mq.core.annotations.MQMessageListener;
 import com.kt.component.mq.core.processor.SimpleMQMessageProcessor;
-import com.kt.component.mq.core.processor.StandardMQMessageProcessor;
 import com.kt.component.mq.core.support.MQType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,10 +18,17 @@ import org.springframework.stereotype.Component;
 )
 @Component
 @Slf4j
-public class OrderPayNotifyMQProcessor extends SimpleMQMessageProcessor<String> {
+public class OrderPayNotifyMQProcessor extends SimpleMQMessageProcessor<MQPayNotifyDTO> {
+
+    private final OrderService orderService;
+
+    public OrderPayNotifyMQProcessor(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @Override
-    protected void handleMessage(String msgId, String message, Object o) {
+    protected void handleMessage(String msgId, Message<MQPayNotifyDTO> message, Object o) {
         log.info("接收支付通知 -> msgId:{}, message:{}", msgId, message);
+
     }
 }

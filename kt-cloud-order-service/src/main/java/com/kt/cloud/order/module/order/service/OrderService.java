@@ -88,7 +88,7 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
             OrderItemDO orderItemDO = new OrderItemDO();
             SkuRespDTO skuRespDTO = skuMap.get(orderItemDTO.getSkuId());
             orderItemDO.setSkuId(orderItemDTO.getSkuId());
-            orderItemDO.setOrderCode(orderCode);
+            orderItemDO.setTradeNo(orderCode);
             orderItemDO.setPrice(skuRespDTO.getSalesPrice());
             orderItemDO.setPicUrl(skuRespDTO.getMainPicture());
             int amount = skuRespDTO.getSalesPrice() * orderItemDTO.getQuantity();
@@ -139,7 +139,7 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         Long orderId = order.getId();
         for (OrderItemDO orderItem : orderItems) {
             orderItem.setOrderId(orderId);
-            orderItem.setOrderCode(order.getTradeNo());
+            orderItem.setTradeNo(order.getTradeNo());
         }
         orderItemService.saveBatch(orderItems);
     }
@@ -156,7 +156,7 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         for (OrderItemUpdateReqDTO orderItem :orderItems) {
             OrderItemDO orderItemDO = new OrderItemDO();
             orderItemDO.setOrderId(orderId);
-            orderItemDO.setOrderCode(orderCode);
+            orderItemDO.setTradeNo(orderCode);
             orderItemDO.setQuantity(orderItem.getQuantity());
             orderItemList.add(orderItemDO);
         }

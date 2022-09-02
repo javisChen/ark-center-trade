@@ -24,14 +24,12 @@ import com.kt.component.web.base.BaseController;
  * @author EOP
  * @since 2022-08-23
  */
-@Api(tags = "购物车")
+@Api(tags = "购物车服务")
 @Validated
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController extends BaseController {
-
     private final CartItemService cartItemService;
-
     public CartController(CartItemService cartItemService) {
         this.cartItemService = cartItemService;
     }
@@ -54,6 +52,5 @@ public class CartController extends BaseController {
     public MultiResponse<CartItemRespDTO> listBuyerItems() {
         return MultiResponse.ok(cartItemService.listBuyerCartItems());
     }
-
 
 }

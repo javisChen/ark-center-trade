@@ -28,8 +28,8 @@ public class OrderItemDO extends BaseEntity {
     /**
      * 订单号
      */
-    @TableField("order_code")
-    private String orderCode;
+    @TableField("trade_no")
+    private String tradeNo;
 
     /**
      * SKU ID
