@@ -13,6 +13,7 @@
     <artifactId>kt-cloud-order-api</artifactId>
 
     <properties>
+
     </properties>
 
     <dependencies>
@@ -25,6 +26,12 @@
         <dependency>
             <groupId>com.kt.dto</groupId>
             <artifactId>kt-component-dto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>

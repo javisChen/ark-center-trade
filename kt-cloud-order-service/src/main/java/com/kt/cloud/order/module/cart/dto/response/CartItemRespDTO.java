@@ -26,6 +26,9 @@ public class CartItemRespDTO implements Serializable {
     @ApiModelProperty(value = "SKU ID", required = true)
     private Long skuId;
 
+    @ApiModelProperty(value = "商品名称", required = true)
+    private String spuName;
+
     @ApiModelProperty(value = "SKU单价", required = true)
     private Integer price;
 

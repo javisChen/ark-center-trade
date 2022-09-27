@@ -18,6 +18,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- 支付 -->
         <dependency>
             <groupId>com.kt.cloud</groupId>

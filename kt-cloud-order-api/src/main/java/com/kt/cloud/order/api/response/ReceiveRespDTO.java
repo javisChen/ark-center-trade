@@ -1,4 +1,4 @@
-package com.kt.cloud.order.module.receive.dto.response;
+package com.kt.cloud.order.api.response;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
@@ -41,5 +41,8 @@ public class ReceiveRespDTO implements Serializable {
 
     @ApiModelProperty(value = "详细地址", required = false)
     private String address;
+
+    @ApiModelProperty(value = "街道", required = false)
+    private String street;
 
 }

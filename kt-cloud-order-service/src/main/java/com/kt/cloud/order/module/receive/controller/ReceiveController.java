@@ -2,7 +2,7 @@ package com.kt.cloud.order.module.receive.controller;
 
 import com.kt.cloud.order.module.receive.dto.request.ReceiveUpdateReqDTO;
 import com.kt.cloud.order.module.receive.dto.request.ReceivePageQueryReqDTO;
-import com.kt.cloud.order.module.receive.dto.response.ReceiveRespDTO;
+import com.kt.cloud.order.api.response.ReceiveRespDTO;
 import com.kt.cloud.order.module.receive.service.ReceiveService;
 import com.kt.component.dto.PageResponse;
 import com.kt.component.dto.SingleResponse;

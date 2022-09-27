@@ -1,7 +1,10 @@
 package com.kt.cloud.order.dao.entity;
+
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kt.component.orm.mybatis.base.BaseEntity;
+
 import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.kt.component.common.enums.BasicEnums;
 import com.kt.component.common.enums.EnumUtils;
@@ -9,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 /**
  * <p>
  * 购物车表
@@ -34,6 +38,13 @@ public class CartItemDO extends BaseEntity {
      */
     @TableField("sku_id")
     private Long skuId;
+
+
+    /**
+     * SPU名称
+     */
+    @TableField("spu_name")
+    private String spuName;
 
     /**
      * SKU单价
@@ -81,8 +92,8 @@ public class CartItemDO extends BaseEntity {
     @AllArgsConstructor
     public enum Checked implements BasicEnums {
         YES(1, "是"),
-            NO(0, "否"),
-    ;
+        NO(0, "否"),
+        ;
         private final Integer value;
         private final String text;
 

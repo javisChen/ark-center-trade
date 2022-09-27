@@ -15,15 +15,16 @@ import com.kt.cloud.order.dao.entity.ReceiveDO;
 import com.kt.cloud.order.dao.mapper.OrderMapper;
 import com.kt.cloud.order.module.order.dto.request.OrderCreateDTO;
 import com.kt.cloud.order.module.order.dto.request.OrderPageQueryReqDTO;
-import com.kt.cloud.order.module.order.dto.response.OrderRespDTO;
+import com.kt.cloud.order.api.response.OrderDetailRespDTO;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kt.cloud.order.module.orderitem.dto.request.OrderItemUpdateReqDTO;
-import com.kt.cloud.order.module.orderitem.service.OrderItemService;
 import com.kt.cloud.order.module.receive.dto.request.ReceiveCreateReqDTO;
 import com.kt.cloud.order.module.receive.service.ReceiveService;
+import com.kt.component.context.core.ServiceContext;
 import com.kt.component.dto.PageResponse;
 import com.kt.component.exception.ExceptionFactory;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -46,23 +47,18 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements IService<OrderDO> {
 
     private final ReceiveService receiveService;
     private final OrderItemService orderItemService;
     private final SkuServiceFacade skuServiceFacade;
 
-    public OrderService(ReceiveService receiveService, OrderItemService orderItemService, SkuServiceFacade skuServiceFacade) {
-        this.receiveService = receiveService;
-        this.orderItemService = orderItemService;
-        this.skuServiceFacade = skuServiceFacade;
-    }
-
     @Transactional(rollbackFor = Throwable.class)
     public Long createOrder(OrderCreateDTO reqDTO) {
         // 生成工单号
         String tradeNo = IdUtil.getSnowflakeNextIdStr();
-        // 根据SKU_ID获取商品信息
+        // 根据SkuId获取商品信息
         List<OrderItemDO> orderItemList = assembleOrderItems(reqDTO, tradeNo);
         // 计算总实付金额
         int totalAmount = orderItemList.stream().mapToInt(OrderItemDO::getActualAmount).sum();
@@ -125,8 +121,8 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         // todo 开发运费功能
         orderDO.setFreightAmount(0);
         orderDO.setBuyerRemark(reqDTO.getBuyerRemark());
-        orderDO.setBuyerId(reqDTO.getBuyerId());
-        orderDO.setSellerId(reqDTO.getSellerId());
+        orderDO.setBuyerId(reqDTO.getBuyerId() != null ? reqDTO.getBuyerId() : ServiceContext.getCurrentUser().getUserId());
+        orderDO.setSellerId(reqDTO.getSellerId() != null ? reqDTO.getSellerId() : 1L);
         return orderDO;
     }
 
@@ -172,15 +168,16 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         receiveDO.setCity(receiveInfo.getCity());
         receiveDO.setDistrict(receiveInfo.getDistrict());
         receiveDO.setAddress(receiveInfo.getAddress());
+        receiveDO.setStreet(receiveInfo.getStreet());
         return receiveDO;
     }
 
-    public PageResponse<OrderRespDTO> getPageList(OrderPageQueryReqDTO queryDTO) {
-        IPage<OrderRespDTO> page = lambdaQuery()
+    public PageResponse<OrderDetailRespDTO> getPageList(OrderPageQueryReqDTO queryDTO) {
+        IPage<OrderDetailRespDTO> page = lambdaQuery()
                 .orderByDesc(BaseEntity::getGmtCreate)
                 .page(new Page<>(queryDTO.getCurrent(), queryDTO.getSize()))
-                .convert(item -> BeanConvertor.copy(item, OrderRespDTO.class));
-        return BeanConvertor.copyPage(page, OrderRespDTO.class);
+                .convert(item -> BeanConvertor.copy(item, OrderDetailRespDTO.class));
+        return BeanConvertor.copyPage(page, OrderDetailRespDTO.class);
     }
 
     public Long updateOrder(OrderCreateDTO reqDTO) {
@@ -189,9 +186,12 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         return entity.getId();
     }
 
-    public OrderRespDTO getOrderInfo(Long OrderId) {
-        OrderDO entity = getById(OrderId);
-        return BeanConvertor.copy(entity, OrderRespDTO.class);
+    public OrderDetailRespDTO getOrderInfo(Long orderId) {
+        OrderDO entity = getById(orderId);
+        OrderDetailRespDTO detailRespDTO = BeanConvertor.copy(entity, OrderDetailRespDTO.class);
+        detailRespDTO.setOrderItems(orderItemService.listOrderItems(orderId));
+        detailRespDTO.setReceiveInfo(receiveService.getReceiveInfoByOrderId(orderId));
+        return detailRespDTO;
     }
 
 }

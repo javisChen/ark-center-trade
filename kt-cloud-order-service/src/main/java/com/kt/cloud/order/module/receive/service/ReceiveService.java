@@ -6,7 +6,7 @@ import com.kt.cloud.order.dao.entity.ReceiveDO;
 import com.kt.cloud.order.dao.mapper.ReceiveMapper;
 import com.kt.cloud.order.module.receive.dto.request.ReceiveUpdateReqDTO;
 import com.kt.cloud.order.module.receive.dto.request.ReceivePageQueryReqDTO;
-import com.kt.cloud.order.module.receive.dto.response.ReceiveRespDTO;
+import com.kt.cloud.order.api.response.ReceiveRespDTO;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kt.component.dto.PageResponse;
@@ -50,4 +50,10 @@ public class ReceiveService extends ServiceImpl<ReceiveMapper, ReceiveDO> implem
         return BeanConvertor.copy(entity, ReceiveRespDTO.class);
     }
 
+    public ReceiveRespDTO getReceiveInfoByOrderId(Long orderId) {
+        ReceiveDO receiveDO = lambdaQuery()
+                .eq(ReceiveDO::getOrderId, orderId)
+                .one();
+        return BeanConvertor.copy(receiveDO, ReceiveRespDTO.class);
+    }
 }

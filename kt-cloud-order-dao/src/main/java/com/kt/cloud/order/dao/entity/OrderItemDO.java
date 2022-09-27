@@ -32,6 +32,12 @@ public class OrderItemDO extends BaseEntity {
     private String tradeNo;
 
     /**
+     * 商品名称
+     */
+    @TableField("spu_name")
+    private String spuName;
+
+    /**
      * SKU ID
      */
     @TableField("sku_id")

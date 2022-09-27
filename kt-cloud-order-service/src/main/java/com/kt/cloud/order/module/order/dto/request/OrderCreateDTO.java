@@ -31,14 +31,12 @@ public class OrderCreateDTO implements Serializable {
     private Integer orderChannel;
 
     @ApiModelProperty(value = "买家ID", required = true)
-    @NotNull(message = "买家ID不能为空")
     private Long buyerId;
 
     @ApiModelProperty(value = "买家备注", required = false)
     private String buyerRemark;
 
     @ApiModelProperty(value = "卖家ID", required = true)
-    @NotNull(message = "卖家ID不能为空")
     private Long sellerId;
 
     @ApiModelProperty(value = "订单项", required = true)

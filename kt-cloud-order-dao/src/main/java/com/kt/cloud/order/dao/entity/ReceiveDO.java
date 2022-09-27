@@ -66,4 +66,10 @@ public class ReceiveDO extends BaseEntity {
     @TableField("address")
     private String address;
 
+    /**
+     * 街道
+     */
+    @TableField("street")
+    private String street;
+
 }

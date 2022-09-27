@@ -4,21 +4,18 @@ import com.google.common.collect.Lists;
 
 import com.kt.cloud.commodity.api.sku.request.SkuInfoGetReqDTO;
 import com.kt.cloud.commodity.api.sku.response.SkuRespDTO;
-import com.kt.component.exception.BizException;
 import com.kt.component.exception.ExceptionFactory;
 import com.kt.component.microservice.rpc.util.RpcUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class SkuServiceFacade {
 
     private final SkuServiceApi skuServiceApi;
-
-    public SkuServiceFacade(SkuServiceApi skuServiceApi) {
-        this.skuServiceApi = skuServiceApi;
-    }
 
     public List<SkuRespDTO> getSkuInfoList(List<Long> skuIds) {
         SkuInfoGetReqDTO skuInfoGetReqDTO = new SkuInfoGetReqDTO();

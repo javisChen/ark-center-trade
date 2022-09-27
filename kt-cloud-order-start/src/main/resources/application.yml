@@ -5,8 +5,9 @@ spring:
     allow-bean-definition-overriding: true
   profiles:
     active: dev
-
 kt:
   mq:
     rocketmq:
       server: localhost:9876
+mybatis-plus:
+  mapper-locations: classpath:com/kt/cloud/order/dao/mapper/xml/*.xml

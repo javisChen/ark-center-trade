@@ -10,6 +10,7 @@ public class CartConvertor {
         CartItemDO cartItemDO = new CartItemDO();
         cartItemDO.setBuyerId(currentUserId);
         cartItemDO.setSkuId(respDTO.getId());
+        cartItemDO.setSpuName(respDTO.getSpuName());
         cartItemDO.setPrice(respDTO.getSalesPrice());
         cartItemDO.setQuantity(1);
         cartItemDO.setExpectAmount(respDTO.getSalesPrice());

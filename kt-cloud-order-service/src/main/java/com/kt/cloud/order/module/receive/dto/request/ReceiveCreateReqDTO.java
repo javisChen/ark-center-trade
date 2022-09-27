@@ -36,6 +36,9 @@ public class ReceiveCreateReqDTO implements Serializable {
     @ApiModelProperty(value = "区", required = true)
     private String district;
 
+    @ApiModelProperty(value = "街道", required = false)
+    private String street;
+
     @ApiModelProperty(value = "详细地址", required = true)
     private String address;
 

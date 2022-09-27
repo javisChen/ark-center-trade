@@ -2,7 +2,7 @@ package com.kt.cloud.order.module.order.controller;
 
 import com.kt.cloud.order.module.order.dto.request.OrderCreateDTO;
 import com.kt.cloud.order.module.order.dto.request.OrderPageQueryReqDTO;
-import com.kt.cloud.order.module.order.dto.response.OrderRespDTO;
+import com.kt.cloud.order.api.response.OrderDetailRespDTO;
 import com.kt.cloud.order.module.order.service.OrderService;
 import com.kt.component.dto.PageResponse;
 import com.kt.component.dto.SingleResponse;
@@ -12,7 +12,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.constraints.NotNull;
+
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -52,14 +54,14 @@ public class OrderController extends BaseController {
 
     @ApiOperation(value = "查询订单表分页列表")
     @PostMapping("/page")
-    public SingleResponse<PageResponse<OrderRespDTO>> pageList(@RequestBody @Validated OrderPageQueryReqDTO queryDTO) {
+    public SingleResponse<PageResponse<OrderDetailRespDTO>> pageList(@RequestBody @Validated OrderPageQueryReqDTO queryDTO) {
         return SingleResponse.ok(orderService.getPageList(queryDTO));
     }
 
     @ApiOperation(value = "查询订单表详情")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @GetMapping("/info")
-    public SingleResponse<OrderRespDTO> info(@RequestParam(required = false) @NotNull(message = "id不能为空") Long id) {
+    public SingleResponse<OrderDetailRespDTO> info(@RequestParam(value = "id") @NotNull(message = "id不能为空") Long id) {
         return SingleResponse.ok(orderService.getOrderInfo(id));
     }
 

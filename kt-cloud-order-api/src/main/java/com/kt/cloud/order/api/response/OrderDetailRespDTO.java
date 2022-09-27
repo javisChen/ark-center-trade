@@ -1,7 +1,9 @@
-package com.kt.cloud.order.module.order.dto.response;
+package com.kt.cloud.order.api.response;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,14 +17,14 @@ import lombok.Data;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderRespDTO对象", description = "订单表")
-public class OrderRespDTO implements Serializable {
+@ApiModel(value = "OrderDetailRespDTO", description = "订单表")
+public class OrderDetailRespDTO implements Serializable {
 
     @ApiModelProperty(value = "id", required = true)
     private Long id;
 
     @ApiModelProperty(value = "订单号", required = true)
-    private String code;
+    private String tradeNo;
 
     @ApiModelProperty(value = "订单类型 enums[SHOP,商城订单,1]", required = true)
     private Integer orderType;
@@ -74,5 +76,11 @@ public class OrderRespDTO implements Serializable {
 
     @ApiModelProperty(value = "物流单号", required = true)
     private String logisticsCode;
+
+    @ApiModelProperty(value = "订单项", required = true)
+    private List<OrderItemRespDTO> orderItems;
+
+    @ApiModelProperty(value = "收货信息", required = true)
+    private ReceiveRespDTO receiveInfo;
 
 }

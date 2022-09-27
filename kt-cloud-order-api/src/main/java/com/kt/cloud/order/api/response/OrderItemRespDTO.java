@@ -1,34 +1,32 @@
-package com.kt.cloud.order.module.orderitem.dto.response;
+package com.kt.cloud.order.api.response;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 订单明细表
+ * 订单表
  * </p>
  *
  * @author EOP
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderItemRespDTO对象", description = "订单明细表")
+@ApiModel(value = "OrderDetailRespDTO", description = "订单表")
 public class OrderItemRespDTO implements Serializable {
-
-    @ApiModelProperty(value = "id", required = true)
-    private Long id;
 
     @ApiModelProperty(value = "订单ID", required = true)
     private Long orderId;
 
-    @ApiModelProperty(value = "订单号", required = true)
-    private String code;
-
     @ApiModelProperty(value = "SKU ID", required = true)
     private Long skuId;
+
+    @ApiModelProperty(value = "商品名称", required = true)
+    private String spuName;
 
     @ApiModelProperty(value = "SKU单价", required = true)
     private Integer price;
@@ -45,4 +43,6 @@ public class OrderItemRespDTO implements Serializable {
     @ApiModelProperty(value = "图片地址", required = true)
     private String picUrl;
 
+    @ApiModelProperty(value = "SKU销售参数JSON", required = true)
+    private String specData;
 }
