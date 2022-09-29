@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.kt.cloud.order.module.orderitem.dto.request.OrderItemUpdateReqDTO;
 import com.kt.cloud.order.module.receive.dto.request.ReceiveCreateReqDTO;
 import com.kt.cloud.order.module.receive.service.ReceiveService;
+import com.kt.cloud.pay.api.dto.mq.MQPayNotifyDTO;
 import com.kt.component.context.core.ServiceContext;
 import com.kt.component.dto.PageResponse;
 import com.kt.component.exception.ExceptionFactory;
@@ -194,4 +195,11 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         return detailRespDTO;
     }
 
+    public void updateOrderOnPaySuccess(MQPayNotifyDTO payNotifyDTO) {
+        lambdaUpdate()
+                .eq(BaseEntity::getId, payNotifyDTO.getPayOrderId())
+                .set(OrderDO::getPayStatus, OrderDO.PayStatus.PAY_SUCCESS.getValue())
+                .set(OrderDO::getOrderStatus, OrderDO.OrderStatus.PENDING_DELIVER.getValue())
+                .update();
+    }
 }

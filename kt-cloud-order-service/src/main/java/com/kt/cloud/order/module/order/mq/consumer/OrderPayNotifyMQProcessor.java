@@ -7,6 +7,7 @@ import com.kt.component.mq.Message;
 import com.kt.component.mq.core.annotations.MQMessageListener;
 import com.kt.component.mq.core.processor.SimpleMQMessageProcessor;
 import com.kt.component.mq.core.support.MQType;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,17 +19,15 @@ import org.springframework.stereotype.Component;
 )
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class OrderPayNotifyMQProcessor extends SimpleMQMessageProcessor<MQPayNotifyDTO> {
 
     private final OrderService orderService;
 
-    public OrderPayNotifyMQProcessor(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
     @Override
     protected void handleMessage(String msgId, Message<MQPayNotifyDTO> message, Object o) {
         log.info("接收支付通知 -> msgId:{}, message:{}", msgId, message);
+        orderService.updateOrderOnPaySuccess(message.getBody());
 
     }
 }
