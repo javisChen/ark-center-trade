@@ -82,7 +82,7 @@ public class OrderDO extends BaseEntity {
      * 支付流水号
      */
     @TableField("pay_trade_no")
-    private String pay_trade_no;
+    private String payTradeNo;
 
     /**
      * 支付时间

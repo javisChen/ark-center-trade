@@ -74,6 +74,7 @@
 
     <springProfile name="local,dev,test,sit">
         <logger name="com.kt.component.mq" level="DEBUG"/>
+        <logger name="com.kt.cloud.order.dao" level="DEBUG"/>
     </springProfile>
 
     <root level="info">

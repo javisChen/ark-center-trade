@@ -197,7 +197,8 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
 
     public void updateOrderOnPaySuccess(MQPayNotifyDTO payNotifyDTO) {
         lambdaUpdate()
-                .eq(BaseEntity::getId, payNotifyDTO.getPayOrderId())
+                .eq(OrderDO::getTradeNo, payNotifyDTO.getBizTradeNo())
+                .set(OrderDO::getPayTradeNo, payNotifyDTO.getPayTradeNo())
                 .set(OrderDO::getPayStatus, OrderDO.PayStatus.PAY_SUCCESS.getValue())
                 .set(OrderDO::getOrderStatus, OrderDO.OrderStatus.PENDING_DELIVER.getValue())
                 .update();

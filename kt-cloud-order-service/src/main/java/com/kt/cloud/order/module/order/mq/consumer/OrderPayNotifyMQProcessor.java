@@ -25,9 +25,8 @@ public class OrderPayNotifyMQProcessor extends SimpleMQMessageProcessor<MQPayNot
     private final OrderService orderService;
 
     @Override
-    protected void handleMessage(String msgId, Message<MQPayNotifyDTO> message, Object o) {
-        log.info("接收支付通知 -> msgId:{}, message:{}", msgId, message);
-        orderService.updateOrderOnPaySuccess(message.getBody());
-
+    protected void handleMessage(String msgId, MQPayNotifyDTO body, Object o) {
+        log.info("接收支付通知 -> msgId:{}, body:{}", msgId, body);
+        orderService.updateOrderOnPaySuccess(body);
     }
 }
