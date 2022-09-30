@@ -7,6 +7,7 @@ import com.kt.cloud.order.module.cart.service.CartItemService;
 import com.kt.component.dto.MultiResponse;
 import com.kt.component.dto.ServerResponse;
 import com.kt.component.dto.SingleResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,18 +29,14 @@ import com.kt.component.web.base.BaseController;
 @Validated
 @RestController
 @RequestMapping("/v1/cart")
+@RequiredArgsConstructor
 public class CartController extends BaseController {
     private final CartItemService cartItemService;
-    public CartController(CartItemService cartItemService) {
-        this.cartItemService = cartItemService;
-    }
-
     @ApiOperation(value = "添加商品到购物车")
     @PostMapping("/item/add")
     public SingleResponse<Long> create(@RequestBody @Validated CartItemAddReqDTO reqDTO) {
         return SingleResponse.ok(cartItemService.addOrUpdateCartItem(reqDTO));
     }
-
     @ApiOperation(value = "选中购物车项")
     @PostMapping("/item/checked")
     public ServerResponse checkCartItem(@RequestBody @Validated CartItemCheckReqDTO reqDTO) {
