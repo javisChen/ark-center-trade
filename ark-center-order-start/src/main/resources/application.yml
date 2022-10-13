@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+ark:
+  mq:
+    rocketmq:
+      server: localhost:9876
+mybatis-plus:
+  mapper-locations: classpath:com/ark/center/order/dao/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
