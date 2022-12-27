@@ -6,9 +6,10 @@ spring:
   profiles:
     active: dev
 ark:
-  mq:
-    rocketmq:
-      server: localhost:9876
+  component:
+    mq:
+      rocketmq:
+        server: localhost:9876
 mybatis-plus:
   mapper-locations: classpath:com/ark/center/order/dao/mapper/xml/*.xml
   configuration:
