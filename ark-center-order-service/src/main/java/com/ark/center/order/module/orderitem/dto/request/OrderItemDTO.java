@@ -2,8 +2,7 @@ package com.ark.center.order.module.orderitem.dto.request;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "OrderItemUpdateReqDTO对象", description = "订单明细表")
-public class OrderItemUpdateReqDTO implements Serializable {
+public class OrderItemDTO implements Serializable {
 
     @ApiModelProperty(value = "SKU ID", required = true)
     @NotNull(message = "SKU ID不能为空")

@@ -18,7 +18,7 @@ import com.ark.center.order.module.order.dto.request.OrderPageQueryReqDTO;
 import com.ark.center.order.api.response.OrderDetailRespDTO;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ark.center.order.module.orderitem.dto.request.OrderItemUpdateReqDTO;
+import com.ark.center.order.module.orderitem.dto.request.OrderItemDTO;
 import com.ark.center.order.module.receive.dto.request.ReceiveCreateReqDTO;
 import com.ark.center.order.module.receive.service.ReceiveService;
 import com.ark.center.pay.api.dto.mq.MQPayNotifyDTO;
@@ -74,14 +74,13 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         return orderId;
     }
 
-    @NotNull
     private List<OrderItemDO> assembleOrderItems(OrderCreateDTO reqDTO, String orderCode) {
-        List<OrderItemUpdateReqDTO> orderItems = reqDTO.getOrderItems();
+        List<OrderItemDTO> orderItems = reqDTO.getOrderItems();
 
         Map<Long, SkuRespDTO> skuMap = getSkuMap(orderItems);
 
         List<OrderItemDO> orderItemList = Lists.newArrayList();
-        for (OrderItemUpdateReqDTO orderItemDTO :orderItems) {
+        for (OrderItemDTO orderItemDTO :orderItems) {
             OrderItemDO orderItemDO = new OrderItemDO();
             SkuRespDTO skuRespDTO = skuMap.get(orderItemDTO.getSkuId());
             orderItemDO.setSkuId(orderItemDTO.getSkuId());
@@ -99,9 +98,8 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         return orderItemList;
     }
 
-    @NotNull
-    private Map<Long, SkuRespDTO> getSkuMap(List<OrderItemUpdateReqDTO> orderItems) {
-        List<Long> skuIds = CollUtil.map(orderItems, OrderItemUpdateReqDTO::getSkuId, true);
+    private Map<Long, SkuRespDTO> getSkuMap(List<OrderItemDTO> orderItems) {
+        List<Long> skuIds = CollUtil.map(orderItems, OrderItemDTO::getSkuId, true);
         List<SkuRespDTO> skuInfoList = skuServiceFacade.getSkuInfoList(skuIds);
         Assert.isTrue(CollUtil.isNotEmpty(skuInfoList), () -> ExceptionFactory.userException("SKU列表为空"));
         return skuInfoList
@@ -109,7 +107,6 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
                 .collect(Collectors.toMap(SkuRespDTO::getId, Function.identity()));
     }
 
-    @NotNull
     private OrderDO assembleOrderDO(OrderCreateDTO reqDTO, String tradeNo, Integer totalAmount) {
         OrderDO orderDO = new OrderDO();
         orderDO.setTradeNo(tradeNo);
@@ -148,9 +145,9 @@ public class OrderService extends ServiceImpl<OrderMapper, OrderDO> implements I
         }
     }
 
-    private List<OrderItemDO> convertOrderItems(Long orderId, String orderCode, List<OrderItemUpdateReqDTO> orderItems) {
+    private List<OrderItemDO> convertOrderItems(Long orderId, String orderCode, List<OrderItemDTO> orderItems) {
         List<OrderItemDO> orderItemList = Lists.newArrayList();
-        for (OrderItemUpdateReqDTO orderItem :orderItems) {
+        for (OrderItemDTO orderItem :orderItems) {
             OrderItemDO orderItemDO = new OrderItemDO();
             orderItemDO.setOrderId(orderId);
             orderItemDO.setTradeNo(orderCode);

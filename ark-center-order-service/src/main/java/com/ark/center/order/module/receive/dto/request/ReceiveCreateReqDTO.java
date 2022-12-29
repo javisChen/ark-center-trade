@@ -20,7 +20,6 @@ import lombok.Data;
 @ApiModel(value = "ReceiveCreateReqDTO对象", description = "订单收货信息")
 public class ReceiveCreateReqDTO implements Serializable {
 
-
     @ApiModelProperty(value = "收货人名称", required = true)
     private String name;
 
