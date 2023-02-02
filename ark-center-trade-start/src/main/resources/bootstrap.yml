@@ -1,7 +1,7 @@
 # 启动了consul配置中心，程序启动后会优先读取bootstrap.yml配置文件读取consul配置
 spring:
   application:
-    name: order
+    name: trade
   cloud:
     nacos:
       discovery:

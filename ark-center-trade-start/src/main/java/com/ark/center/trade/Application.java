@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@MapperScan(basePackages = "com.ark.center.order.dao")
+@MapperScan(basePackages = "com.ark.center.trade.dao")
 @SpringBootApplication
 @EnableFeignClients(basePackages = {})
 @EnableDiscoveryClient
