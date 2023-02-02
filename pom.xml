@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ark.center</groupId>
-    <artifactId>ark-center-order</artifactId>
+    <artifactId>ark-center-trade</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>ark-center-order-api</module>
-        <module>ark-center-order-acl</module>
-        <module>ark-center-order-dao</module>
-        <module>ark-center-order-service</module>
-        <module>ark-center-order-manager</module>
-        <module>ark-center-order-start</module>
+        <module>ark-center-trade-api</module>
+        <module>ark-center-trade-acl</module>
+        <module>ark-center-trade-dao</module>
+        <module>ark-center-trade-service</module>
+        <module>ark-center-trade-manager</module>
+        <module>ark-center-trade-start</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -41,27 +41,27 @@
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-order-dao</artifactId>
+                <artifactId>ark-center-trade-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-order-api</artifactId>
+                <artifactId>ark-center-trade-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-order-acl</artifactId>
+                <artifactId>ark-center-trade-acl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-order-manager</artifactId>
+                <artifactId>ark-center-trade-manager</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-order-service</artifactId>
+                <artifactId>ark-center-trade-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- MQ -->

@@ -74,7 +74,7 @@
 
     <springProfile name="local,dev,test,sit">
         <logger name="com.ark.component.mq" level="DEBUG"/>
-        <logger name="com.ark.center.order.dao" level="DEBUG"/>
+        <logger name="com.ark.center.trade.dao" level="DEBUG"/>
     </springProfile>
 
     <root level="info">
