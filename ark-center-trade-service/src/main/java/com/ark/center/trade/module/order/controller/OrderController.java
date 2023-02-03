@@ -28,7 +28,7 @@ import com.ark.component.web.base.BaseController;
  * @author EOP
  * @since 2022-08-09
  */
-@Api(tags = "订单服务")
+@Api(tags = "订单")
 @Validated
 @RestController
 @RequestMapping("/v1/order")
@@ -40,7 +40,7 @@ public class OrderController extends BaseController {
         this.orderService = orderService;
     }
 
-    @ApiOperation(value = "创建订单")
+    @ApiOperation(value = "订单-创建订单")
     @PostMapping("/create")
     public SingleResponse<Long> create(@RequestBody @Validated OrderCreateDTO reqDTO) {
         return SingleResponse.ok(orderService.createOrder(reqDTO));
