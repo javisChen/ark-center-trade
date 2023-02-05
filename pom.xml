@@ -8,11 +8,13 @@
     <artifactId>ark-center-trade</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>ark-center-trade-api</module>
+        <module>ark-center-trade-client</module>
+        <module>ark-center-trade-adapter</module>
         <module>ark-center-trade-acl</module>
         <module>ark-center-trade-dao</module>
-        <module>ark-center-trade-service</module>
-        <module>ark-center-trade-manager</module>
+        <module>ark-center-trade-app</module>
+        <module>ark-center-trade-domain</module>
+        <module>ark-center-trade-infra</module>
         <module>ark-center-trade-start</module>
     </modules>
     <packaging>pom</packaging>
@@ -46,7 +48,7 @@
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-trade-api</artifactId>
+                <artifactId>ark-center-trade-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -56,12 +58,22 @@
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-trade-manager</artifactId>
+                <artifactId>ark-center-trade-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-trade-service</artifactId>
+                <artifactId>ark-center-trade-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ark.center</groupId>
+                <artifactId>ark-center-trade-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ark.center</groupId>
+                <artifactId>ark-center-trade-infra</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- MQ -->
