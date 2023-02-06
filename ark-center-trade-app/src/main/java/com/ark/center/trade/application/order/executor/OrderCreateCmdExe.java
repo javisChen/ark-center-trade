@@ -11,8 +11,10 @@ import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.domain.order.gateway.ReceiveGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Order;
+import com.ark.center.trade.domain.order.model.OrderItem;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
@@ -41,11 +43,13 @@ public class OrderCreateCmdExe {
 
     private final SkuGateway skuGateway;
 
+    private final ReceiveGateway receiveGateway;
+
     public Long execute(OrderCreateCmd orderCreateCmd) {
         // 生成工单号
         String tradeNo = IdUtil.getSnowflakeNextIdStr();
         // 组装订单数据
-        Order order = assembleOrderDO(orderCreateCmd, tradeNo);
+        Order order = assembleOrder(orderCreateCmd, tradeNo);
         // 保存订单信息
         Long orderId = saveOrder(order);
         // 保存收货信息
@@ -53,24 +57,23 @@ public class OrderCreateCmdExe {
         return orderId;
     }
 
-    private List<OrderItemDO> assembleOrderItems(OrderCreateCmd reqDTO, String orderCode) {
+    private List<OrderItem> assembleOrderItems(OrderCreateCmd reqDTO, String orderCode) {
         List<OrderCreateItemCmd> orderItems = reqDTO.getOrderItems();
         Map<Long, Sku> skuMap = getSkuListMap(orderItems);
-        List<OrderItemDO> orderItemList = Lists.newArrayList();
+        List<OrderItem> orderItemList = Lists.newArrayList();
         for (OrderCreateItemCmd orderItemDTO :orderItems) {
-            OrderItemDO orderItemDO = new OrderItemDO();
+            OrderItem orderItem = new OrderItem();
             Sku sku = skuMap.get(orderItemDTO.getSkuId());
-            orderItemDO.setSkuId(orderItemDTO.getSkuId());
-            orderItemDO.setTradeNo(orderCode);
-            orderItemDO.setPrice(sku.getSalesPrice());
-            orderItemDO.setPicUrl(sku.getMainPicture());
+            orderItem.setSkuId(orderItemDTO.getSkuId());
+            orderItem.setPrice(sku.getSalesPrice());
+            orderItem.setPicUrl(sku.getMainPicture());
             int amount = sku.getSalesPrice() * orderItemDTO.getQuantity();
-            orderItemDO.setExpectAmount(amount);
+            orderItem.setExpectAmount(amount);
             // todo 后期开发计算优惠券等方法
-            orderItemDO.setActualAmount(amount);
-            orderItemDO.setQuantity(orderItemDTO.getQuantity());
-            orderItemDO.setSpecData(JSON.toJSONString(sku.getSpecList()));
-            orderItemList.add(orderItemDO);
+            orderItem.setActualAmount(amount);
+            orderItem.setQuantity(orderItemDTO.getQuantity());
+            orderItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
+            orderItemList.add(orderItem);
         }
         return orderItemList;
     }
@@ -84,12 +87,12 @@ public class OrderCreateCmdExe {
                 .collect(Collectors.toMap(Sku::getSkuId, Function.identity()));
     }
 
-    private Order assembleOrderDO(OrderCreateCmd orderCreateCmd, String tradeNo) {
+    private Order assembleOrder(OrderCreateCmd orderCreateCmd, String tradeNo) {
 
-        List<OrderItemDO> orderItemList = assembleOrderItems(orderCreateCmd, tradeNo);
+        List<OrderItem> orderItemList = assembleOrderItems(orderCreateCmd, tradeNo);
 
         // 计算总实付金额
-        int totalAmount = orderItemList.stream().mapToInt(OrderItemDO::getActualAmount).sum();
+        int totalAmount = orderItemList.stream().mapToInt(OrderItem::getActualAmount).sum();
 
         Order order = new Order();
         // 设置订单基本信息
@@ -99,7 +102,7 @@ public class OrderCreateCmdExe {
         order.setOrderStatus(Order.OrderStatus.PENDING_PAY);
         order.setBuyerRemark(orderCreateCmd.getBuyerRemark());
         order.setBuyerId(orderCreateCmd.getBuyerId() != null ? orderCreateCmd.getBuyerId() : ServiceContext.getCurrentUser().getUserId());
-        order.setSellerId(orderCreateCmd.getSellerId() != null ? orderCreateCmd.getSellerId() : 1L);
+        order.setSellerId(orderCreateCmd.getSellerId() != null ? orderCreateCmd.getSellerId() : 0L);
 
         // 订单支付信息
         OrderPay orderPay = new OrderPay();
@@ -111,21 +114,15 @@ public class OrderCreateCmdExe {
         orderAmount.setExpectAmount(totalAmount);
         orderAmount.setActualAmount(totalAmount);
         orderAmount.setFreightAmount(0);
+
+        // 设置订单项
+        order.setOrderItemList(orderItemList);
         return order;
     }
 
     private Long saveOrder(Order order) {
         orderGateway.save(order);
         return order.getOrderId();
-    }
-
-    private void saveOrderItems(List<OrderItemDO> orderItems, OrderDO order) {
-        Long orderId = order.getId();
-        for (OrderItemDO orderItem : orderItems) {
-            orderItem.setOrderId(orderId);
-            orderItem.setTradeNo(order.getTradeNo());
-        }
-        orderItemService.saveBatch(orderItems);
     }
 
     private void saveReceive(OrderCreateCmd reqDTO, Long orderId) {

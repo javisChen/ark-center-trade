@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class Order {
@@ -74,17 +75,20 @@ public class Order {
      */
     private String logisticsCode;
 
-
     /**
      * 订单金额信息
      */
     private OrderAmount orderAmount;
 
-
     /**
      * 订单
      */
     private OrderPay orderPay;
+
+    /**
+     * 订单子项
+     */
+    private List<OrderItem> orderItemList;
 
 
     @Getter

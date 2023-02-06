@@ -1,22 +1,17 @@
 package com.ark.center.trade.infra.order.convertor;
 
-import com.ark.center.commodity.api.sku.response.SkuRespDTO;
 import com.ark.center.trade.domain.order.model.Order;
 import com.ark.center.trade.domain.order.model.OrderItem;
-import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
 import com.ark.center.trade.infra.order.gateway.impl.db.OrderDO;
 import com.ark.center.trade.infra.order.gateway.impl.db.OrderItemDO;
-import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class OrderConvertor {
 
-    public static OrderDO toDataObject(Order order) {
+    public static OrderDO toOrderDataObject(Order order) {
         OrderDO orderDO = new OrderDO();
         orderDO.setId(order.getOrderId());
         orderDO.setTradeNo(order.getTradeNo());
@@ -45,7 +40,7 @@ public class OrderConvertor {
         return orderDO;
     }
 
-    public static OrderItemDO toDataObject(Order order, OrderItem orderItem) {
+    public static OrderItemDO toOrderItemDataObject(Order order, OrderItem orderItem) {
         OrderItemDO orderItemDO = new OrderItemDO();
         orderItemDO.setOrderId(order.getOrderId());
         orderItemDO.setTradeNo(order.getTradeNo());

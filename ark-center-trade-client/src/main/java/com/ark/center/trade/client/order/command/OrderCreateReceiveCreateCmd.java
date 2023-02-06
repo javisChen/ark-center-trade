@@ -14,7 +14,7 @@ import lombok.Data;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "ReceiveCreateReqDTO对象", description = "订单收货信息")
+@ApiModel(value = "OrderCreateReceiveCreateCmd", description = "订单收货信息")
 public class OrderCreateReceiveCreateCmd implements Serializable {
 
     @ApiModelProperty(value = "收货人名称", required = true)
