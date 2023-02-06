@@ -1,4 +1,4 @@
-package com.ark.center.trade.client.receive.dto.request;
+package com.ark.center.trade.client.order.command;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "ReceiveCreateReqDTO对象", description = "订单收货信息")
-public class ReceiveCreateReqDTO implements Serializable {
+public class OrderCreateReceiveCreateCmd implements Serializable {
 
     @ApiModelProperty(value = "收货人名称", required = true)
     private String name;

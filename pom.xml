@@ -9,10 +9,10 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>ark-center-trade-client</module>
+        <module>ark-center-trade-app</module>
         <module>ark-center-trade-adapter</module>
         <module>ark-center-trade-acl</module>
         <module>ark-center-trade-dao</module>
-        <module>ark-center-trade-app</module>
         <module>ark-center-trade-domain</module>
         <module>ark-center-trade-infra</module>
         <module>ark-center-trade-start</module>
@@ -58,7 +58,7 @@
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-trade-application</artifactId>
+                <artifactId>ark-center-trade-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

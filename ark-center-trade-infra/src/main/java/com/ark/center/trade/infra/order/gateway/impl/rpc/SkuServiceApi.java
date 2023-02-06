@@ -1,4 +1,4 @@
-package com.ark.center.trade.acl.sku;
+package com.ark.center.trade.infra.order.gateway.impl.rpc;
 
 import com.ark.center.commodity.api.sku.SkuApi;
 import com.ark.component.microservice.rpc.exception.FeignCommonErrorDecoder;

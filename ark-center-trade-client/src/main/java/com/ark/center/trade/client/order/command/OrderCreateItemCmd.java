@@ -1,4 +1,4 @@
-package com.ark.center.trade.client.order.response;
+package com.ark.center.trade.client.order.command;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,8 +15,8 @@ import java.io.Serializable;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderDetailRespDTO", description = "订单表")
-public class OrderItemDTO implements Serializable {
+@ApiModel(value = "OrderCreateItemCmd", description = "订单明细")
+public class OrderCreateItemCmd implements Serializable {
 
     @ApiModelProperty(value = "订单ID", required = true)
     private Long orderId;

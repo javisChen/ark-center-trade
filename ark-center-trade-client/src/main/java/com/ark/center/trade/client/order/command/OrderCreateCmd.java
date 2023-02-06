@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.ark.center.trade.client.order.response.OrderItemDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,7 +17,7 @@ import lombok.Data;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderCreateDTO", description = "订单创建请求对象")
+@ApiModel(value = "OrderCreateCmd", description = "订单创建请求对象")
 public class OrderCreateCmd implements Serializable {
 
     @ApiModelProperty(value = "订单类型 enums[SHOP,商城订单,1]", required = true)
@@ -40,9 +39,9 @@ public class OrderCreateCmd implements Serializable {
 
     @ApiModelProperty(value = "订单项", required = true)
     @Size(max = 1000, message = "订单项不能超过1000个")
-    private List<OrderItemDTO> orderItems;
+    private List<OrderCreateItemCmd> orderItems;
 
     @ApiModelProperty(value = "收货信息", required = true)
-    private ReceiveCreateReqDTO receiveInfo;
+    private OrderCreateReceiveCreateCmd receiveInfo;
 
 }
