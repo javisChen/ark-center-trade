@@ -2,7 +2,7 @@ package com.ark.center.trade.domain.order.model;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 public class OrderItem {
@@ -46,6 +46,6 @@ public class OrderItem {
     /**
      * SKU销售参数JSON
      */
-    private String specData;
+    private Map<String, Object> specData;
 
 }

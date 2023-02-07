@@ -78,17 +78,24 @@ public class Order {
     /**
      * 订单金额信息
      */
-    private OrderAmount orderAmount;
+    private OrderAmount orderAmount = new OrderAmount();
 
     /**
      * 订单
      */
-    private OrderPay orderPay;
+    private OrderPay orderPay = new OrderPay();
 
     /**
      * 订单子项
      */
     private List<OrderItem> orderItemList;
+
+    public void paySuccess(String payTradeNo, LocalDateTime payTime) {
+        this.orderPay.setPayStatus(OrderPay.PayStatus.PAY_SUCCESS);
+        this.orderPay.setPayTradeNo(payTradeNo);
+        this.orderPay.setPayTime(payTime);
+        this.orderStatus = OrderStatus.SUCCESS;
+    }
 
 
     @Getter

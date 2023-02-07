@@ -18,7 +18,6 @@ import lombok.EqualsAndHashCode;
 @TableName("od_order_item")
 public class OrderItemDO extends BaseEntity {
 
-
     /**
      * 订单ID
      */
@@ -78,7 +77,5 @@ public class OrderItemDO extends BaseEntity {
      */
     @TableField("spec_data")
     private String specData;
-
-
 
 }

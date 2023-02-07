@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.order.gateway.impl.rpc;
 
-import com.ark.center.commodity.api.sku.SkuApi;
+import com.ark.center.commodity.client.commodity.rpc.SkuApi;
 import com.ark.component.microservice.rpc.exception.FeignCommonErrorDecoder;
 import org.springframework.cloud.openfeign.FeignClient;
 

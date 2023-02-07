@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 /**
  * 订单支付信息
@@ -58,14 +59,21 @@ public class OrderPay {
     @Getter
     @AllArgsConstructor
     public enum PayType implements BasicEnums {
-        WECHAT(1, "微信支付"),
-        ALIPAY(2, "支付宝"),
+        WECHAT("WECHAT", "微信支付"),
+        ALIPAY("ALIPAY", "支付宝"),
         ;
-        private final Integer value;
+        private final String value;
         private final String text;
 
-        public static PayType getByValue(Integer value) {
-            return EnumUtils.getByValue(values(), value);
+        public static PayType getByValue(String value) {
+            return Arrays.stream(values())
+                    .filter(payType -> payType.getValue().equals(value))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        public Integer getValue() {
+            return 0;
         }
 
         public static String getText(Integer value) {

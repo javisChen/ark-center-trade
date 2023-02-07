@@ -17,13 +17,6 @@
 
     <dependencies>
 
-        <!-- 服务自身工程依赖 -->
-        <dependency>
-            <groupId>com.ark.center</groupId>
-            <artifactId>ark-center-trade-acl</artifactId>
-        </dependency>
-        <!-- 服务自身工程依赖 -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -40,6 +33,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ark.center</groupId>
+            <artifactId>ark-center-trade-client</artifactId>
         </dependency>
 
     </dependencies>

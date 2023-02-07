@@ -1,14 +1,12 @@
-package com.ark.center.trade.client.order.response;
+package com.ark.center.trade.client.order.dto;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.List;
-
-import com.ark.center.trade.client.order.OrderItemDTO;
-import com.ark.center.trade.client.order.ReceiveDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -19,8 +17,8 @@ import lombok.Data;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderDetailRespDTO", description = "订单表")
-public class OrderDetailDTO implements Serializable {
+@ApiModel(value = "OrderDTO", description = "订单信息")
+public class OrderDTO implements Serializable {
 
     @ApiModelProperty(value = "id", required = true)
     private Long id;
@@ -53,7 +51,7 @@ public class OrderDetailDTO implements Serializable {
     private Integer freightAmount;
 
     @ApiModelProperty(value = "支付流水号", required = true)
-    private String paySn;
+    private String payTradeNo;
 
     @ApiModelProperty(value = "支付时间", required = false)
     private LocalDateTime payTime;
@@ -83,6 +81,6 @@ public class OrderDetailDTO implements Serializable {
     private List<OrderItemDTO> orderItems;
 
     @ApiModelProperty(value = "收货信息", required = true)
-    private ReceiveDTO receiveInfo;
+    private ReceiveDTO receive;
 
 }
