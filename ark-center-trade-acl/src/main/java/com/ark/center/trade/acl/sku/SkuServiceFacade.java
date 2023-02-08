@@ -2,8 +2,8 @@
 //import cn.hutool.core.collection.CollUtil;
 //import com.google.common.collect.Lists;
 //
-//import com.ark.center.commodity.api.sku.request.SkuInfoGetReqDTO;
-//import com.ark.center.commodity.api.sku.response.SkuRespDTO;
+//import com.ark.center.commodity.client.commodity.query.SkuInfoGetReqDTO;
+//import com.ark.center.commodity.client.commodity.dto.SkuRespDTO;
 //import com.ark.component.exception.ExceptionFactory;
 //import com.ark.component.microservice.rpc.util.RpcUtils;
 //import lombok.RequiredArgsConstructor;
