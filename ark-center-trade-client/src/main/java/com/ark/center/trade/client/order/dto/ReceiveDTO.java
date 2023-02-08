@@ -1,9 +1,10 @@
-package com.ark.center.trade.client.order.response;
+package com.ark.center.trade.client.order.dto;
 
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,7 +15,7 @@ import lombok.Data;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "ReceiveRespDTO对象", description = "订单收货信息")
+@ApiModel(value = "ReceiveDTO", description = "订单收货信息")
 public class ReceiveDTO implements Serializable {
 
     @ApiModelProperty(value = "id", required = true)

@@ -1,28 +1,24 @@
 package com.ark.center.trade.adapter.order.web;
 
-import com.ark.center.trade.application.order.dto.request.OrderCreateDTO;
-import com.ark.center.trade.application.order.dto.request.OrderPageQueryReqDTO;
-import com.ark.center.trade.client.order.response.OrderDetailRespDTO;
-import com.ark.center.trade.application.order.service.OrderService;
+import com.ark.center.trade.application.order.OrderAppService;
+import com.ark.center.trade.client.order.dto.OrderDTO;
+import com.ark.center.trade.client.order.command.OrderCreateCmd;
+import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.dto.SingleResponse;
-import com.ark.component.validator.ValidateGroup;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.ark.component.web.base.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.web.bind.annotation.*;
-
-import org.springframework.web.bind.annotation.RestController;
-import com.ark.component.web.base.BaseController;
-
 /**
  * <p>
- * 订单表 前端控制器
+ * 订单服务
  * </p>
  *
  * @author EOP
@@ -31,38 +27,31 @@ import com.ark.component.web.base.BaseController;
 @Api(tags = "订单接口")
 @Validated
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/v1/order")
 public class OrderController extends BaseController {
 
-    private final OrderService orderService;
-
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderAppService orderAppService;
 
     @ApiOperation(value = "订单-创建订单")
     @PostMapping("/create")
-    public SingleResponse<Long> create(@RequestBody @Validated OrderCreateDTO reqDTO) {
-        return SingleResponse.ok(orderService.createOrder(reqDTO));
+    public SingleResponse<Long> create(@RequestBody @Validated OrderCreateCmd cmd) {
+        return SingleResponse.ok(orderAppService.createOrder(cmd));
     }
 
-    @ApiOperation(value = "修改订单")
-    @PostMapping("/update")
-    public SingleResponse<Long> update(@RequestBody @Validated(ValidateGroup.Update.class) OrderCreateDTO reqDTO) {
-        return SingleResponse.ok(orderService.updateOrder(reqDTO));
-    }
-
-    @ApiOperation(value = "查询订单表分页列表")
+    @ApiOperation(value = "订单-分页查询")
     @PostMapping("/page")
-    public SingleResponse<PageResponse<OrderDetailRespDTO>> pageList(@RequestBody @Validated OrderPageQueryReqDTO queryDTO) {
-        return SingleResponse.ok(orderService.getPageList(queryDTO));
+    public SingleResponse<PageResponse<OrderDTO>> pageList(@RequestBody
+                                                                 @Validated OrderPageQry qry) {
+        return SingleResponse.ok(orderAppService.getPageList(qry));
     }
 
-    @ApiOperation(value = "查询订单表详情")
+    @ApiOperation(value = "订单-订单详情")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @GetMapping("/info")
-    public SingleResponse<OrderDetailRespDTO> info(@RequestParam(value = "id") @NotNull(message = "id不能为空") Long id) {
-        return SingleResponse.ok(orderService.getOrderInfo(id));
+    public SingleResponse<OrderDTO> info(@RequestParam(value = "id")
+                                               @NotNull(message = "id不能为空") Long id) {
+        return SingleResponse.ok(orderAppService.getOrder(id));
     }
 
 

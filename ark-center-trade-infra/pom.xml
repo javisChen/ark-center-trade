@@ -23,6 +23,23 @@
             <artifactId>ark-center-trade-domain</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ark.center</groupId>
+            <artifactId>ark-center-trade-client</artifactId>
+        </dependency>
+
+        <!-- 商品服务 -->
+        <dependency>
+            <groupId>com.ark.center</groupId>
+            <artifactId>ark-center-commodity-client</artifactId>
+        </dependency>
+
+        <!-- 支付服务 -->
+        <dependency>
+            <groupId>com.ark.center</groupId>
+            <artifactId>ark-center-pay-client</artifactId>
+        </dependency>
+
         <!-- 服务基本组件 -->
         <dependency>
             <groupId>com.ark.microservice</groupId>

@@ -6,6 +6,11 @@ import lombok.Data;
 public class Receive {
 
     /**
+     * 订单id
+     */
+    private Long orderId;
+
+    /**
      * 收货人名称
      */
     private String name;

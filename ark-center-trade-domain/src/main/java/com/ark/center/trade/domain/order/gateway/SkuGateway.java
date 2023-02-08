@@ -1,6 +1,5 @@
 package com.ark.center.trade.domain.order.gateway;
 
-import com.ark.center.trade.domain.order.model.Order;
 import com.ark.center.trade.domain.order.model.Sku;
 
 import java.util.List;

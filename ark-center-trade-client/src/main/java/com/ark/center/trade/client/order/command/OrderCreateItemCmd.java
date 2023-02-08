@@ -18,30 +18,10 @@ import java.io.Serializable;
 @ApiModel(value = "OrderCreateItemCmd", description = "订单明细")
 public class OrderCreateItemCmd implements Serializable {
 
-    @ApiModelProperty(value = "订单ID", required = true)
-    private Long orderId;
-
-    @ApiModelProperty(value = "SKU ID", required = true)
+    @ApiModelProperty(value = "SkuId", required = true)
     private Long skuId;
-
-    @ApiModelProperty(value = "商品名称", required = true)
-    private String spuName;
-
-    @ApiModelProperty(value = "SKU单价", required = true)
-    private Integer price;
 
     @ApiModelProperty(value = "购买数量", required = true)
     private Integer quantity;
 
-    @ApiModelProperty(value = "应付金额", required = true)
-    private Integer expectAmount;
-
-    @ApiModelProperty(value = "实付金额", required = true)
-    private Integer actualAmount;
-
-    @ApiModelProperty(value = "图片地址", required = true)
-    private String picUrl;
-
-    @ApiModelProperty(value = "SKU销售参数JSON", required = true)
-    private String specData;
 }

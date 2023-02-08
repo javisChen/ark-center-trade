@@ -1,31 +1,24 @@
 package com.ark.center.trade.application.order.executor;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
-import com.alibaba.fastjson.JSON;
-import com.ark.center.pay.api.dto.mq.MQPayNotifyDTO;
-import com.ark.center.trade.application.orderitem.dto.request.OrderItemDTO;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
-import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.order.gateway.ReceiveGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Order;
 import com.ark.center.trade.domain.order.model.OrderItem;
+import com.ark.center.trade.domain.order.model.Receive;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
-import com.ark.center.trade.infra.order.gateway.impl.db.OrderDO;
-import com.ark.center.trade.infra.order.gateway.impl.db.OrderItemDO;
-import com.ark.center.trade.infra.receive.gateway.impl.db.ReceiveDO;
+import com.ark.center.trade.infra.order.convertor.OrderConvertor;
+import com.ark.center.trade.infra.receive.convertor.ReceiveConvertor;
+import com.ark.component.common.ParamsChecker;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.exception.ExceptionFactory;
-import com.ark.component.orm.mybatis.base.BaseEntity;
-import com.ark.component.web.util.bean.BeanConvertor;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -39,11 +32,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderCreateCmdExe {
 
+
     private final OrderGateway orderGateway;
 
     private final SkuGateway skuGateway;
 
     private final ReceiveGateway receiveGateway;
+
+    private final ReceiveConvertor receiveConvertor;
+    private final OrderConvertor orderConvertor;
 
     public Long execute(OrderCreateCmd orderCreateCmd) {
         // 生成工单号
@@ -57,22 +54,13 @@ public class OrderCreateCmdExe {
         return orderId;
     }
 
-    private List<OrderItem> assembleOrderItems(OrderCreateCmd reqDTO, String orderCode) {
-        List<OrderCreateItemCmd> orderItems = reqDTO.getOrderItems();
+    private List<OrderItem> assembleOrderItems(OrderCreateCmd orderCreateCmd, String tradeNo) {
+        List<OrderCreateItemCmd> orderItems = orderCreateCmd.getOrderItems();
         Map<Long, Sku> skuMap = getSkuListMap(orderItems);
         List<OrderItem> orderItemList = Lists.newArrayList();
-        for (OrderCreateItemCmd orderItemDTO :orderItems) {
-            OrderItem orderItem = new OrderItem();
-            Sku sku = skuMap.get(orderItemDTO.getSkuId());
-            orderItem.setSkuId(orderItemDTO.getSkuId());
-            orderItem.setPrice(sku.getSalesPrice());
-            orderItem.setPicUrl(sku.getMainPicture());
-            int amount = sku.getSalesPrice() * orderItemDTO.getQuantity();
-            orderItem.setExpectAmount(amount);
-            // todo 后期开发计算优惠券等方法
-            orderItem.setActualAmount(amount);
-            orderItem.setQuantity(orderItemDTO.getQuantity());
-            orderItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
+        for (OrderCreateItemCmd itemCmd :orderItems) {
+            Sku sku = skuMap.get(itemCmd.getSkuId());
+            OrderItem orderItem = orderConvertor.toOrderItemDomainObject(itemCmd, sku);
             orderItemList.add(orderItem);
         }
         return orderItemList;
@@ -81,7 +69,11 @@ public class OrderCreateCmdExe {
     private Map<Long, Sku> getSkuListMap(List<OrderCreateItemCmd> orderItems) {
         List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
         List<Sku> skuInfoList = skuGateway.getSkuList(skuIds);
-        Assert.isTrue(CollUtil.isNotEmpty(skuInfoList), () -> ExceptionFactory.userException("SKU列表为空"));
+
+        ParamsChecker
+                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() == skuInfoList.size(),
+                ExceptionFactory.userException("SKU列表为空"));
+
         return skuInfoList
                 .stream()
                 .collect(Collectors.toMap(Sku::getSkuId, Function.identity()));
@@ -128,63 +120,9 @@ public class OrderCreateCmdExe {
     private void saveReceive(OrderCreateCmd reqDTO, Long orderId) {
         OrderCreateReceiveCreateCmd receiveInfo = reqDTO.getReceiveInfo();
         if (receiveInfo != null) {
-            receiveService.save(convertReceive(orderId, receiveInfo));
+            Receive receive = receiveConvertor.convertToReceive(receiveInfo);
+            receive.setOrderId(orderId);
+            receiveGateway.save(receive);
         }
-    }
-
-    private List<OrderItemDO> convertOrderItems(Long orderId, String orderCode, List<OrderItemDTO> orderItems) {
-        List<OrderItemDO> orderItemList = Lists.newArrayList();
-        for (OrderItemDTO orderItem :orderItems) {
-            OrderItemDO orderItemDO = new OrderItemDO();
-            orderItemDO.setOrderId(orderId);
-            orderItemDO.setTradeNo(orderCode);
-            orderItemDO.setQuantity(orderItem.getQuantity());
-            orderItemList.add(orderItemDO);
-        }
-        return orderItemList;
-    }
-
-    private ReceiveDO convertReceive(Long orderId, OrderCreateReceiveCreateCmd receiveInfo) {
-        ReceiveDO receiveDO = new ReceiveDO();
-        receiveDO.setOrderId(orderId);
-        receiveDO.setName(receiveInfo.getName());
-        receiveDO.setMobile(receiveInfo.getMobile());
-        receiveDO.setProvince(receiveInfo.getProvince());
-        receiveDO.setCity(receiveInfo.getCity());
-        receiveDO.setDistrict(receiveInfo.getDistrict());
-        receiveDO.setAddress(receiveInfo.getAddress());
-        receiveDO.setStreet(receiveInfo.getStreet());
-        return receiveDO;
-    }
-
-    public PageResponse<OrderDetailRespDTO> getPageList(OrderPageQry queryDTO) {
-        IPage<OrderDetailRespDTO> page = lambdaQuery()
-                .orderByDesc(BaseEntity::getGmtCreate)
-                .page(new Page<>(queryDTO.getCurrent(), queryDTO.getSize()))
-                .convert(item -> BeanConvertor.copy(item, OrderDetailRespDTO.class));
-        return BeanConvertor.copyPage(page, OrderDetailRespDTO.class);
-    }
-
-    public Long updateOrder(OrderCreateCmd reqDTO) {
-        OrderDO entity = BeanConvertor.copy(reqDTO, OrderDO.class);
-        updateById(entity);
-        return entity.getId();
-    }
-
-    public OrderDetailRespDTO getOrderInfo(Long orderId) {
-        OrderDO entity = getById(orderId);
-        OrderDetailRespDTO detailRespDTO = BeanConvertor.copy(entity, OrderDetailRespDTO.class);
-        detailRespDTO.setOrderItems(orderItemService.listOrderItems(orderId));
-        detailRespDTO.setReceiveInfo(receiveService.getReceiveInfoByOrderId(orderId));
-        return detailRespDTO;
-    }
-
-    public void updateOrderOnPaySuccess(MQPayNotifyDTO payNotifyDTO) {
-        lambdaUpdate()
-                .eq(OrderDO::getTradeNo, payNotifyDTO.getBizTradeNo())
-                .set(OrderDO::getPayTradeNo, payNotifyDTO.getPayTradeNo())
-                .set(OrderDO::getPayStatus, OrderDO.PayStatus.PAY_SUCCESS.getValue())
-                .set(OrderDO::getOrderStatus, OrderDO.OrderStatus.PENDING_DELIVER.getValue())
-                .update();
     }
 }
