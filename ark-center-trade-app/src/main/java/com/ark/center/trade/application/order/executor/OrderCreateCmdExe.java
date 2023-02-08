@@ -31,8 +31,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class OrderCreateCmdExe {
-
-
     private final OrderGateway orderGateway;
 
     private final SkuGateway skuGateway;
@@ -40,6 +38,7 @@ public class OrderCreateCmdExe {
     private final ReceiveGateway receiveGateway;
 
     private final ReceiveConvertor receiveConvertor;
+
     private final OrderConvertor orderConvertor;
 
     public Long execute(OrderCreateCmd orderCreateCmd) {

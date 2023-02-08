@@ -11,8 +11,8 @@ import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
 import com.ark.center.trade.domain.order.model.vo.OrderPay.PayStatus;
 import com.ark.center.trade.domain.order.model.vo.OrderPay.PayType;
-import com.ark.center.trade.infra.order.gateway.impl.db.OrderDO;
-import com.ark.center.trade.infra.order.gateway.impl.db.OrderItemDO;
+import com.ark.center.trade.infra.order.gateway.db.OrderDO;
+import com.ark.center.trade.infra.order.gateway.db.OrderItemDO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
