@@ -11,12 +11,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
         "com.ark.center.trade.infra.*.gateway.db",
 })
 @SpringBootApplication
-@EnableFeignClients(basePackages = {})
+@EnableFeignClients()
 @EnableDiscoveryClient
-public class Application extends ArkWebConfig {
+public class TradeApplication extends ArkWebConfig {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(TradeApplication.class, args);
     }
 
 }

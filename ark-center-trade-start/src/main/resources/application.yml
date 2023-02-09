@@ -13,5 +13,5 @@ ark:
     mq:
       rocketmq:
         producer:
-          group: "trade_group"
+          group: trade_group
         server: localhost:9876

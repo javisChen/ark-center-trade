@@ -42,6 +42,6 @@ public class OrderAppService {
         Order order = new Order();
         order.setOrderId(message.getOrderId());
         order.paySuccess(message.getPayTradeNo(), LocalDateTime.now());
-        orderGateway.save(order);
+        orderGateway.updateOrderPayStatus(order);
     }
 }

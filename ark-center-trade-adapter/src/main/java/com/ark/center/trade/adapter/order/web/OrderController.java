@@ -41,8 +41,7 @@ public class OrderController extends BaseController {
 
     @ApiOperation(value = "订单-分页查询")
     @PostMapping("/page")
-    public SingleResponse<PageResponse<OrderDTO>> pageList(@RequestBody
-                                                                 @Validated OrderPageQry qry) {
+    public SingleResponse<PageResponse<OrderDTO>> pageList(@RequestBody @Validated OrderPageQry qry) {
         return SingleResponse.ok(orderAppService.getPageList(qry));
     }
 

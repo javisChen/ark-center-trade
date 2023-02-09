@@ -75,6 +75,15 @@ public class OrderGatewayImpl implements OrderGateway {
         return orderConvertor.toOrderItemDTO(orderItemDOS);
     }
 
+    @Override
+    public void updateOrderPayStatus(Order order) {
+        OrderDO entity = new OrderDO();
+        entity.setId(order.getOrderId());
+        entity.setPayStatus(order.getOrderPay().getPayStatus().getValue());
+        entity.setOrderStatus(order.getOrderStatus().getValue());
+        orderMapper.updateById(entity);
+    }
+
     public void update(Order order) {
         OrderDO orderDO = orderConvertor.toOrderDO(order);
         orderMapper.updateById(orderDO);

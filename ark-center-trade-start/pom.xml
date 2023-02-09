@@ -51,7 +51,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.ark.center.trade.Application</mainClass>
+                            <mainClass>com.ark.center.trade.TradeApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>

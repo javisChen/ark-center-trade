@@ -18,4 +18,5 @@ public interface OrderGateway {
 
     List<OrderItemDTO> listOrderItems(Long orderId);
 
+    void updateOrderPayStatus(Order order);
 }

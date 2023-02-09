@@ -140,8 +140,7 @@ public class Order {
         PENDING_PAY(1, "待支付"),
         PENDING_DELIVER(2, "待发货"),
         PENDING_RECEIVE(3, "待收货"),
-        PENDING_EVALUATE(4, "待评价"),
-        SUCCESS(5, "交易成功"),
+        SUCCESS(4, "交易成功"),
         ;
         private final Integer value;
         private final String text;

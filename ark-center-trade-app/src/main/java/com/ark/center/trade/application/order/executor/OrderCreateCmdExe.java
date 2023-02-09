@@ -70,7 +70,7 @@ public class OrderCreateCmdExe {
         List<Sku> skuInfoList = skuGateway.getSkuList(skuIds);
 
         ParamsChecker
-                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() == skuInfoList.size(),
+                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
                 ExceptionFactory.userException("SKU列表为空"));
 
         return skuInfoList

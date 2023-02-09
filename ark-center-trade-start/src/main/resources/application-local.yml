@@ -5,7 +5,7 @@ spring:
     name: trade
   datasource:
     druid:
-      url: jdbc:mysql://gz-cynosdbmysql-grp-irl7x9ar.sql.tencentcdb.com:20716/order?useSSL=false&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&serverTimezone=UTC&allowPublicKeyRetrieval=True
+      url: jdbc:mysql://gz-cynosdbmysql-grp-irl7x9ar.sql.tencentcdb.com:20716/trade?useSSL=false&useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&serverTimezone=UTC&allowPublicKeyRetrieval=True
       username: kt_cloud8888
       password: Kt.cloud1234!@#$
       name: defaultDataSource
@@ -31,5 +31,5 @@ ark:
     mq:
       rocketmq:
         producer:
-          group: "trade_group"
+          group: trade_group
         server: localhost:9876
