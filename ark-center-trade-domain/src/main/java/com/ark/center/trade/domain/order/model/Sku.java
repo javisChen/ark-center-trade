@@ -13,7 +13,7 @@ public class Sku {
     /**
      * 商品名称
      */
-    private Long skuId;
+    private Long id;
 
 
     /**

@@ -53,7 +53,7 @@ public class OrderCreateCmdExe {
         return orderId;
     }
 
-    private List<OrderItem> assembleOrderItems(OrderCreateCmd orderCreateCmd, String tradeNo) {
+    private List<OrderItem> assembleOrderItems(OrderCreateCmd orderCreateCmd) {
         List<OrderCreateItemCmd> orderItems = orderCreateCmd.getOrderItems();
         Map<Long, Sku> skuMap = getSkuListMap(orderItems);
         List<OrderItem> orderItemList = Lists.newArrayList();
@@ -69,18 +69,17 @@ public class OrderCreateCmdExe {
         List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
         List<Sku> skuInfoList = skuGateway.getSkuList(skuIds);
 
-        ParamsChecker
-                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
+        ParamsChecker.throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
                 ExceptionFactory.userException("SKU列表为空"));
 
         return skuInfoList
                 .stream()
-                .collect(Collectors.toMap(Sku::getSkuId, Function.identity()));
+                .collect(Collectors.toMap(Sku::getId, Function.identity()));
     }
 
     private Order assembleOrder(OrderCreateCmd orderCreateCmd, String tradeNo) {
 
-        List<OrderItem> orderItemList = assembleOrderItems(orderCreateCmd, tradeNo);
+        List<OrderItem> orderItemList = assembleOrderItems(orderCreateCmd);
 
         // 计算总实付金额
         int totalAmount = orderItemList.stream().mapToInt(OrderItem::getActualAmount).sum();
