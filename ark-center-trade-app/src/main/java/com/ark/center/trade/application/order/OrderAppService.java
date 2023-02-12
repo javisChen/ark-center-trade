@@ -5,6 +5,7 @@ import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
+import com.ark.center.trade.client.order.dto.info.OrderInfoDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.order.model.Order;
@@ -33,8 +34,9 @@ public class OrderAppService {
         return orderQryExe.getPageList(qry);
     }
 
-    public OrderDTO getOrder(Long id) {
-        return orderQryExe.get(id);
+    public OrderInfoDTO getOrder(Long id) {
+        OrderDTO orderDTO = orderQryExe.get(id);
+        return orderDTO;
     }
 
     @Transactional(rollbackFor = Throwable.class)

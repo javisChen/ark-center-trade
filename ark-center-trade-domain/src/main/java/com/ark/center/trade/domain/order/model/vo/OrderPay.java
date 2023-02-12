@@ -59,13 +59,13 @@ public class OrderPay {
     @Getter
     @AllArgsConstructor
     public enum PayType implements BasicEnums {
-        WECHAT("WECHAT", "微信支付"),
-        ALIPAY("ALIPAY", "支付宝"),
+        WECHAT(1, "微信支付"),
+        ALIPAY(2, "支付宝"),
         ;
-        private final String value;
+        private final Integer value;
         private final String text;
 
-        public static PayType getByValue(String value) {
+        public static PayType getByValue(Integer value) {
             return Arrays.stream(values())
                     .filter(payType -> payType.getValue().equals(value))
                     .findFirst()

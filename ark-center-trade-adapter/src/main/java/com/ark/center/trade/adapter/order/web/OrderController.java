@@ -3,6 +3,7 @@ package com.ark.center.trade.adapter.order.web;
 import com.ark.center.trade.application.order.OrderAppService;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
+import com.ark.center.trade.client.order.dto.info.OrderInfoDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.dto.SingleResponse;
@@ -48,8 +49,8 @@ public class OrderController extends BaseController {
     @ApiOperation(value = "订单-订单详情")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @GetMapping("/info")
-    public SingleResponse<OrderDTO> info(@RequestParam(value = "id")
-                                               @NotNull(message = "id不能为空") Long id) {
+    public SingleResponse<OrderInfoDTO> info(@RequestParam(value = "id")
+                                         @NotNull(message = "id不能为空") Long id) {
         return SingleResponse.ok(orderAppService.getOrder(id));
     }
 

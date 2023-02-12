@@ -49,9 +49,9 @@ public interface OrderConvertor {
         return orderDO;
     }
 
-    default OrderItemDO toOrderItemDO(Order order, OrderItem orderItem) {
+    default OrderItemDO toOrderItemDO(OrderDO order, OrderItem orderItem) {
         OrderItemDO orderItemDO = new OrderItemDO();
-        orderItemDO.setOrderId(order.getOrderId());
+        orderItemDO.setOrderId(order.getId());
         orderItemDO.setTradeNo(order.getTradeNo());
         orderItemDO.setSpuName(orderItem.getSpuName());
         orderItemDO.setSkuId(orderItem.getSkuId());

@@ -1,15 +1,12 @@
 package com.ark.center.trade.infra.order.gateway.db;
+
+import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.ark.component.orm.mybatis.base.BaseEntity;
-import java.time.LocalDateTime;
-
-import com.ark.component.common.enums.BasicEnums;
-import com.ark.component.common.enums.EnumUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+
+import java.time.LocalDateTime;
 /**
  * <p>
  * 订单表
@@ -58,7 +55,7 @@ public class OrderDO extends BaseEntity {
      * 支付类型 enums[WECHAT,微信支付,1;ALIPAY,支付宝,2]
      */
     @TableField("pay_type")
-    private String payType;
+    private Integer payType;
 
     /**
      * 应付金额

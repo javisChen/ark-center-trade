@@ -1,24 +1,12 @@
-package com.ark.center.trade.client.order.dto;
+package com.ark.center.trade.client.order.dto.info;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
-/**
- * <p>
- * 订单表
- * </p>
- *
- * @author EOP
- * @since 2022-08-09
- */
 @Data
-@ApiModel(value = "OrderDTO", description = "订单信息")
-public class OrderDTO implements Serializable {
+public class OrderBaseDTO {
 
     @ApiModelProperty(value = "id", required = true)
     private Long id;
@@ -40,15 +28,6 @@ public class OrderDTO implements Serializable {
 
     @ApiModelProperty(value = "1-微信支付 2-支付宝", required = true)
     private Integer payType;
-
-    @ApiModelProperty(value = "应付金额（单位：分）", required = true)
-    private Integer expectAmount;
-
-    @ApiModelProperty(value = "实付金额（单位：分）", required = true)
-    private Integer actualAmount;
-
-    @ApiModelProperty(value = "运费金额（单位：分）", required = true)
-    private Integer freightAmount;
 
     @ApiModelProperty(value = "支付流水号", required = true)
     private String payTradeNo;
@@ -76,11 +55,5 @@ public class OrderDTO implements Serializable {
 
     @ApiModelProperty(value = "物流单号", required = true)
     private String logisticsCode;
-
-    @ApiModelProperty(value = "订单项", required = true)
-    private List<OrderItemDTO> orderItems;
-
-    @ApiModelProperty(value = "收货信息", required = true)
-    private ReceiveDTO receive;
 
 }

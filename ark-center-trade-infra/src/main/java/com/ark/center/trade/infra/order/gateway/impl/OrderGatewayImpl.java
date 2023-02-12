@@ -40,11 +40,12 @@ public class OrderGatewayImpl implements OrderGateway {
 
             List<OrderItem> orderItemList = order.getOrderItemList();
             orderItemList.stream()
-                    .map(orderItem -> orderConvertor.toOrderItemDO(order, orderItem))
+                    .map(orderItem -> orderConvertor.toOrderItemDO(orderDO, orderItem))
                     .forEach(orderItemMapper::insert);
         } else {
             orderMapper.updateById(orderDO);
         }
+        order.setOrderId(orderDO.getId());
     }
 
     @Override
@@ -59,12 +60,13 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     @Override
-    public OrderDTO findById(Long orderId) {
+    public Order findById(Long orderId) {
         OrderDO orderDO = orderMapper.selectById(orderId);
-        OrderDTO orderDTO = orderConvertor.toOrderDTO(orderDO);
-        orderDTO.setOrderItems(listOrderItems(orderId));
-        orderDTO.setReceive(receiveGateway.findByOrderId(orderId));
-        return orderDTO;
+        return orderConvertor.toOrderDomainObject(orderDO);
+//        OrderDTO orderDTO = orderConvertor.toOrderDTO(orderDO);
+//        orderDTO.setOrderItems(listOrderItems(orderId));
+//        orderDTO.setReceive(receiveGateway.findByOrderId(orderId));
+//        return orderDTO;
     }
 
     @Override

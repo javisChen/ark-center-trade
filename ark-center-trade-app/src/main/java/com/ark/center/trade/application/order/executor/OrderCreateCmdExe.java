@@ -55,7 +55,8 @@ public class OrderCreateCmdExe {
 
     private List<OrderItem> assembleOrderItems(OrderCreateCmd orderCreateCmd) {
         List<OrderCreateItemCmd> orderItems = orderCreateCmd.getOrderItems();
-        Map<Long, Sku> skuMap = getSkuListMap(orderItems);
+        List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
+        Map<Long, Sku> skuMap = requestSkuList(skuIds);
         List<OrderItem> orderItemList = Lists.newArrayList();
         for (OrderCreateItemCmd itemCmd :orderItems) {
             Sku sku = skuMap.get(itemCmd.getSkuId());
@@ -65,12 +66,12 @@ public class OrderCreateCmdExe {
         return orderItemList;
     }
 
-    private Map<Long, Sku> getSkuListMap(List<OrderCreateItemCmd> orderItems) {
-        List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
+    private Map<Long, Sku> requestSkuList(List<Long> skuIds) {
         List<Sku> skuInfoList = skuGateway.getSkuList(skuIds);
 
-        ParamsChecker.throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
-                ExceptionFactory.userException("SKU列表为空"));
+        ParamsChecker
+                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
+                ExceptionFactory.userException("商品库存不足或已下架"));
 
         return skuInfoList
                 .stream()

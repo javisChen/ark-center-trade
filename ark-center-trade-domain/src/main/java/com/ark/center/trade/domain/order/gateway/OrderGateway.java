@@ -14,7 +14,7 @@ public interface OrderGateway {
 
     PageResponse<OrderDTO> getPageList(OrderPageQry pageQry);
 
-    OrderDTO findById(Long orderId);
+    Order findById(Long orderId);
 
     List<OrderItemDTO> listOrderItems(Long orderId);
 
