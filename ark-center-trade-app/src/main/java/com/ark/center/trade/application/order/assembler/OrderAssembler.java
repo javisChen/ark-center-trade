@@ -2,23 +2,55 @@ package com.ark.center.trade.application.order.assembler;
 
 import com.ark.center.trade.client.order.dto.ReceiveDTO;
 import com.ark.center.trade.client.order.dto.info.OrderBaseDTO;
+import com.ark.center.trade.client.order.dto.info.OrderChargeDTO;
+import com.ark.center.trade.client.order.dto.info.OrderCommodityDTO;
 import com.ark.center.trade.client.order.dto.info.OrderInfoDTO;
 import com.ark.center.trade.domain.order.model.Order;
+import com.ark.center.trade.domain.order.model.OrderItem;
+import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
+import com.ark.center.trade.infra.order.convertor.OrderConvertor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@RequiredArgsConstructor
 public class OrderAssembler {
 
-    public OrderInfoDTO assemble(Order order, ReceiveDTO receiveDTO) {
-        OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
-        OrderBaseDTO orderBaseDTO = assembleOrderBase(order);
+    private final OrderConvertor orderConvertor;
 
-        orderInfoDTO.setOrderBaseDTO(orderBaseDTO);
-        orderInfoDTO.setOrderChargeDTO();
-        orderInfoDTO.setReceiveDTO();
-        orderInfoDTO.setOrderCommodityDTO();
+    public OrderInfoDTO assemble(Order order, List<OrderItem> orderItems, ReceiveDTO receiveDTO) {
+        OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
+        // 订单基本信息
+        OrderBaseDTO orderBaseDTO = assembleOrderBase(order);
+        orderInfoDTO.setOrderBase(orderBaseDTO);
+
+        // 订单费用信息
+        OrderChargeDTO orderChargeDTO = assembleOrderCharge(order);
+        orderInfoDTO.setOrderCharge(orderChargeDTO);
+
+        // 订单收货信息
+        orderInfoDTO.setOrderReceive(receiveDTO);
+
+        // 订单商品信息
+        List<OrderCommodityDTO> orderCommodityDTO = assembleOrderCommodity(orderItems);
+        orderInfoDTO.setOrderCommodities(orderCommodityDTO);
         return orderInfoDTO;
+    }
+
+    private List<OrderCommodityDTO> assembleOrderCommodity(List<OrderItem> orderItems) {
+        return orderConvertor.toOrderCommodityDTO(orderItems);
+    }
+
+    private OrderChargeDTO assembleOrderCharge(Order order) {
+        OrderChargeDTO orderChargeDTO = new OrderChargeDTO();
+        OrderAmount orderAmount = order.getOrderAmount();
+        orderChargeDTO.setExpectAmount(orderAmount.getExpectAmount());
+        orderChargeDTO.setActualAmount(orderAmount.getActualAmount());
+        orderChargeDTO.setFreightAmount(orderAmount.getFreightAmount());
+        return orderChargeDTO;
     }
 
     private OrderBaseDTO assembleOrderBase(Order order) {
@@ -30,7 +62,10 @@ public class OrderAssembler {
         orderBaseDTO.setOrderStatus(order.getOrderStatus().getValue());
         OrderPay orderPay = order.getOrderPay();
         orderBaseDTO.setPayStatus(orderPay.getPayStatus().getValue());
-        orderBaseDTO.setPayType(orderPay.getPayType().getValue());
+        OrderPay.PayType payType = orderPay.getPayType();
+        if (payType != null) {
+            orderBaseDTO.setPayType(payType.getValue());
+        }
         orderBaseDTO.setPayTradeNo(orderPay.getPayTradeNo());
         orderBaseDTO.setPayTime(orderPay.getPayTime());
         orderBaseDTO.setDeliverTime(order.getDeliverTime());
@@ -43,5 +78,4 @@ public class OrderAssembler {
         return orderBaseDTO;
     }
 
-    ;
 }

@@ -105,6 +105,7 @@ public class OrderCreateCmdExe {
         orderAmount.setExpectAmount(totalAmount);
         orderAmount.setActualAmount(totalAmount);
         orderAmount.setFreightAmount(0);
+        order.setOrderAmount(orderAmount);
 
         // 设置订单项
         order.setOrderItemList(orderItemList);

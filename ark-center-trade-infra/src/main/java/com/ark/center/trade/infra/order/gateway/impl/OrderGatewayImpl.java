@@ -86,6 +86,14 @@ public class OrderGatewayImpl implements OrderGateway {
         orderMapper.updateById(entity);
     }
 
+    @Override
+    public List<OrderItem> findItemsByOrderId(Long orderId) {
+        LambdaQueryWrapper<OrderItemDO> qw = new LambdaQueryWrapper<>();
+        qw.eq(OrderItemDO::getOrderId, orderId);
+        List<OrderItemDO> orderItemDOS = orderItemMapper.selectList(qw);
+        return orderConvertor.toOrderItemDomainObject(orderItemDOS);
+    }
+
     public void update(Order order) {
         OrderDO orderDO = orderConvertor.toOrderDO(order);
         orderMapper.updateById(orderDO);

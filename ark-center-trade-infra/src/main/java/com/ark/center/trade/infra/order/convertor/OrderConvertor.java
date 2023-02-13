@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
+import com.ark.center.trade.client.order.dto.info.OrderCommodityDTO;
 import com.ark.center.trade.domain.order.model.Order;
 import com.ark.center.trade.domain.order.model.OrderItem;
 import com.ark.center.trade.domain.order.model.Sku;
+import com.ark.center.trade.domain.order.model.SkuAttr;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
 import com.ark.center.trade.domain.order.model.vo.OrderPay.PayStatus;
@@ -72,13 +74,23 @@ public interface OrderConvertor {
         orderItem.setSkuId(orderCreateItemCmd.getSkuId());
         orderItem.setPrice(sku.getSalesPrice());
         orderItem.setQuantity(orderCreateItemCmd.getQuantity());
-        orderItem.setExpectAmount(sku.getSalesPrice());
         orderItem.setExpectAmount(totalAmount);
         orderItem.setActualAmount(totalAmount);
         orderItem.setPicUrl(sku.getMainPicture());
-        orderItem.setSpecData(sku.specListToMap());
+        List<SkuAttr> specList = sku.getSpecList();
+        orderItem.setSpecData(buildSpecString(specList));
         return orderItem;
     }
+
+    private String buildSpecString(List<SkuAttr> specList) {
+        StringBuilder builder = new StringBuilder();
+        for (SkuAttr skuAttr : specList) {
+            builder.append(skuAttr.getAttrName()).append("：").append(skuAttr.getAttrValue()).append(";");
+        }
+        return builder.toString();
+    }
+
+    List<OrderItem> toOrderItemDomainObject(List<OrderItemDO> orderItemDOS);
 
     default OrderDTO toOrderDTO(OrderDO orderDO) {
         OrderDTO orderDTO = new OrderDTO();
@@ -139,4 +151,6 @@ public interface OrderConvertor {
     }
 
     List<OrderItemDTO> toOrderItemDTO(List<OrderItemDO> orderItemDOS);
+
+    List<OrderCommodityDTO> toOrderCommodityDTO(List<OrderItem> orderItems);
 }

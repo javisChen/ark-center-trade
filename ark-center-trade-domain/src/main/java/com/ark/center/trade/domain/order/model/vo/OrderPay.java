@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * 订单支付信息
@@ -66,14 +65,7 @@ public class OrderPay {
         private final String text;
 
         public static PayType getByValue(Integer value) {
-            return Arrays.stream(values())
-                    .filter(payType -> payType.getValue().equals(value))
-                    .findFirst()
-                    .orElse(null);
-        }
-
-        public Integer getValue() {
-            return 0;
+            return EnumUtils.getByValue(values(), value);
         }
 
         public static String getText(Integer value) {

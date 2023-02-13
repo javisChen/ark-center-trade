@@ -35,7 +35,7 @@ public class OrderAppService {
     }
 
     public OrderInfoDTO getOrder(Long id) {
-        OrderDTO orderDTO = orderQryExe.get(id);
+        OrderInfoDTO orderDTO = orderQryExe.get(id);
         return orderDTO;
     }
 

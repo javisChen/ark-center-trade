@@ -2,10 +2,13 @@ package com.ark.center.trade.domain.order.model;
 
 import lombok.Data;
 
-import java.util.Map;
-
 @Data
 public class OrderItem {
+
+    /**
+     * 订单id
+     */
+    private Long orderId;
 
 
     /**
@@ -46,6 +49,6 @@ public class OrderItem {
     /**
      * SKU销售参数JSON
      */
-    private Map<String, Object> specData;
+    private String specData;
 
 }

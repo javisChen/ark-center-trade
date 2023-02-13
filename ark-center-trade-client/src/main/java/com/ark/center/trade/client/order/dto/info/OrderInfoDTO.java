@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -20,16 +21,16 @@ import java.io.Serializable;
 public class OrderInfoDTO implements Serializable {
 
     @ApiModelProperty(value = "订单基本信息", required = true)
-    private OrderBaseDTO orderBaseDTO;
+    private OrderBaseDTO orderBase;
 
     @ApiModelProperty(value = "订单费用信息", required = true)
-    private OrderChargeDTO orderChargeDTO;
+    private OrderChargeDTO orderCharge;
 
     @ApiModelProperty(value = "订单收货信息", required = true)
-    private ReceiveDTO receiveDTO;
+    private ReceiveDTO orderReceive;
 
     @ApiModelProperty(value = "订单商品信息", required = true)
-    private OrderCommodityDTO orderCommodityDTO;
+    private List<OrderCommodityDTO> orderCommodities;
 
 
 }
