@@ -35,8 +35,7 @@ public class OrderAppService {
     }
 
     public OrderInfoDTO getOrder(Long id) {
-        OrderInfoDTO orderDTO = orderQryExe.get(id);
-        return orderDTO;
+        return orderQryExe.get(id);
     }
 
     @Transactional(rollbackFor = Throwable.class)
