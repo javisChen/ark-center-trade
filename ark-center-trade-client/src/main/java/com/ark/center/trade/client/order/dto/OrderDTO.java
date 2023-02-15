@@ -83,4 +83,7 @@ public class OrderDTO implements Serializable {
     @ApiModelProperty(value = "收货信息", required = true)
     private ReceiveDTO receive;
 
+    @ApiModelProperty(value = "下单时间", required = true)
+    private LocalDateTime gmtCreate;
+
 }

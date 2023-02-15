@@ -113,8 +113,7 @@ public interface OrderConvertor {
         orderDTO.setSellerId(orderDO.getSellerId());
         orderDTO.setLogisticsCompany(orderDO.getLogisticsCompany());
         orderDTO.setLogisticsCode(orderDO.getLogisticsCode());
-//        orderDTO.setOrderItems();
-//        orderDTO.setReceiveInfo();
+        orderDTO.setGmtCreate(orderDO.getGmtCreate());
         return orderDTO;
     }
 

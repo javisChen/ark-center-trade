@@ -22,7 +22,6 @@ public class OrderAppService {
 
     private final OrderCreateCmdExe orderCreateCmdExe;
     private final OrderQryExe orderQryExe;
-
     private final OrderGateway orderGateway;
 
     @Transactional(rollbackFor = Throwable.class)
