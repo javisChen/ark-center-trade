@@ -55,5 +55,7 @@ public class OrderBaseDTO {
 
     @ApiModelProperty(value = "物流单号", required = true)
     private String logisticsCode;
+    @ApiModelProperty(value = "下单时间", required = true)
+    private LocalDateTime createTime;
 
 }

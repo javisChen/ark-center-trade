@@ -55,6 +55,7 @@ public class OrderAssembler {
 
     private OrderBaseDTO assembleOrderBase(Order order) {
         OrderBaseDTO orderBaseDTO = new OrderBaseDTO();
+        orderBaseDTO.setCreateTime(order.getCreateTime());
         orderBaseDTO.setId(order.getOrderId());
         orderBaseDTO.setTradeNo(order.getTradeNo());
         orderBaseDTO.setOrderType(order.getOrderType());

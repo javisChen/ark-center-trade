@@ -76,6 +76,11 @@ public class Order {
     private String logisticsCode;
 
     /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
      * 订单金额信息
      */
     private OrderAmount orderAmount = new OrderAmount();

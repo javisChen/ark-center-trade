@@ -132,6 +132,7 @@ public interface OrderConvertor {
         order.setSellerId(orderDO.getSellerId());
         order.setLogisticsCompany(orderDO.getLogisticsCompany());
         order.setLogisticsCode(orderDO.getLogisticsCode());
+        order.setCreateTime(orderDO.getGmtCreate());
 
         OrderAmount orderAmount = new OrderAmount();
         orderAmount.setExpectAmount(orderDO.getExpectAmount());
