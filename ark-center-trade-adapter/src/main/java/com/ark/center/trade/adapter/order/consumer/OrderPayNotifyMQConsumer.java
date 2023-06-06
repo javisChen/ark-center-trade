@@ -3,9 +3,9 @@ package com.ark.center.trade.adapter.order.consumer;
 import com.ark.center.pay.api.dto.mq.PayNotifyMessage;
 import com.ark.center.trade.application.order.OrderAppService;
 import com.ark.center.trade.application.order.mq.MQConst;
+import com.ark.component.mq.MQType;
 import com.ark.component.mq.core.annotations.MQMessageListener;
-import com.ark.component.mq.core.processor.SimpleMQMessageProcessor;
-import com.ark.component.mq.core.support.MQType;
+import com.ark.component.mq.core.processor.SimpleMessageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class OrderPayNotifyMQConsumer extends SimpleMQMessageProcessor<PayNotifyMessage> {
+public class OrderPayNotifyMQConsumer extends SimpleMessageHandler<PayNotifyMessage> {
 
     private final OrderAppService orderAppService;
 

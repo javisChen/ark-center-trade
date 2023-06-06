@@ -1,7 +1,7 @@
 package com.ark.center.trade.client.client.command;
 
 import java.io.Serializable;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

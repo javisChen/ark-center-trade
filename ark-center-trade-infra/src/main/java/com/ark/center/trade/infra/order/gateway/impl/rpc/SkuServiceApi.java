@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
         name = "${ark.center.commodity.service.name:commodity}",
         path = "/v1/sku",
         url = "${ark.center.commodity.service.uri:}",
-        decode404 = true,
+        dismiss404 = true,
         configuration = {FeignCommonErrorDecoder.class}
 )
 public interface SkuServiceApi extends SkuApi {

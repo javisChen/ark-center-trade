@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
     name = "${ark.center.trade.service.name:order}",
     path = "/v1/order",
     url = "${ark.center.trade.service.uri:}",
-    decode404 = true,
+    dismiss404 = true,
     configuration = {FeignCommonErrorDecoder.class}
 )
 public interface OrderApi {
