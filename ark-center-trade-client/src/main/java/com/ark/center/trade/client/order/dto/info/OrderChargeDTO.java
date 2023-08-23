@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 public class OrderChargeDTO {
 
-    @ApiModelProperty(value = "应付金额（单位：分）", required = true)
+    @Schema(description = "应付金额（单位：分）", required = true)
     private Integer expectAmount;
 
-    @ApiModelProperty(value = "实付金额（单位：分）", required = true)
+    @Schema(description = "实付金额（单位：分）", required = true)
     private Integer actualAmount;
 
-    @ApiModelProperty(value = "运费金额（单位：分）", required = true)
+    @Schema(description = "运费金额（单位：分）", required = true)
     private Integer freightAmount;
 
 }

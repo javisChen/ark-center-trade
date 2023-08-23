@@ -17,25 +17,25 @@ import lombok.Data;
 @ApiModel(value = "OrderCreateReceiveCreateCmd", description = "订单收货信息")
 public class OrderCreateReceiveCreateCmd implements Serializable {
 
-    @ApiModelProperty(value = "收货人名称", required = true)
+    @Schema(description = "收货人名称", required = true)
     private String name;
 
-    @ApiModelProperty(value = "收货人电话", required = true)
+    @Schema(description = "收货人电话", required = true)
     private String mobile;
 
-    @ApiModelProperty(value = "省份", required = true)
+    @Schema(description = "省份", required = true)
     private String province;
 
-    @ApiModelProperty(value = "城市", required = true)
+    @Schema(description = "城市", required = true)
     private String city;
 
-    @ApiModelProperty(value = "区", required = true)
+    @Schema(description = "区", required = true)
     private String district;
 
-    @ApiModelProperty(value = "街道", required = false)
+    @Schema(description = "街道", required = false)
     private String street;
 
-    @ApiModelProperty(value = "详细地址", required = true)
+    @Schema(description = "详细地址", required = true)
     private String address;
 
 }

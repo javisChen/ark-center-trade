@@ -18,7 +18,7 @@ import lombok.Data;
 @ApiModel(value = "CartAddReqDTO", description = "添加商品进购物车模型")
 public class CartItemAddCmd implements Serializable {
 
-    @ApiModelProperty(value = "SKU ID", required = true)
+    @Schema(description = "SKU ID", required = true)
     @NotNull(message = "SKU ID不能为空")
     private Long skuId;
 

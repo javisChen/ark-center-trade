@@ -18,37 +18,37 @@ import java.io.Serializable;
 @ApiModel(value = "CartItemRespDTO对象", description = "购物车表")
 public class CartItemDTO implements Serializable {
 
-    @ApiModelProperty(value = "id", required = true)
+    @Schema(description = "id", required = true)
     private Long id;
 
-    @ApiModelProperty(value = "买家ID", required = true)
+    @Schema(description = "买家ID", required = true)
     private Long buyerId;
 
-    @ApiModelProperty(value = "SKU ID", required = true)
+    @Schema(description = "SKU ID", required = true)
     private Long skuId;
 
-    @ApiModelProperty(value = "商品名称", required = true)
+    @Schema(description = "商品名称", required = true)
     private String spuName;
 
-    @ApiModelProperty(value = "SKU单价", required = true)
+    @Schema(description = "SKU单价", required = true)
     private Integer price;
 
-    @ApiModelProperty(value = "购买数量", required = true)
+    @Schema(description = "购买数量", required = true)
     private Integer quantity;
 
-    @ApiModelProperty(value = "应付金额", required = true)
+    @Schema(description = "应付金额", required = true)
     private Integer expectAmount;
 
-    @ApiModelProperty(value = "实付金额", required = true)
+    @Schema(description = "实付金额", required = true)
     private Integer actualAmount;
 
-    @ApiModelProperty(value = "图片地址", required = true)
+    @Schema(description = "图片地址", required = true)
     private String picUrl;
 
-    @ApiModelProperty(value = "SKU销售参数JSON", required = true)
+    @Schema(description = "SKU销售参数JSON", required = true)
     private String specData;
 
-    @ApiModelProperty(value = "是否选中 enums[YES,是,1;NO,否,0]", required = true)
+    @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", required = true)
     private Integer checked;
 
 }

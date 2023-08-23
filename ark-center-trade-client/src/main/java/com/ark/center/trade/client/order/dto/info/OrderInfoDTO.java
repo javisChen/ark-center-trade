@@ -20,16 +20,16 @@ import java.util.List;
 @ApiModel(value = "OrderInfoDTO", description = "订单详情")
 public class OrderInfoDTO implements Serializable {
 
-    @ApiModelProperty(value = "订单基本信息", required = true)
+    @Schema(description = "订单基本信息", required = true)
     private OrderBaseDTO orderBase;
 
-    @ApiModelProperty(value = "订单费用信息", required = true)
+    @Schema(description = "订单费用信息", required = true)
     private OrderChargeDTO orderCharge;
 
-    @ApiModelProperty(value = "订单收货信息", required = true)
+    @Schema(description = "订单收货信息", required = true)
     private ReceiveDTO orderReceive;
 
-    @ApiModelProperty(value = "订单商品信息", required = true)
+    @Schema(description = "订单商品信息", required = true)
     private List<OrderCommodityDTO> orderCommodities;
 
 

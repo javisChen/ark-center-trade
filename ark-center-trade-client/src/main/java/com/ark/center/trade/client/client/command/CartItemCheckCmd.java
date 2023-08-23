@@ -19,11 +19,11 @@ import java.io.Serializable;
 @ApiModel(value = "CartItemCheckReqDTO", description = "添加商品进购物车模型")
 public class CartItemCheckCmd implements Serializable {
 
-    @ApiModelProperty(value = "购物车项", required = true)
+    @Schema(description = "购物车项", required = true)
     @NotNull(message = "选项ID不能为空")
     private Long cartItemId;
 
-    @ApiModelProperty(value = "是否选中", required = true)
+    @Schema(description = "是否选中", required = true)
     @NotNull(message = "是否选中不能为空")
     private Boolean checked;
 

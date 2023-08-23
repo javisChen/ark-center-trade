@@ -18,10 +18,10 @@ import java.io.Serializable;
 @ApiModel(value = "OrderCreateItemCmd", description = "订单明细")
 public class OrderCreateItemCmd implements Serializable {
 
-    @ApiModelProperty(value = "SkuId", required = true)
+    @Schema(description = "SkuId", required = true)
     private Long skuId;
 
-    @ApiModelProperty(value = "购买数量", required = true)
+    @Schema(description = "购买数量", required = true)
     private Integer quantity;
 
 }

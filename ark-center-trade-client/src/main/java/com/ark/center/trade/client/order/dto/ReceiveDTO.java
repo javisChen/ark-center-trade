@@ -18,31 +18,31 @@ import java.io.Serializable;
 @ApiModel(value = "ReceiveDTO", description = "订单收货信息")
 public class ReceiveDTO implements Serializable {
 
-    @ApiModelProperty(value = "id", required = true)
+    @Schema(description = "id", required = true)
     private Long id;
 
-    @ApiModelProperty(value = "订单ID", required = true)
+    @Schema(description = "订单ID", required = true)
     private Long orderId;
 
-    @ApiModelProperty(value = "收货人名称", required = false)
+    @Schema(description = "收货人名称", required = false)
     private String name;
 
-    @ApiModelProperty(value = "收货人电话", required = false)
+    @Schema(description = "收货人电话", required = false)
     private String mobile;
 
-    @ApiModelProperty(value = "省份", required = false)
+    @Schema(description = "省份", required = false)
     private String province;
 
-    @ApiModelProperty(value = "城市", required = false)
+    @Schema(description = "城市", required = false)
     private String city;
 
-    @ApiModelProperty(value = "区", required = false)
+    @Schema(description = "区", required = false)
     private String district;
 
-    @ApiModelProperty(value = "详细地址", required = false)
+    @Schema(description = "详细地址", required = false)
     private String address;
 
-    @ApiModelProperty(value = "街道", required = false)
+    @Schema(description = "街道", required = false)
     private String street;
 
 }
