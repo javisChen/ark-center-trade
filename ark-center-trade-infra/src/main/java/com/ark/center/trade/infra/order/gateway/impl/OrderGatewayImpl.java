@@ -27,7 +27,9 @@ import java.util.List;
 public class OrderGatewayImpl implements OrderGateway {
 
     private final OrderMapper orderMapper;
+
     private final OrderConvertor orderConvertor;
+
     private final OrderItemMapper orderItemMapper;
 
     @Override

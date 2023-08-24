@@ -1,7 +1,6 @@
 package com.ark.center.trade.client.order.dto;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -18,73 +17,73 @@ import java.util.List;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderDTO", description = "订单信息")
+@Schema(name = "OrderDTO", description = "订单信息")
 public class OrderDTO implements Serializable {
 
-    @Schema(description = "id", required = true)
+    @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "订单号", required = true)
+    @Schema(name = "订单号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String tradeNo;
 
-    @Schema(description = "订单类型 1-商城订单", required = true)
+    @Schema(name = "订单类型 1-商城订单", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer orderType;
 
-    @Schema(description = "下单渠道 1-PC 2-APP 3-小程序", required = true)
+    @Schema(name = "下单渠道 1-PC 2-APP 3-小程序", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer orderChannel;
 
-    @Schema(description = "1-待支付 2-待发货 3-待收货 4-交易成功", required = true)
+    @Schema(name = "1-待支付 2-待发货 3-待收货 4-交易成功", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer orderStatus;
 
-    @Schema(description = "1-待支付 2-支付中 3-支付成功 4-支付失败", required = true)
+    @Schema(name = "1-待支付 2-支付中 3-支付成功 4-支付失败", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer payStatus;
 
-    @Schema(description = "1-微信支付 2-支付宝", required = true)
+    @Schema(name = "1-微信支付 2-支付宝", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer payType;
 
-    @Schema(description = "应付金额（单位：分）", required = true)
+    @Schema(name = "应付金额（单位：分）", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer expectAmount;
 
-    @Schema(description = "实付金额（单位：分）", required = true)
+    @Schema(name = "实付金额（单位：分）", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer actualAmount;
 
-    @Schema(description = "运费金额（单位：分）", required = true)
+    @Schema(name = "运费金额（单位：分）", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer freightAmount;
 
-    @Schema(description = "支付流水号", required = true)
+    @Schema(name = "支付流水号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String payTradeNo;
 
-    @Schema(description = "支付时间", required = false)
+    @Schema(name = "支付时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private LocalDateTime payTime;
 
-    @Schema(description = "发货时间", required = false)
+    @Schema(name = "发货时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private LocalDateTime deliverTime;
 
-    @Schema(description = "确认收货时间", required = false)
+    @Schema(name = "确认收货时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private LocalDateTime confirmTime;
 
-    @Schema(description = "买家备注", required = true)
+    @Schema(name = "买家备注", requiredMode = Schema.RequiredMode.REQUIRED)
     private String buyerRemark;
 
-    @Schema(description = "买家ID", required = true)
+    @Schema(name = "买家ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long buyerId;
 
-    @Schema(description = "卖家ID", required = true)
+    @Schema(name = "卖家ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long sellerId;
 
-    @Schema(description = "物流公司", required = true)
+    @Schema(name = "物流公司", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logisticsCompany;
 
-    @Schema(description = "物流单号", required = true)
+    @Schema(name = "物流单号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String logisticsCode;
 
-    @Schema(description = "订单项", required = true)
+    @Schema(name = "订单项", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<OrderItemDTO> orderItems;
 
-    @Schema(description = "收货信息", required = true)
+    @Schema(name = "收货信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private ReceiveDTO receive;
 
-    @Schema(description = "下单时间", required = true)
+    @Schema(name = "下单时间", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDateTime gmtCreate;
 
 }

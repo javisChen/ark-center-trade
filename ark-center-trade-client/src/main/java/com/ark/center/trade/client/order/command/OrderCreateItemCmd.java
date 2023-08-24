@@ -1,7 +1,7 @@
 package com.ark.center.trade.client.order.command;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,13 +15,13 @@ import java.io.Serializable;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderCreateItemCmd", description = "订单明细")
+@Schema(name = "OrderCreateItemCmd", description = "订单明细")
 public class OrderCreateItemCmd implements Serializable {
 
-    @Schema(description = "SkuId", required = true)
+    @Schema(name = "SkuId", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long skuId;
 
-    @Schema(description = "购买数量", required = true)
+    @Schema(name = "购买数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer quantity;
 
 }

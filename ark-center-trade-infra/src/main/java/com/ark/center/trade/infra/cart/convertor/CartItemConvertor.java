@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.cart.convertor;
 
-import com.ark.center.trade.client.client.command.CartItemAddCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.model.CartItem;
 import com.ark.center.trade.infra.cart.gateway.db.CartItemDO;

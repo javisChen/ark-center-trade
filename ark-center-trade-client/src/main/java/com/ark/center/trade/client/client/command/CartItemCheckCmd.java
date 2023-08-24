@@ -1,10 +1,10 @@
 package com.ark.center.trade.client.client.command;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -19,11 +19,11 @@ import java.io.Serializable;
 @ApiModel(value = "CartItemCheckReqDTO", description = "添加商品进购物车模型")
 public class CartItemCheckCmd implements Serializable {
 
-    @Schema(description = "购物车项", required = true)
+    @Schema(description = "购物车项", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "选项ID不能为空")
     private Long cartItemId;
 
-    @Schema(description = "是否选中", required = true)
+    @Schema(description = "是否选中", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "是否选中不能为空")
     private Boolean checked;
 

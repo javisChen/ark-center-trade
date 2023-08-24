@@ -2,7 +2,7 @@ package com.ark.center.trade.application.cart;
 
 import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
-import com.ark.center.trade.client.client.command.CartItemAddCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
 import com.ark.center.trade.client.client.command.CartItemCheckCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;

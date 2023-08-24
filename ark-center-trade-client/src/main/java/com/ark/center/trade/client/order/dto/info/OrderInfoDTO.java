@@ -2,7 +2,7 @@ package com.ark.center.trade.client.order.dto.info;
 
 import com.ark.center.trade.client.order.dto.ReceiveDTO;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,19 +17,19 @@ import java.util.List;
  * @since 2022-08-09
  */
 @Data
-@ApiModel(value = "OrderInfoDTO", description = "订单详情")
+@Schema(name = "OrderInfoDTO", description = "订单详情")
 public class OrderInfoDTO implements Serializable {
 
-    @Schema(description = "订单基本信息", required = true)
+    @Schema(name = "订单基本信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private OrderBaseDTO orderBase;
 
-    @Schema(description = "订单费用信息", required = true)
+    @Schema(name = "订单费用信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private OrderChargeDTO orderCharge;
 
-    @Schema(description = "订单收货信息", required = true)
+    @Schema(name = "订单收货信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private ReceiveDTO orderReceive;
 
-    @Schema(description = "订单商品信息", required = true)
+    @Schema(name = "订单商品信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<OrderCommodityDTO> orderCommodities;
 
 

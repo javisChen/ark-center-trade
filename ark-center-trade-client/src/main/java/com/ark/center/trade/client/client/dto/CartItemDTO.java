@@ -1,7 +1,7 @@
 package com.ark.center.trade.client.client.dto;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,37 +18,37 @@ import java.io.Serializable;
 @ApiModel(value = "CartItemRespDTO对象", description = "购物车表")
 public class CartItemDTO implements Serializable {
 
-    @Schema(description = "id", required = true)
+    @Schema(description = "id", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
-    @Schema(description = "买家ID", required = true)
+    @Schema(description = "买家ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long buyerId;
 
-    @Schema(description = "SKU ID", required = true)
+    @Schema(description = "SKU ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long skuId;
 
-    @Schema(description = "商品名称", required = true)
+    @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED)
     private String spuName;
 
-    @Schema(description = "SKU单价", required = true)
+    @Schema(description = "SKU单价", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer price;
 
-    @Schema(description = "购买数量", required = true)
+    @Schema(description = "购买数量", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer quantity;
 
-    @Schema(description = "应付金额", required = true)
+    @Schema(description = "应付金额", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer expectAmount;
 
-    @Schema(description = "实付金额", required = true)
+    @Schema(description = "实付金额", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer actualAmount;
 
-    @Schema(description = "图片地址", required = true)
+    @Schema(description = "图片地址", requiredMode = Schema.RequiredMode.REQUIRED)
     private String picUrl;
 
-    @Schema(description = "SKU销售参数JSON", required = true)
+    @Schema(description = "SKU销售参数JSON", requiredMode = Schema.RequiredMode.REQUIRED)
     private String specData;
 
-    @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", required = true)
+    @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer checked;
 
 }
