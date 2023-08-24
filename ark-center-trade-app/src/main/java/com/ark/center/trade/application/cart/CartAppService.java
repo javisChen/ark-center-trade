@@ -1,13 +1,10 @@
 package com.ark.center.trade.application.cart;
 
-import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
-import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
 import com.ark.center.trade.client.client.command.CartItemCheckCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
 import com.ark.center.trade.domain.cart.model.CartItem;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
 import com.ark.component.context.core.ServiceContext;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +16,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CartAppService {
-
-    private final OrderCreateCmdExe orderCreateCmdExe;
-
-    private final OrderQryExe orderQryExe;
-
-    private final OrderGateway orderGateway;
 
     private final CartGateway cartGateway;
     private final CartItemConvertor cartItemConvertor;
