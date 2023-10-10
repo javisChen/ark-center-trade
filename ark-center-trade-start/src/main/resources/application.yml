@@ -26,8 +26,6 @@ spring:
         file-extension: yml
         prefix: ${spring.application.name}
         refresh-enabled: true
-        shared-configs:
-          - common-${spring.profiles.active}.yml
         # 开启检查spring.config.import
         import-check:
           enabled: true
@@ -41,10 +39,9 @@ spring:
     import:
       # 指定从nacos取的配置
       - nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+      - nacos:common.yml
 mybatis-plus:
   mapper-locations: classpath:com/ark/center/order/dao/mapper/xml/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 ark:
   component:
