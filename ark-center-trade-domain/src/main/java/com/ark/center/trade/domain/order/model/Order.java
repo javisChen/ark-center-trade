@@ -1,5 +1,6 @@
 package com.ark.center.trade.domain.order.model;
 
+import com.ark.center.trade.domain.order.OrderStatus;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
 import com.ark.component.common.enums.BasicEnums;
@@ -99,7 +100,7 @@ public class Order {
         this.orderPay.setPayStatus(OrderPay.PayStatus.PAY_SUCCESS);
         this.orderPay.setPayTradeNo(payTradeNo);
         this.orderPay.setPayTime(payTime);
-        this.orderStatus = OrderStatus.SUCCESS;
+        this.orderStatus = OrderStatus.COMPLETED;
     }
 
 
@@ -131,26 +132,6 @@ public class Order {
         private final String text;
 
         public static OrderChannel getByValue(Integer value) {
-            return EnumUtils.getByValue(values(), value);
-        }
-
-        public static String getText(Integer value) {
-            return EnumUtils.getTextByValue(values(), value);
-        }
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public enum OrderStatus implements BasicEnums {
-        PENDING_PAY(1, "待支付"),
-        PENDING_DELIVER(2, "待发货"),
-        PENDING_RECEIVE(3, "待收货"),
-        SUCCESS(4, "交易成功"),
-        ;
-        private final Integer value;
-        private final String text;
-
-        public static OrderStatus getByValue(Integer value) {
             return EnumUtils.getByValue(values(), value);
         }
 

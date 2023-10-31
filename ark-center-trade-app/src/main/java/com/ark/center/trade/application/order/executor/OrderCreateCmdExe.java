@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
+import com.ark.center.trade.domain.order.OrderStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.order.gateway.ReceiveGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
@@ -90,7 +91,7 @@ public class OrderCreateCmdExe {
         order.setTradeNo(tradeNo);
         order.setOrderType(orderCreateCmd.getOrderType());
         order.setOrderChannel(orderCreateCmd.getOrderChannel());
-        order.setOrderStatus(Order.OrderStatus.PENDING_PAY);
+        order.setOrderStatus(OrderStatus.WAIT_PAY);
         order.setBuyerRemark(orderCreateCmd.getBuyerRemark());
         order.setBuyerId(orderCreateCmd.getBuyerId() != null ? orderCreateCmd.getBuyerId() : ServiceContext.getCurrentUser().getUserId());
         order.setSellerId(orderCreateCmd.getSellerId() != null ? orderCreateCmd.getSellerId() : 0L);

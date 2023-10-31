@@ -5,6 +5,7 @@ import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.client.order.dto.info.OrderCommodityDTO;
+import com.ark.center.trade.domain.order.OrderStatus;
 import com.ark.center.trade.domain.order.model.Order;
 import com.ark.center.trade.domain.order.model.OrderItem;
 import com.ark.center.trade.domain.order.model.Sku;
@@ -124,7 +125,7 @@ public interface OrderConvertor {
         order.setTradeNo(orderDO.getTradeNo());
         order.setOrderType(orderDO.getOrderType());
         order.setOrderChannel(orderDO.getOrderChannel());
-        order.setOrderStatus(Order.OrderStatus.getByValue(orderDO.getOrderStatus()));
+        order.setOrderStatus(OrderStatus.getByValue(orderDO.getOrderStatus()));
         order.setDeliverTime(orderDO.getDeliverTime());
         order.setConfirmTime(orderDO.getConfirmTime());
         order.setBuyerRemark(orderDO.getBuyerRemark());
