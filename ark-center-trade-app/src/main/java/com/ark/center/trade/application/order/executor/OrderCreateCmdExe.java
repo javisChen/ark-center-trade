@@ -16,6 +16,7 @@ import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.vo.OrderAmount;
 import com.ark.center.trade.domain.order.model.vo.OrderPay;
 import com.ark.center.trade.infra.order.convertor.OrderConvertor;
+import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
 import com.ark.center.trade.infra.receive.convertor.ReceiveConvertor;
 import com.ark.component.common.ParamsChecker;
 import com.ark.component.context.core.ServiceContext;
@@ -42,6 +43,8 @@ public class OrderCreateCmdExe {
 
     private final OrderConvertor orderConvertor;
 
+    private final TradeOrderStateMachine tradeOrderStateMachine;
+
     public Long execute(OrderCreateCmd orderCreateCmd) {
         // 生成工单号
         String tradeNo = IdUtil.getSnowflakeNextIdStr();
@@ -51,6 +54,8 @@ public class OrderCreateCmdExe {
         Long orderId = saveOrder(order);
         // 保存收货信息
         saveReceive(orderCreateCmd, orderId);
+        // //
+        // tradeOrderStateMachine.create(String.valueOf(orderId), orderCreateCmd);
         return orderId;
     }
 
