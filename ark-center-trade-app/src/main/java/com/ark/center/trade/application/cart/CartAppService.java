@@ -5,7 +5,6 @@ import com.ark.center.trade.client.client.command.CartItemCheckCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItemDO;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
-import com.ark.center.trade.domain.cart.model.CartItem;
 import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
 import com.ark.component.context.core.ServiceContext;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +25,7 @@ public class CartAppService {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
         Long skuId = cmd.getSkuId();
         CartItemDO cartItem = cartGateway.getCartItem(currentUserId, skuId);
-        if (cartItem == null) {
-            cartItem = cartItemConvertor.toCartItemDomainObject(cmd);
-        } else {
+        if (cartItem != null) {
             cartItem.increase(1);
         }
         cartGateway.saveCartItem(cartItem);

@@ -14,16 +14,12 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {})
 public interface CartItemConvertor {
 
-    List<CartItemDO> toCartItemDomainObject(List<CartItemDO> cartItemDOList);
-
     List<CartItemDTO> toCartItemDTO(List<CartItemDO> cartItemDOList);
 
     @Mappings({
             @Mapping(target = "checked", expression = "java(cartItemDO.getChecked() ? 1: 0)")
     })
     CartItemDTO toCartItemDTO(CartItemDO cartItemDO);
-
-    CartItemDO toCartItemDomainObject(CartItemDO cartItemDO);
 
     CartItemDO toCartItemDomainObject(CartItemAddCmd cartItemAddCmd);
 

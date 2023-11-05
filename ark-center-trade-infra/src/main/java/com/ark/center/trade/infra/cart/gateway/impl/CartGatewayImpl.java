@@ -26,8 +26,7 @@ public class CartGatewayImpl implements CartGateway {
         qw.eq(CartItemDO::getBuyerId, userId)
                 .eq(CartItemDO::getSkuId, skuId)
                 .last("limit 1");
-        CartItemDO cartItemDO = cartItemMapper.selectOne(qw);
-        return cartItemConvertor.toCartItemDomainObject(cartItemDO);
+        return cartItemMapper.selectOne(qw);
     }
 
     @Override
@@ -36,7 +35,7 @@ public class CartGatewayImpl implements CartGateway {
         qw.eq(CartItemDO::getId, cartItemId)
                 .last("limit 1");
         CartItemDO cartItemDO = cartItemMapper.selectOne(qw);
-        return cartItemConvertor.toCartItemDomainObject(cartItemDO);
+        return cartItemDO;
     }
 
     @Override
