@@ -1,6 +1,7 @@
 package com.ark.center.trade.infra.cart.gateway.db;
 
 
+import com.ark.center.trade.domain.cart.CartItemDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 

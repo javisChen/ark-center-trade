@@ -23,7 +23,7 @@ public class SkuGatewayImpl implements SkuGateway {
     public List<Sku> getSkuList(List<Long> skuIds) {
         SkuQry qry = new SkuQry();
         qry.setSkuIds(skuIds);
-        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuServiceApi.getSkuList(qry));
+        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuServiceApi.listSku(qry));
         return skuConvertor.toSkuDomainObject(skuRespDTOList);
     }
 

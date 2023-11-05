@@ -39,11 +39,6 @@
             </dependency>
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-trade-dao</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ark.center</groupId>
                 <artifactId>ark-center-trade-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
