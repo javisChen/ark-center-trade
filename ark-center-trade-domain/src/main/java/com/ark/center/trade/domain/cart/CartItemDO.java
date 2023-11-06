@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.cart.gateway.db;
+package com.ark.center.trade.domain.cart;
 
 import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -81,4 +81,12 @@ public class CartItemDO extends BaseEntity {
     @TableField("checked")
     private Boolean checked;
 
+
+    public void increase(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public void checked(Boolean checked) {
+        this.checked = checked;
+    }
 }

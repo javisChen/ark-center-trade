@@ -2,10 +2,10 @@ package com.ark.center.trade.infra.cart.gateway.impl;
 
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
-import com.ark.center.trade.domain.cart.model.CartItem;
 import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
-import com.ark.center.trade.infra.cart.gateway.db.CartItemDO;
+import com.ark.center.trade.domain.cart.CartItemDO;
 import com.ark.center.trade.infra.cart.gateway.db.CartItemMapper;
+import com.ark.component.context.core.ServiceContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,28 +21,28 @@ public class CartGatewayImpl implements CartGateway {
     private final CartItemConvertor cartItemConvertor;
 
     @Override
-    public CartItem getCartItem(Long userId, Long skuId) {
+    public CartItemDO getCartItem(Long userId, Long skuId) {
         LambdaQueryWrapper<CartItemDO> qw = new LambdaQueryWrapper<>();
         qw.eq(CartItemDO::getBuyerId, userId)
                 .eq(CartItemDO::getSkuId, skuId)
                 .last("limit 1");
-        CartItemDO cartItemDO = cartItemMapper.selectOne(qw);
-        return cartItemConvertor.toCartItemDomainObject(cartItemDO);
+        return cartItemMapper.selectOne(qw);
     }
 
     @Override
-    public CartItem getCartItem(Long cartItemId) {
+    public CartItemDO getCartItem(Long cartItemId) {
         LambdaQueryWrapper<CartItemDO> qw = new LambdaQueryWrapper<>();
         qw.eq(CartItemDO::getId, cartItemId)
                 .last("limit 1");
         CartItemDO cartItemDO = cartItemMapper.selectOne(qw);
-        return cartItemConvertor.toCartItemDomainObject(cartItemDO);
+        return cartItemDO;
     }
 
     @Override
-    public void saveCartItem(CartItem cartItem) {
+    public void saveCartItem(CartItemDO cartItem) {
         CartItemDO entity = cartItemConvertor.toCartItemDO(cartItem);
-        if (entity.getId() != null) {
+        if (entity.getId() == null) {
+            cartItem.setBuyerId(ServiceContext.getCurrentUser().getUserId());
             cartItemMapper.insert(entity);
         } else {
             cartItemMapper.updateCartItemQuantity(cartItem.getId(), cartItem.getQuantity());
@@ -51,7 +51,7 @@ public class CartGatewayImpl implements CartGateway {
     }
 
     @Override
-    public void updateChecked(CartItem cartItem) {
+    public void updateChecked(CartItemDO cartItem) {
         CartItemDO entity = new CartItemDO();
         entity.setChecked(cartItem.getChecked());
         entity.setId(cartItem.getId());

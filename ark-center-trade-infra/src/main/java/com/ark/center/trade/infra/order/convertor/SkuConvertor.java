@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.order.convertor;
 
-import com.ark.center.commodity.client.commodity.dto.SkuAttrDTO;
+import com.ark.center.commodity.client.commodity.dto.AttrDTO;
 import com.ark.center.commodity.client.commodity.dto.SkuDTO;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.SkuAttr;
@@ -13,7 +13,7 @@ public interface SkuConvertor {
 
     List<Sku> toSkuDomainObject(List<SkuDTO> skuDTOList);
 
-    List<SkuAttr> toSkuAttrDomainObject(List<SkuAttrDTO> skuAttrDTOList);
+    List<SkuAttr> toSkuAttrDomainObject(List<AttrDTO> skuAttrDTOList);
 //    List<Sku> toSkuDomainObject(List<SkuDTO> skuDTOList) {
 //        List<Sku> skuList = Lists.newArrayListWithCapacity(skuDTOList.size());
 //        for (SkuDTO skuDTO : skuDTOList) {

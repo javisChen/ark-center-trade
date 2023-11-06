@@ -40,5 +40,10 @@
             <artifactId>ark-center-trade-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ark.web</groupId>
+            <artifactId>ark-component-web-spring-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
