@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.*;
 public class CartController extends BaseController {
     private final CartAppService cartAppService;
     @Operation(summary = "添加/编辑购物车商品")
-    @PostMapping("/item/add")
+    @PostMapping("/item/save")
     public ServerResponse create(@RequestBody @Validated CartItemAddCmd cmd) {
-        cartAppService.addOrUpdateCartItem(cmd);
+        cartAppService.save(cmd);
         return ServerResponse.ok();
     }
 

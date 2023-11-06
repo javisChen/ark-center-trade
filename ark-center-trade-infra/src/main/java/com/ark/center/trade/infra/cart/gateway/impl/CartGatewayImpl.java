@@ -7,6 +7,7 @@ import com.ark.center.trade.domain.cart.CartItemDO;
 import com.ark.center.trade.infra.cart.gateway.db.CartItemMapper;
 import com.ark.component.context.core.ServiceContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class CartGatewayImpl implements CartGateway {
+public class CartGatewayImpl extends ServiceImpl<CartItemMapper, CartItemDO> implements CartGateway {
 
     private final CartItemMapper cartItemMapper;
 
@@ -39,11 +40,10 @@ public class CartGatewayImpl implements CartGateway {
     }
 
     @Override
-    public void saveCartItem(CartItemDO cartItem) {
-        CartItemDO entity = cartItemConvertor.toCartItemDO(cartItem);
-        if (entity.getId() == null) {
+    public void insert(CartItemDO cartItem) {
+        if (cartItem.getId() == null) {
             cartItem.setBuyerId(ServiceContext.getCurrentUser().getUserId());
-            cartItemMapper.insert(entity);
+            cartItemMapper.insert(cartItem);
         } else {
             cartItemMapper.updateCartItemQuantity(cartItem.getId(), cartItem.getQuantity());
         }
@@ -64,5 +64,10 @@ public class CartGatewayImpl implements CartGateway {
         queryWrapper.eq(CartItemDO::getBuyerId, userId);
         List<CartItemDO> cartItemDOS = cartItemMapper.selectList(queryWrapper);
         return cartItemConvertor.toCartItemDTO(cartItemDOS);
+    }
+
+    @Override
+    public void updateCartItemQuantity(Long cartItemId, Integer quantity) {
+
     }
 }

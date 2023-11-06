@@ -82,10 +82,6 @@ public class CartItemDO extends BaseEntity {
     private Boolean checked;
 
 
-    public void increase(int quantity) {
-        this.quantity += quantity;
-    }
-
     public void checked(Boolean checked) {
         this.checked = checked;
     }

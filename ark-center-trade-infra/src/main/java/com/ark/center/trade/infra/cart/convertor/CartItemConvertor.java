@@ -23,5 +23,5 @@ public interface CartItemConvertor {
 
     CartItemDO toCartItemDomainObject(CartItemAddCmd cartItemAddCmd);
 
-    CartItemDO toCartItemDO(CartItemDO cartItem);
+    CartItemDO toCartItemDO(CartItemAddCmd cartItem);
 }
