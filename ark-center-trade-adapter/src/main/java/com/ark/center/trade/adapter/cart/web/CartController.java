@@ -1,7 +1,7 @@
 package com.ark.center.trade.adapter.cart.web;
 
 import com.ark.center.trade.application.cart.CartAppService;
-import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.client.command.CartItemCheckCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
 import com.ark.component.dto.MultiResponse;
@@ -28,9 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CartController extends BaseController {
     private final CartAppService cartAppService;
-    @Operation(summary = "添加/编辑购物车商品")
+    @Operation(summary = "保存购物车商品")
     @PostMapping("/item/save")
-    public ServerResponse create(@RequestBody @Validated CartItemAddCmd cmd) {
+    public ServerResponse create(@RequestBody @Validated CartItemCmd cmd) {
         cartAppService.save(cmd);
         return ServerResponse.ok();
     }
@@ -44,8 +44,8 @@ public class CartController extends BaseController {
 
     @Operation(summary = "获取用户的购物车信息")
     @GetMapping("/items")
-    public MultiResponse<CartItemDTO> listBuyerItems() {
-        return MultiResponse.ok(cartAppService.listBuyerCartItems());
+    public MultiResponse<CartItemDTO> queryUserItems() {
+        return MultiResponse.ok(cartAppService.queryUserItems());
     }
 
 }

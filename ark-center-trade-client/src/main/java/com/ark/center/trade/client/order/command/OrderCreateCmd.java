@@ -28,8 +28,11 @@ public class OrderCreateCmd implements Serializable {
     @NotNull(message = "下单渠道不能为空")
     private Integer orderChannel;
 
-    @Schema(name = "买家ID", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(name = "买家ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private Long buyerId;
+
+    @Schema(name = "买家名称", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String buyerName;
 
     @Schema(name = "买家备注", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String buyerRemark;

@@ -10,6 +10,7 @@ import com.ark.component.microservice.rpc.util.RpcUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -20,11 +21,16 @@ public class SkuGatewayImpl implements SkuGateway {
     private final SkuConvertor skuConvertor;
 
     @Override
-    public List<Sku> getSkuList(List<Long> skuIds) {
+    public List<Sku> querySkus(List<Long> skuIds) {
         SkuQry qry = new SkuQry();
         qry.setSkuIds(skuIds);
-        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuServiceApi.listSku(qry));
-        return skuConvertor.toSkuDomainObject(skuRespDTOList);
+        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuServiceApi.querySkus(qry));
+        return skuConvertor.toSku(skuRespDTOList);
+    }
+
+    @Override
+    public Sku querySku(Long skuId) {
+        return querySkus(Collections.singletonList(skuId)).get(0);
     }
 
 }

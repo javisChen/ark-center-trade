@@ -1,65 +1,67 @@
 package com.ark.center.trade.application.cart;
 
 import com.alibaba.fastjson.JSON;
-import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.client.command.CartItemCheckCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
-import com.ark.center.trade.domain.cart.CartItemDO;
+import com.ark.center.trade.domain.cart.CartItem;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
-import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
 import com.ark.component.context.core.ServiceContext;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CartAppService {
 
     private final CartGateway cartGateway;
-    private final CartItemConvertor cartItemConvertor;
+
     private final SkuGateway skuGateway;
 
     @Transactional(rollbackFor = Throwable.class)
-    public void save(CartItemAddCmd cmd) {
+    public void save(CartItemCmd cmd) {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
         Long skuId = cmd.getSkuId();
-
-        CartItemDO cartItem = cartGateway.getCartItem(currentUserId, skuId);
-
+        CartItem cartItem = cartGateway.selectItem(currentUserId, skuId);
         if (cartItem == null) {
-            List<Sku> skuList = skuGateway.getSkuList(Collections.singletonList(skuId));
-            Sku sku = skuList.get(0);
-            cartItem = new CartItemDO();
-            cartItem.setBuyerId(currentUserId);
-            cartItem.setSkuId(skuId);
-            cartItem.setSpuName(sku.getSpuName());
-            cartItem.setPrice(sku.getSalesPrice());
-            cartItem.setQuantity(1);
-            cartItem.setExpectAmount(sku.getSalesPrice());
-            cartItem.setActualAmount(sku.getSalesPrice());
-            cartItem.setPicUrl(sku.getMainPicture());
-            cartItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
-            cartItem.setChecked(true);
+            Sku sku = skuGateway.querySku(skuId);
+            log.info("Add to cart item, sku = {}", sku);
+            cartItem = createCartItem(currentUserId, skuId, sku);
             cartGateway.insert(cartItem);
         } else {
             cartGateway.updateCartItemQuantity(cartItem.getId(), cartItem.getQuantity() + 1);
         }
     }
 
-    public void checkCartItem(CartItemCheckCmd cmd) {
-        CartItemDO cartItem = cartGateway.getCartItem(cmd.getCartItemId());
-        cartItem.checked(cmd.getChecked());
-        cartGateway.updateChecked(cartItem);
+    private CartItem createCartItem(Long currentUserId, Long skuId, Sku sku) {
+        CartItem cartItem = new CartItem();
+        cartItem.setBuyerId(currentUserId);
+        cartItem.setSkuId(skuId);
+        cartItem.setProductName(sku.getSpuName());
+        cartItem.setPrice(sku.getSalesPrice());
+        cartItem.setQuantity(1);
+        cartItem.setExpectAmount(sku.getSalesPrice());
+        cartItem.setActualAmount(sku.getSalesPrice());
+        cartItem.setPicUrl(sku.getMainPicture());
+        cartItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
+        cartItem.setChecked(true);
+        return cartItem;
     }
 
-    public List<CartItemDTO> listBuyerCartItems() {
+    public void checkCartItem(CartItemCheckCmd cmd) {
+        CartItem cartItem = cartGateway.selectItem(ServiceContext.getCurrentUser().getUserId(), cmd.getCartItemId());
+        cartGateway.updateChecked(cartItem, cmd.getChecked());
+    }
+
+    public List<CartItemDTO> queryUserItems() {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
-        return cartGateway.listCartItems(currentUserId);
+        return cartGateway.selectByBuyer(currentUserId);
     }
 }

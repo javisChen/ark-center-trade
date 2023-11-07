@@ -28,7 +28,7 @@ public class CartItemDTO implements Serializable {
     private Long skuId;
 
     @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED)
-    private String spuName;
+    private String productName;
 
     @Schema(description = "SKU单价", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer price;
@@ -49,6 +49,6 @@ public class CartItemDTO implements Serializable {
     private String specData;
 
     @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Integer checked;
+    private Boolean checked;
 
 }

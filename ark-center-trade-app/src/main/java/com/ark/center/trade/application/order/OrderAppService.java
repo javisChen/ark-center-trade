@@ -5,10 +5,12 @@ import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.dto.info.OrderInfoDTO;
+import com.ark.center.trade.client.order.dto.info.OrderDetailsDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.domain.order.OrderStatus;
+import com.ark.center.trade.domain.order.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.domain.order.model.Order;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,19 +31,22 @@ public class OrderAppService {
         return orderCreateCmdExe.execute(orderCreateCmd);
     }
 
-    public PageResponse<OrderDTO> getPageList(OrderPageQry qry) {
-        return orderQryExe.getPageList(qry);
+    public PageResponse<OrderDTO> queryPages(OrderPageQry qry) {
+        return orderQryExe.queryPages(qry);
     }
 
-    public OrderInfoDTO getOrder(Long id) {
-        return orderQryExe.get(id);
+    public OrderDetailsDTO queryDetails(Long id) {
+        return orderQryExe.queryDetails(id);
     }
 
     @Transactional(rollbackFor = Throwable.class)
     public void updateOrderOnPaySuccess(PayNotifyMessage message) {
         Order order = new Order();
-        order.setOrderId(message.getOrderId());
-        order.paySuccess(message.getPayTradeNo(), LocalDateTime.now());
+        order.setId(message.getOrderId());
+        order.setPayStatus(PayStatus.PAY_SUCCESS.getValue());
+        order.setPayTradeNo(message.getPayTradeNo());
+        order.setPayTime(LocalDateTime.now());
+        order.setOrderStatus(OrderStatus.COMPLETED.getValue());;
         orderGateway.updateOrderPayStatus(order);
     }
 }

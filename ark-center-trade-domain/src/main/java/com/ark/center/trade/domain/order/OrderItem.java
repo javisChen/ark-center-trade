@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.gateway.db;
+package com.ark.center.trade.domain.order;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ark.component.orm.mybatis.base.BaseEntity;
@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("od_order_item")
-public class OrderItemDO extends BaseEntity {
+public class OrderItem extends BaseEntity {
 
     /**
      * 订单ID
@@ -33,8 +33,8 @@ public class OrderItemDO extends BaseEntity {
     /**
      * 商品名称
      */
-    @TableField("spu_name")
-    private String spuName;
+    @TableField("product_name")
+    private String productName;
 
     /**
      * SKU ID

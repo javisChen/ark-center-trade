@@ -1,27 +1,26 @@
 package com.ark.center.trade.infra.cart.convertor;
 
-import com.ark.center.trade.client.cartitem.command.CartItemAddCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.client.dto.CartItemDTO;
-import com.ark.center.trade.domain.cart.CartItemDO;
+import com.ark.center.trade.domain.cart.CartItem;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.MappingConstants;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CartItemConvertor {
 
-    List<CartItemDTO> toCartItemDTO(List<CartItemDO> cartItemDOList);
+    List<CartItemDTO> toCartItemDTO(List<CartItem> cartItemList);
 
-    @Mappings({
-            @Mapping(target = "checked", expression = "java(cartItemDO.getChecked() ? 1: 0)")
-    })
-    CartItemDTO toCartItemDTO(CartItemDO cartItemDO);
+    // @Mappings({
+    //         @Mapping(target = "checked", expression = "java(cartItemDO.getChecked() ? 1: 0)")
+    // })
+    // CartItemDTO toCartItemDTO(CartItem cartItem);
 
-    CartItemDO toCartItemDomainObject(CartItemAddCmd cartItemAddCmd);
+    CartItem toCartItemDomainObject(CartItemCmd cartItemCmd);
 
-    CartItemDO toCartItemDO(CartItemAddCmd cartItem);
+    CartItem toCartItemDO(CartItemCmd cartItem);
 }

@@ -26,7 +26,7 @@ public class OrderItemDTO implements Serializable {
      * 商品名称
      */
     @Schema(name = "商品名称")
-    private String spuName;
+    private String productName;
 
     /**
      * SKU ID

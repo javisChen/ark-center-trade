@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("od_cart_item")
-public class CartItemDO extends BaseEntity {
+public class CartItem extends BaseEntity {
 
 
     /**
@@ -34,10 +34,10 @@ public class CartItemDO extends BaseEntity {
 
 
     /**
-     * SPU名称
+     * 商品名称
      */
-    @TableField("spu_name")
-    private String spuName;
+    @TableField("product_name")
+    private String productName;
 
     /**
      * SKU单价
@@ -82,7 +82,4 @@ public class CartItemDO extends BaseEntity {
     private Boolean checked;
 
 
-    public void checked(Boolean checked) {
-        this.checked = checked;
-    }
 }

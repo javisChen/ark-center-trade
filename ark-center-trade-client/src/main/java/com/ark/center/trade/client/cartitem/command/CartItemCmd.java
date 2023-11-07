@@ -1,6 +1,5 @@
 package com.ark.center.trade.client.cartitem.command;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -16,7 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(name = "CartAddReqDTO", description = "添加商品进购物车模型")
-public class CartItemAddCmd implements Serializable {
+public class CartItemCmd implements Serializable {
 
     @Schema(name = "SKU ID", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "SKU ID不能为空")

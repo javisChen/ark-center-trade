@@ -24,7 +24,7 @@ public class ReceiveGatewayImpl implements ReceiveGateway {
     }
 
     @Override
-    public ReceiveDTO findByOrderId(Long orderId) {
+    public ReceiveDTO selectByOrderId(Long orderId) {
         LambdaQueryWrapper<ReceiveDO> qw = new LambdaQueryWrapper<>();
         qw.eq(ReceiveDO::getOrderId, orderId)
                         .last("limit 1");

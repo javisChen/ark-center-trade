@@ -7,5 +7,5 @@ public interface ReceiveGateway {
 
     void save(Receive receive);
 
-    ReceiveDTO findByOrderId(Long orderId);
+    ReceiveDTO selectByOrderId(Long orderId);
 }

@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.gateway.db;
+package com.ark.center.trade.domain.order;
 
 import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("od_order")
-public class OrderDO extends BaseEntity {
+public class Order extends BaseEntity {
 
 
     /**
@@ -110,6 +110,12 @@ public class OrderDO extends BaseEntity {
      */
     @TableField("buyer_id")
     private Long buyerId;
+
+    /**
+     * 买家名称
+     */
+    @TableField("buyer_name")
+    private String buyerName;
 
     /**
      * 卖家ID

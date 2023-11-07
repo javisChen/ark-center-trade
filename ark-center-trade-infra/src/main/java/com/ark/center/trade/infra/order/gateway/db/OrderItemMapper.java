@@ -1,5 +1,6 @@
 package com.ark.center.trade.infra.order.gateway.db;
 
+import com.ark.center.trade.domain.order.OrderItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -10,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author EOP
  * @since 2022-08-09
  */
-public interface OrderItemMapper extends BaseMapper<OrderItemDO> {
+public interface OrderItemMapper extends BaseMapper<OrderItem> {
 
 }

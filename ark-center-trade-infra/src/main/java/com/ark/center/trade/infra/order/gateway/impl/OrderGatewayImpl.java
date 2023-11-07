@@ -3,12 +3,10 @@ package com.ark.center.trade.infra.order.gateway.impl;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.domain.order.model.Order;
-import com.ark.center.trade.domain.order.model.OrderItem;
 import com.ark.center.trade.infra.order.convertor.OrderConvertor;
-import com.ark.center.trade.infra.order.gateway.db.OrderDO;
-import com.ark.center.trade.infra.order.gateway.db.OrderItemDO;
 import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
 import com.ark.component.dto.PageResponse;
@@ -33,25 +31,25 @@ public class OrderGatewayImpl implements OrderGateway {
     private final OrderItemMapper orderItemMapper;
 
     @Override
-    public void save(Order order) {
+    public void save(Order order, List<OrderItem> orderItems) {
 
-        OrderDO orderDO = orderConvertor.toOrderDO(order);
+        orderMapper.insert(order);
 
-        // 保存订单
-        orderMapper.insert(orderDO);
+        Long orderId = order.getId();
 
-        // 保存订单项
-        List<OrderItem> orderItemList = order.getOrderItemList();
-        orderItemList.stream()
-                .map(orderItem -> orderConvertor.toOrderItemDO(orderDO, orderItem))
-                .forEach(orderItemMapper::insert);
+        String tradeNo = order.getTradeNo();
 
-        order.setOrderId(orderDO.getId());
+        orderItems.forEach(orderItem -> {
+                    orderItem.setOrderId(orderId);
+                    orderItem.setTradeNo(tradeNo);
+                    orderItemMapper.insert(orderItem);
+                });
+
     }
 
     @Override
-    public PageResponse<OrderDTO> getPageList(OrderPageQry pageQry) {
-        LambdaQueryWrapper<OrderDO> qw = Wrappers.lambdaQuery(OrderDO.class)
+    public PageResponse<OrderDTO> selectPages(OrderPageQry pageQry) {
+        LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
                 .orderByDesc(BaseEntity::getGmtCreate);
 
         IPage<OrderDTO> page = orderMapper
@@ -62,34 +60,32 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     @Override
-    public Order findById(Long orderId) {
-        OrderDO orderDO = orderMapper.selectById(orderId);
-        return orderConvertor.toOrderDomainObject(orderDO);
+    public Order selectById(Long orderId) {
+        return orderMapper.selectById(orderId);
     }
 
     @Override
     public List<OrderItemDTO> listOrderItems(Long orderId) {
-        LambdaQueryWrapper<OrderItemDO> qw = new LambdaQueryWrapper<>();
-        qw.eq(OrderItemDO::getOrderId, orderId);
-        List<OrderItemDO> orderItemDOS = orderItemMapper.selectList(qw);
-        return orderConvertor.toOrderItemDTO(orderItemDOS);
+        LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
+        qw.eq(OrderItem::getOrderId, orderId);
+        List<OrderItem> orderItems = orderItemMapper.selectList(qw);
+        return orderConvertor.toOrderItemDTO(orderItems);
     }
 
     @Override
     public void updateOrderPayStatus(Order order) {
-        OrderDO entity = new OrderDO();
-        entity.setId(order.getOrderId());
-        entity.setPayStatus(order.getOrderPay().getPayStatus().getValue());
-        entity.setOrderStatus(order.getOrderStatus().getValue());
+        Order entity = new Order();
+        entity.setId(order.getId());
+        entity.setPayStatus(order.getPayStatus());
+        entity.setOrderStatus(order.getOrderStatus());
         orderMapper.updateById(entity);
     }
 
     @Override
-    public List<OrderItem> findItemsByOrderId(Long orderId) {
-        LambdaQueryWrapper<OrderItemDO> qw = new LambdaQueryWrapper<>();
-        qw.eq(OrderItemDO::getOrderId, orderId);
-        List<OrderItemDO> orderItemDOS = orderItemMapper.selectList(qw);
-        return orderConvertor.toOrderItemDomainObject(orderItemDOS);
+    public List<OrderItem> selectItemsByOrderId(Long orderId) {
+        LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
+        qw.eq(OrderItem::getOrderId, orderId);
+        return orderItemMapper.selectList(qw);
     }
 
 }

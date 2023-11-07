@@ -7,21 +7,16 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum OrderStatus implements BasicEnums {
-
-    COMPLETED(10, "已完成"),
-
-    WAIT_PAY(1, "待支付"),
-
-    WAIT_DELIVER(2, "待发货"),
-
-    WAIT_RECEIVE(3, "待收货"),
-    WAIT_EVALUATE(4, "待评价");
-
+public enum PayStatus implements BasicEnums {
+    PENDING_PAY(1, "待支付"),
+    PAYING(2, "支付中"),
+    PAY_SUCCESS(3, "支付成功"),
+    PAY_FAIL(4, "支付失败"),
+    ;
     private final Integer value;
     private final String text;
 
-    public static OrderStatus getByValue(Integer value) {
+    public static PayStatus getByValue(Integer value) {
         return EnumUtils.getByValue(values(), value);
     }
 

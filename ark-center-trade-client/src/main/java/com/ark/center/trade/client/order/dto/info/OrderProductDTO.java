@@ -3,13 +3,12 @@ package com.ark.center.trade.client.order.dto.info;
 import lombok.Data;
 
 @Data
-public class OrderCommodityDTO {
-
+public class OrderProductDTO {
 
     /**
      * 商品名称
      */
-    private String name;
+    private String productName;
 
     /**
      * SKU单价

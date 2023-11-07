@@ -7,8 +7,13 @@ import java.util.List;
 public interface SkuGateway {
 
     /**
-     * 获取SKU集合
+     * 查询Sku
      */
-    List<Sku> getSkuList(List<Long> skuIds);
+    List<Sku> querySkus(List<Long> skuIds);
+
+    /**
+     * 查询Sku
+     */
+    Sku querySku(Long skuId);
 
 }

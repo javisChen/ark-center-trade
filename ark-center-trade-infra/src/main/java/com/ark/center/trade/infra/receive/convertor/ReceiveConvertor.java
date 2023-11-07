@@ -5,8 +5,9 @@ import com.ark.center.trade.client.order.dto.ReceiveDTO;
 import com.ark.center.trade.domain.order.model.Receive;
 import com.ark.center.trade.infra.receive.gateway.db.ReceiveDO;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ReceiveConvertor {
 
     Receive convertToReceive(OrderCreateReceiveCreateCmd receiveCreateCmd);
