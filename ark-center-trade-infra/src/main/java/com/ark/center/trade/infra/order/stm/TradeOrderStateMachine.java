@@ -15,13 +15,23 @@ public class TradeOrderStateMachine implements InitializingBean {
 
     private final StateMachineFactory stateMachineFactory;
 
-    private final static String TRADE_ORDER_MACHINE = "trade_order";
+    public final static String TRADE_ORDER_MACHINE = "trade_order";
 
 
     private StateMachine<OrderStatus, OrderEvent> stateMachine;
 
+    /**
+     * 创建订单
+     */
     public void create(String bizId, OrderCreateCmd orderCreateCmd) {
         this.stateMachine.init(bizId, OrderEvent.CREATE, orderCreateCmd);
+    }
+
+    /**
+     * 支付
+     */
+    public OrderStatus pay(OrderStatus source) {
+        return this.stateMachine.sendEvent(source, OrderEvent.PAY, null);
     }
 
     @Override

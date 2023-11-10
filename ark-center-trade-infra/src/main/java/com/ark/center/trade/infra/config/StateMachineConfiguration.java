@@ -2,6 +2,7 @@ package com.ark.center.trade.infra.config;
 
 import com.ark.center.trade.domain.order.OrderEvent;
 import com.ark.center.trade.domain.order.OrderStatus;
+import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
 import com.ark.component.statemachine.core.StateMachine;
 import com.ark.component.statemachine.core.builder.StateMachineBuilder;
 import com.ark.component.statemachine.core.lock.DefaultStateMachineLock;
@@ -17,12 +18,11 @@ public class StateMachineConfiguration {
 
     @Bean
     public StateMachine<OrderStatus, OrderEvent> tradeOrderStatusMachine(JdbcTemplate jdbcTemplate) {
-        String machineId = "tradeOrder";
         StateMachineBuilder<OrderStatus, OrderEvent> builder = StateMachineBuilder.newBuilder();
         return builder
                 // 状态机基本配置
                 .withConfiguration(configurationBuilder -> configurationBuilder
-                        .machineId(machineId)
+                        .machineId(TradeOrderStateMachine.TRADE_ORDER_MACHINE)
                         .persist(new JdbcStateMachinePersist<>(jdbcTemplate))
                         .lock(new DefaultStateMachineLock<>())
                 )

@@ -39,7 +39,7 @@ public class OrderController extends BaseController {
     @Operation(summary = "查询订单详情")
     @GetMapping("/details")
     public SingleResponse<OrderDetailsDTO> details(@RequestParam(value = "id")
-                                                @NotNull(message = "id不能为空") Long id) {
+                                                   @NotNull(message = "id不能为空") Long id) {
         return SingleResponse.ok(orderAppService.queryDetails(id));
     }
 

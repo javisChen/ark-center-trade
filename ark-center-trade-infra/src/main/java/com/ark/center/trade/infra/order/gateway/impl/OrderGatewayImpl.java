@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class OrderGatewayImpl implements OrderGateway {
+public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements OrderGateway {
 
     private final OrderMapper orderMapper;
 
@@ -86,6 +87,16 @@ public class OrderGatewayImpl implements OrderGateway {
         LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
         qw.eq(OrderItem::getOrderId, orderId);
         return orderItemMapper.selectList(qw);
+    }
+
+    @Override
+    public int compareAndUpdateOrderStatusAndPayStatus(Long orderId, Integer sourceOrderStatus, Integer targetOrderStatus, Integer payStatus) {
+        return orderMapper.compareAndUpdateOrderStatusAndPayStatus(orderId, sourceOrderStatus, targetOrderStatus, payStatus);
+    }
+
+    @Override
+    public int update(Order order) {
+        return orderMapper.updateById(order);
     }
 
 }

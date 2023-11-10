@@ -22,4 +22,8 @@ public interface OrderGateway {
     void updateOrderPayStatus(Order order);
 
     List<OrderItem> selectItemsByOrderId(Long orderId);
+
+    int compareAndUpdateOrderStatusAndPayStatus(Long orderId, Integer sourceOrderStatus, Integer targetOrderStatus, Integer payStatus);
+
+    int update(Order order);
 }

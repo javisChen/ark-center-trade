@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-    name = "${ark.center.trade.service.name:order}",
+    name = "${ark.center.trade.service.name:trade}",
     path = "/v1/order",
     url = "${ark.center.trade.service.uri:}",
     dismiss404 = true,
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 )
 public interface OrderApi {
 
-    @GetMapping({"/info"})
-    SingleResponse<OrderDTO> getOrderById(@RequestParam(value = "id") Long id);
+    @GetMapping({"/details"})
+    SingleResponse<OrderDTO> queryDetails(@RequestParam(value = "id") Long id);
 
 }
