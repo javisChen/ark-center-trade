@@ -29,7 +29,7 @@ public class OrderBaseDTO {
     @Schema(name = "1-微信支付 2-支付宝", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer payType;
 
-    @Schema(name = "支付流水号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(name = "支付单号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String payTradeNo;
 
     @Schema(name = "支付时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)

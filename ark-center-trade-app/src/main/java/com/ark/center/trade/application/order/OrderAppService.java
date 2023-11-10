@@ -19,8 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -46,13 +44,24 @@ public class OrderAppService {
 
     @Transactional(rollbackFor = Throwable.class)
     public void updateOrderOnPaySuccess(PayNotifyMessage message) {
-        Order order = new Order();
-        order.setId(message.getBizOrderId());
-        order.setPayStatus(PayStatus.PAY_SUCCESS.getValue());
-        order.setPayTradeNo(message.getPayTradeNo());
-        order.setPayTime(LocalDateTime.now());
-        order.setOrderStatus(OrderStatus.COMPLETED.getValue());;
-        orderGateway.updateOrderPayStatus(order);
+        Long orderId = message.getBizOrderId();
+        Order order = orderGateway.selectById(orderId);
+        if (order == null) {
+            log.warn("订单不存在 {}", orderId);
+            return;
+        }
+
+        OrderStatus currentStatus = OrderStatus.getByValue(order.getOrderStatus());
+        OrderStatus nextStatus = tradeOrderStateMachine.pay(currentStatus);
+
+        int updated = orderGateway.compareAndUpdateOrderStatusAndPayStatus(orderId,
+                currentStatus.getValue(),
+                nextStatus.getValue(),
+                PayStatus.PAY_SUCCESS.getValue());
+
+        if (updated == 0) {
+            log.warn("订单 [{}] 已发生改变，更新失败", orderId);
+        }
     }
 
     @Transactional(rollbackFor = Throwable.class)
