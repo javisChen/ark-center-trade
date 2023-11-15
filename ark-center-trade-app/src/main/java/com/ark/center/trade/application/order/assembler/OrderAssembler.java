@@ -59,7 +59,7 @@ public class OrderAssembler {
         orderBaseDTO.setOrderChannel(order.getOrderChannel());
         orderBaseDTO.setOrderStatus(order.getOrderStatus());
         orderBaseDTO.setPayStatus(order.getPayStatus());
-        orderBaseDTO.setPayType(order.getPayType());
+        orderBaseDTO.setPayTypeCode(order.getPayTypeCode());
         orderBaseDTO.setPayTradeNo(order.getPayTradeNo());
         orderBaseDTO.setPayTime(order.getPayTime());
         orderBaseDTO.setDeliverTime(order.getDeliverTime());

@@ -26,8 +26,8 @@ public class OrderBaseDTO {
     @Schema(name = "1-待支付 2-支付中 3-支付成功 4-支付失败", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer payStatus;
 
-    @Schema(name = "1-微信支付 2-支付宝", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Integer payType;
+    @Schema(name = "支付类型编码", requiredMode = Schema.RequiredMode.REQUIRED)
+    private String payTypeCode;
 
     @Schema(name = "支付单号", requiredMode = Schema.RequiredMode.REQUIRED)
     private String payTradeNo;

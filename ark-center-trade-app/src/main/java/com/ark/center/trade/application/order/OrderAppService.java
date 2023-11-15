@@ -75,6 +75,7 @@ public class OrderAppService {
         Order updateOrder = new Order();
         updateOrder.setId(orderId);
         updateOrder.setPayTradeNo(message.getPayTradeNo());
+        updateOrder.setPayTypeCode(message.getPayTypeCode());
         orderGateway.update(updateOrder);
     }
 }

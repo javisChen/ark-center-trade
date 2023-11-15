@@ -1,11 +1,11 @@
 package com.ark.center.trade.client.order.query;
 
-import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import com.ark.component.dto.PagingQuery;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
 /**
  * <p>
  * 订单表
@@ -35,8 +35,8 @@ public class OrderPageQry extends PagingQuery {
     @Schema(name = "支付状态 enums[PENDING_PAY,待支付,1;PAYING,支付中,2;PAY_SUCCESS,支付成功,3;PAY_FAIL,支付失败,4]")
     private Integer payStatus;
 
-    @Schema(name = "支付类型 enums[WECHAT,微信支付,1;ALIPAY,支付宝,2]")
-    private String payType;
+    @Schema(name = "支付类型编码")
+    private String payTypeCode;
 
     @Schema(name = "应付金额")
     private Integer expectAmount;
