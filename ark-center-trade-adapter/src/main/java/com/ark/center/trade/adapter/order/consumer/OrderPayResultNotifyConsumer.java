@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * 订单支付成功后通知
+ */
 @MQMessageListener(
         mq = MQType.ROCKET,
         consumerGroup = MQConst.CG_TAG_PAY_NOTIFY,
@@ -19,13 +22,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class OrderPayNotifyMQConsumer extends SimpleMessageHandler<PayNotifyMessage> {
+public class OrderPayResultNotifyConsumer extends SimpleMessageHandler<PayNotifyMessage> {
 
     private final OrderAppService orderAppService;
 
     @Override
     protected void handleMessage(String msgId, String sendId, PayNotifyMessage body, Object o) {
-        log.info("接收支付通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
-        orderAppService.updateOrderOnPaySuccess(body);
+        log.info("支付结果通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
+        orderAppService.orderPay(body);
     }
 }

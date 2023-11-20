@@ -23,7 +23,13 @@ public interface OrderGateway {
 
     List<OrderItem> selectItemsByOrderId(Long orderId);
 
-    int compareAndUpdateOrderStatusAndPayStatus(Long orderId, Integer sourceOrderStatus, Integer targetOrderStatus, Integer payStatus);
-
     int update(Order order);
+
+    /**
+     * 使用订单id+订单状态作为乐观锁更新订单状态
+     * @param sourceOrder 条件
+     * @param updateOrder 更新值
+     * @return 更新影响行数
+     */
+    int optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder);
 }

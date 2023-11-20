@@ -5,11 +5,11 @@ import com.ark.center.pay.api.dto.mq.PayOrderCreatedMessage;
 import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
+import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.info.OrderDetailsDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.OrderStatus;
 import com.ark.center.trade.domain.order.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
@@ -43,29 +43,13 @@ public class OrderAppService {
     }
 
     @Transactional(rollbackFor = Throwable.class)
-    public void updateOrderOnPaySuccess(PayNotifyMessage message) {
-        Long orderId = message.getBizOrderId();
-        Order order = orderGateway.selectById(orderId);
-        if (order == null) {
-            log.warn("订单不存在 {}", orderId);
-            return;
-        }
-
-        OrderStatus currentStatus = OrderStatus.getByValue(order.getOrderStatus());
-        OrderStatus nextStatus = tradeOrderStateMachine.pay(currentStatus);
-
-        int updated = orderGateway.compareAndUpdateOrderStatusAndPayStatus(orderId,
-                currentStatus.getValue(),
-                nextStatus.getValue(),
-                PayStatus.PAY_SUCCESS.getValue());
-
-        if (updated == 0) {
-            log.warn("订单 [{}] 已发生改变，更新失败", orderId);
-        }
+    public void orderPay(PayNotifyMessage message) {
+        tradeOrderStateMachine.pay(message.getBizOrderId(),
+                updateOrder -> updateOrder.setPayStatus(PayStatus.PAY_SUCCESS.getValue()));
     }
 
     @Transactional(rollbackFor = Throwable.class)
-    public void updateOrderOnPayOrderCreated(PayOrderCreatedMessage message) {
+    public void onPayOrderCreated(PayOrderCreatedMessage message) {
         Long orderId = message.getBizOrderId();
         Order order = orderGateway.selectById(orderId);
         if (order == null) {
@@ -77,5 +61,17 @@ public class OrderAppService {
         updateOrder.setPayTradeNo(message.getPayTradeNo());
         updateOrder.setPayTypeCode(message.getPayTypeCode());
         orderGateway.update(updateOrder);
+
+    }
+
+    @Transactional(rollbackFor = Throwable.class)
+    public void deliver(OrderDeliverCmd cmd) {
+        log.info("订单 [{}] 发货, Params = {}", cmd.getOrderId(), cmd);
+        tradeOrderStateMachine.deliver(cmd.getOrderId(),
+                updateOrder -> {
+                    updateOrder.setLogisticsCode(cmd.getLogisticsCode());
+                    updateOrder.setLogisticsCompany(cmd.getLogisticsCompany());
+                });
+
     }
 }

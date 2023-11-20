@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * 订单支付单生成成功后通知
+ */
 @MQMessageListener(
         mq = MQType.ROCKET,
         consumerGroup = MQConst.CG_TAG_PAY_ORDER_CREATED,
@@ -19,13 +22,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class OrderPayOrderCreatedMQConsumer extends SimpleMessageHandler<PayOrderCreatedMessage> {
+public class OrderPayOrderCreatedConsumer extends SimpleMessageHandler<PayOrderCreatedMessage> {
 
     private final OrderAppService orderAppService;
 
     @Override
     protected void handleMessage(String msgId, String sendId, PayOrderCreatedMessage body, Object o) {
         log.info("支付单生成通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
-        orderAppService.updateOrderOnPayOrderCreated(body);
+        orderAppService.onPayOrderCreated(body);
     }
 }

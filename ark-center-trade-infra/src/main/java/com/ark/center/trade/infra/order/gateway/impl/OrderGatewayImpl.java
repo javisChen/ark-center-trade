@@ -12,6 +12,7 @@ import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -41,10 +42,10 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         String tradeNo = order.getTradeNo();
 
         orderItems.forEach(orderItem -> {
-                    orderItem.setOrderId(orderId);
-                    orderItem.setTradeNo(tradeNo);
-                    orderItemMapper.insert(orderItem);
-                });
+            orderItem.setOrderId(orderId);
+            orderItem.setTradeNo(tradeNo);
+            orderItemMapper.insert(orderItem);
+        });
 
     }
 
@@ -90,13 +91,17 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public int compareAndUpdateOrderStatusAndPayStatus(Long orderId, Integer sourceOrderStatus, Integer targetOrderStatus, Integer payStatus) {
-        return orderMapper.compareAndUpdateOrderStatusAndPayStatus(orderId, sourceOrderStatus, targetOrderStatus, payStatus);
-    }
-
-    @Override
     public int update(Order order) {
         return orderMapper.updateById(order);
     }
 
+    @Override
+    public int optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder) {
+        return orderMapper.update(updateOrder,
+                new LambdaUpdateWrapper<Order>()
+                        .eq(BaseEntity::getId, sourceOrder.getId())
+                        .eq(Order::getOrderStatus, sourceOrder.getOrderStatus()));
+    }
+
 }
+
