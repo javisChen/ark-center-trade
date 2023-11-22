@@ -1,6 +1,6 @@
 package com.ark.center.trade.domain.cart.gateway;
 
-import com.ark.center.trade.client.client.dto.CartItemDTO;
+import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItem;
 
 import java.util.List;
@@ -18,5 +18,5 @@ public interface CartGateway {
 
     List<CartItemDTO> selectByBuyer(Long userId);
 
-    void updateCartItemQuantity(Long cartItemId, Integer quantity);
+    void updateQuantity(Long cartItemId, Integer quantity);
 }

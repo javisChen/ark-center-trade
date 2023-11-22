@@ -1,4 +1,4 @@
-package com.ark.center.trade.client.client.dto;
+package com.ark.center.trade.client.cartitem.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @since 2022-08-23
  */
 @Data
-@ApiModel(value = "CartItemRespDTO对象", description = "购物车表")
+@ApiModel(value = "CartItemDTO", description = "购物车表")
 public class CartItemDTO implements Serializable {
 
     @Schema(description = "id", requiredMode = Schema.RequiredMode.REQUIRED)

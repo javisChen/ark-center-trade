@@ -1,9 +1,10 @@
 package com.ark.center.trade.adapter.cart.web;
 
 import com.ark.center.trade.application.cart.CartAppService;
+import com.ark.center.trade.client.cartitem.command.CartItemCheckCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemCmd;
-import com.ark.center.trade.client.client.command.CartItemCheckCmd;
-import com.ark.center.trade.client.client.dto.CartItemDTO;
+import com.ark.center.trade.client.cartitem.command.CartItemUpdateCmd;
+import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.component.dto.MultiResponse;
 import com.ark.component.dto.ServerResponse;
 import com.ark.component.web.base.BaseController;
@@ -39,6 +40,13 @@ public class CartController extends BaseController {
     @PostMapping("/item/checked")
     public ServerResponse checkCartItem(@RequestBody @Validated CartItemCheckCmd cmd) {
         cartAppService.checkCartItem(cmd);
+        return ServerResponse.ok();
+    }
+
+    @Operation(summary = "选中购物车项")
+    @PostMapping("/item/quantity")
+    public ServerResponse updateQuantity(@RequestBody @Validated CartItemUpdateCmd cmd) {
+        cartAppService.updateCartItemQuantity(cmd);
         return ServerResponse.ok();
     }
 

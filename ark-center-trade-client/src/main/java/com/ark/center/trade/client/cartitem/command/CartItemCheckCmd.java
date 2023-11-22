@@ -1,4 +1,4 @@
-package com.ark.center.trade.client.client.command;
+package com.ark.center.trade.client.cartitem.command;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;

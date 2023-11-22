@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.cart.gateway.impl;
 
-import com.ark.center.trade.client.client.dto.CartItemDTO;
+import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItem;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
 import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
@@ -66,7 +66,10 @@ public class CartGatewayImpl extends ServiceImpl<CartItemMapper, CartItem> imple
     }
 
     @Override
-    public void updateCartItemQuantity(Long cartItemId, Integer quantity) {
-
+    public void updateQuantity(Long cartItemId, Integer quantity) {
+        CartItem cartItem = new CartItem();
+        cartItem.setId(cartItemId);
+        cartItem.setQuantity(quantity);
+        updateById(cartItem);
     }
 }

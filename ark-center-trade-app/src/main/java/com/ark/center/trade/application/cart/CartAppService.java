@@ -2,8 +2,9 @@ package com.ark.center.trade.application.cart;
 
 import com.alibaba.fastjson.JSON;
 import com.ark.center.trade.client.cartitem.command.CartItemCmd;
-import com.ark.center.trade.client.client.command.CartItemCheckCmd;
-import com.ark.center.trade.client.client.dto.CartItemDTO;
+import com.ark.center.trade.client.cartitem.command.CartItemCheckCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemUpdateCmd;
+import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItem;
 import com.ark.center.trade.domain.cart.gateway.CartGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
@@ -36,7 +37,7 @@ public class CartAppService {
             cartItem = createCartItem(currentUserId, skuId, sku);
             cartGateway.insert(cartItem);
         } else {
-            cartGateway.updateCartItemQuantity(cartItem.getId(), cartItem.getQuantity() + 1);
+            cartGateway.updateQuantity(cartItem.getId(), cartItem.getQuantity() + 1);
         }
     }
 
@@ -57,11 +58,20 @@ public class CartAppService {
 
     public void checkCartItem(CartItemCheckCmd cmd) {
         CartItem cartItem = cartGateway.selectItem(ServiceContext.getCurrentUser().getUserId(), cmd.getCartItemId());
-        cartGateway.updateChecked(cartItem, cmd.getChecked());
+        if (cartItem != null) {
+            cartGateway.updateChecked(cartItem, cmd.getChecked());
+        }
     }
 
     public List<CartItemDTO> queryUserItems() {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
         return cartGateway.selectByBuyer(currentUserId);
+    }
+
+    public void updateCartItemQuantity(CartItemUpdateCmd cmd) {
+        CartItem cartItem = cartGateway.selectItem(ServiceContext.getCurrentUser().getUserId(), cmd.getCartItemId());
+        if (cartItem != null) {
+            cartGateway.updateQuantity(cartItem.getId(), cmd.getQuantity());
+        }
     }
 }
