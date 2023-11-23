@@ -3,6 +3,7 @@ package com.ark.center.trade.adapter.cart.web;
 import com.ark.center.trade.application.cart.CartAppService;
 import com.ark.center.trade.client.cartitem.command.CartItemCheckCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemDeleteCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemUpdateCmd;
 import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.component.dto.MultiResponse;
@@ -35,6 +36,12 @@ public class CartController extends BaseController {
         cartAppService.save(cmd);
         return ServerResponse.ok();
     }
+    @Operation(summary = "删除购物车商品")
+    @PostMapping("/item/delete")
+    public ServerResponse deleteItems(@RequestBody @Validated CartItemDeleteCmd cmd) {
+        cartAppService.deleteCartItems(cmd);
+        return ServerResponse.ok();
+    }
 
     @Operation(summary = "选中购物车项")
     @PostMapping("/item/checked")
@@ -43,8 +50,8 @@ public class CartController extends BaseController {
         return ServerResponse.ok();
     }
 
-    @Operation(summary = "选中购物车项")
-    @PostMapping("/item/quantity")
+    @Operation(summary = "更新购物车商品项数量")
+    @PutMapping("/item/quantity")
     public ServerResponse updateQuantity(@RequestBody @Validated CartItemUpdateCmd cmd) {
         cartAppService.updateCartItemQuantity(cmd);
         return ServerResponse.ok();

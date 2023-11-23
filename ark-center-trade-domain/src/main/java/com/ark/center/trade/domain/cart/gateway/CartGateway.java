@@ -19,4 +19,8 @@ public interface CartGateway {
     List<CartItemDTO> selectByBuyer(Long userId);
 
     void updateQuantity(Long cartItemId, Integer quantity);
+
+    void deleteByIds(List<Long> itemIds);
+
+
 }

@@ -3,6 +3,7 @@ package com.ark.center.trade.application.cart;
 import com.alibaba.fastjson.JSON;
 import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemCheckCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemDeleteCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemUpdateCmd;
 import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItem;
@@ -57,7 +58,7 @@ public class CartAppService {
     }
 
     public void checkCartItem(CartItemCheckCmd cmd) {
-        CartItem cartItem = cartGateway.selectItem(ServiceContext.getCurrentUser().getUserId(), cmd.getCartItemId());
+        CartItem cartItem = cartGateway.selectById(cmd.getCartItemId());
         if (cartItem != null) {
             cartGateway.updateChecked(cartItem, cmd.getChecked());
         }
@@ -69,9 +70,13 @@ public class CartAppService {
     }
 
     public void updateCartItemQuantity(CartItemUpdateCmd cmd) {
-        CartItem cartItem = cartGateway.selectItem(ServiceContext.getCurrentUser().getUserId(), cmd.getCartItemId());
+        CartItem cartItem = cartGateway.selectById(cmd.getCartItemId());
         if (cartItem != null) {
             cartGateway.updateQuantity(cartItem.getId(), cmd.getQuantity());
         }
+    }
+
+    public void deleteCartItems(CartItemDeleteCmd cmd) {
+        cartGateway.deleteByIds(cmd.getCartItemIds());
     }
 }

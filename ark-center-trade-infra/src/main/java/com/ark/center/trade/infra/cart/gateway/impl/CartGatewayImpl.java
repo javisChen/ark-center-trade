@@ -72,4 +72,10 @@ public class CartGatewayImpl extends ServiceImpl<CartItemMapper, CartItem> imple
         cartItem.setQuantity(quantity);
         updateById(cartItem);
     }
+
+    @Override
+    public void deleteByIds(List<Long> itemIds) {
+        LambdaQueryWrapper<CartItem> wrapper = new LambdaQueryWrapper<CartItem>().in(CartItem::getId, itemIds);
+        remove(wrapper);
+    }
 }
