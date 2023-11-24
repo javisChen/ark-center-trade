@@ -49,6 +49,6 @@ public class CartItemDTO implements Serializable {
     private String specData;
 
     @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", requiredMode = Schema.RequiredMode.REQUIRED)
-    private Boolean checked;
+    private Boolean checked = false;
 
 }
