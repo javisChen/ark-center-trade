@@ -11,7 +11,9 @@ public interface CartGateway {
      * 根据用户和商品id查询购物车商品
      */
     CartItem selectItem(Long userId, Long skuId);
+
     CartItem selectById(Long cartItemId);
+
     void insert(CartItem cartItem);
 
     void updateChecked(CartItem cartItem, Boolean checked);

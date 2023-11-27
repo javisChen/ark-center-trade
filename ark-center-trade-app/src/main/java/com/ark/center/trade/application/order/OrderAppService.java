@@ -9,10 +9,12 @@ import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.info.OrderDetailsDTO;
 import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
+import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,14 @@ public class OrderAppService {
 
     public PageResponse<OrderDTO> queryPages(OrderPageQry qry) {
         return orderQryExe.queryPages(qry);
+    }
+    public PageResponse<OrderDTO> queryUserOrderPages(UserOrderPageQry qry) {
+        OrderPageQry pageQry = new OrderPageQry();
+        pageQry.setBuyerId(ServiceContext.getCurrentUser().getUserId());
+        pageQry.setOrderStatus(qry.getOrderStatus());
+        pageQry.setPayStatus(qry.getPayStatus());
+        pageQry.setCode(qry.getCode());
+        return orderQryExe.queryPages(pageQry);
     }
 
     public OrderDetailsDTO queryDetails(Long id) {

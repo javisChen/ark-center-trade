@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Schema(name = "OrderPageQueryReqDTO对象", description = "订单表")
 public class OrderPageQry extends PagingQuery {
 
-
     @Schema(name = "订单号")
     private String code;
 
