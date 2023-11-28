@@ -7,8 +7,7 @@ import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.dto.info.OrderDetailsDTO;
-import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.PayStatus;
@@ -36,19 +35,24 @@ public class OrderAppService {
         return orderCreateCmdExe.execute(orderCreateCmd);
     }
 
-    public PageResponse<OrderDTO> queryPages(OrderPageQry qry) {
+    public PageResponse<OrderDTO> queryPages(OrderQry qry) {
+        qry.setWithOrderItems(false);
+        qry.setWithReceive(false);
         return orderQryExe.queryPages(qry);
     }
     public PageResponse<OrderDTO> queryUserOrderPages(UserOrderPageQry qry) {
-        OrderPageQry pageQry = new OrderPageQry();
-        pageQry.setBuyerId(ServiceContext.getCurrentUser().getUserId());
-        pageQry.setOrderStatus(qry.getOrderStatus());
-        pageQry.setPayStatus(qry.getPayStatus());
-        pageQry.setCode(qry.getCode());
-        return orderQryExe.queryPages(pageQry);
+        OrderQry orderQry = new OrderQry();
+        orderQry.setBuyerId(ServiceContext.getCurrentUser().getUserId());
+        orderQry.setOrderStatus(qry.getOrderStatus());
+        orderQry.setPayStatus(qry.getPayStatus());
+        orderQry.setCode(qry.getCode());
+        orderQry.setCurrent(qry.getCurrent());
+        orderQry.setSize(qry.getSize());
+        orderQry.setWithOrderItems(true);
+        return orderQryExe.queryPages(orderQry);
     }
 
-    public OrderDetailsDTO queryDetails(Long id) {
+    public OrderDTO queryDetails(Long id) {
         return orderQryExe.queryDetails(id);
     }
 

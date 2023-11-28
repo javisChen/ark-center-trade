@@ -10,7 +10,7 @@ import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.OrderStatus;
 import com.ark.center.trade.domain.order.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.domain.order.gateway.ReceiveGateway;
+import com.ark.center.trade.domain.receive.gateway.ReceiveGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Receive;
 import com.ark.center.trade.domain.order.model.Sku;

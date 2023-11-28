@@ -1,4 +1,4 @@
-package com.ark.center.trade.client.order.dto.info;
+package com.ark.center.trade.client.order.dto;
 
 import lombok.Data;
 

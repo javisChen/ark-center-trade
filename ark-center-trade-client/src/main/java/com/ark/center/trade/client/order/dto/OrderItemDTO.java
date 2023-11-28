@@ -16,6 +16,9 @@ import java.io.Serializable;
 @Schema(name = "OrderItemDTO", description = "订单项")
 public class OrderItemDTO implements Serializable {
 
+    @Schema(name = "订单id")
+    private Long orderId;
+
     /**
      * 订单号
      */

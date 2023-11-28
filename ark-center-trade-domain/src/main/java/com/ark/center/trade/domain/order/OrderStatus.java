@@ -10,11 +10,8 @@ import lombok.Getter;
 public enum OrderStatus implements BasicEnums {
 
     COMPLETED(10, "已完成"),
-
     WAIT_PAY(1, "待支付"),
-
     WAIT_DELIVER(2, "待发货"),
-
     WAIT_RECEIVE(3, "待收货"),
     WAIT_EVALUATE(4, "待评价");
 

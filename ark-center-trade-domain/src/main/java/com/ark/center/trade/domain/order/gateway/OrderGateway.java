@@ -1,8 +1,8 @@
 package com.ark.center.trade.domain.order.gateway;
 
-import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
-import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.client.receive.dto.ReceiveDTO;
+import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.component.dto.PageResponse;
@@ -13,11 +13,15 @@ public interface OrderGateway {
 
     void save(Order order, List<OrderItem> orderItems);
 
-    PageResponse<OrderDTO> selectPages(OrderPageQry pageQry);
+    PageResponse<Order> selectPages(OrderQry pageQry);
 
     Order selectById(Long orderId);
 
-    List<OrderItemDTO> listOrderItems(Long orderId);
+    List<OrderItemDTO> selectOrderItems(Long orderId);
+
+    List<OrderItemDTO> selectOrderItems(List<Long> orderIds);
+
+    List<ReceiveDTO> selectReceives(List<Long> orderIds);
 
     void updateOrderPayStatus(Order order);
 

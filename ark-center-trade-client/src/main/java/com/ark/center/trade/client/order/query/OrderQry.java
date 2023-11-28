@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Schema(name = "OrderPageQueryReqDTO对象", description = "订单表")
-public class OrderPageQry extends PagingQuery {
+@Schema(name = "OrderQry", description = "获取订单信息")
+public class OrderQry extends PagingQuery {
 
     @Schema(name = "订单号")
     private String code;
@@ -36,15 +36,6 @@ public class OrderPageQry extends PagingQuery {
 
     @Schema(name = "支付类型编码")
     private String payTypeCode;
-
-    @Schema(name = "应付金额")
-    private Integer expectAmount;
-
-    @Schema(name = "实付金额")
-    private Integer actualAmount;
-
-    @Schema(name = "运费金额")
-    private Integer freightAmount;
 
     @Schema(name = "支付流水号")
     private String paySn;
@@ -72,5 +63,11 @@ public class OrderPageQry extends PagingQuery {
 
     @Schema(name = "物流单号")
     private String logisticsCode;
+
+    @Schema(name = "是否查询订单子项")
+    private Boolean withOrderItems = false;
+
+    @Schema(name = "是否查询订单子项")
+    private Boolean withReceive = false;
 
 }

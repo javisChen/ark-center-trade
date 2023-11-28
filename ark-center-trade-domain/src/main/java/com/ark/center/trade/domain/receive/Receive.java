@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.receive.gateway.db;
+package com.ark.center.trade.domain.receive;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("od_receive")
-public class ReceiveDO extends BaseEntity {
+public class Receive extends BaseEntity {
 
 
     /**

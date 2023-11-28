@@ -1,11 +1,13 @@
 package com.ark.center.trade.infra.order.gateway.impl;
 
-import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
-import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.client.receive.dto.ReceiveDTO;
+import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.domain.receive.gateway.ReceiveGateway;
+import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.center.trade.infra.order.convertor.OrderConvertor;
 import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
@@ -17,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +33,11 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private final OrderConvertor orderConvertor;
 
+    private final OrderAssembler orderAssembler;
+
     private final OrderItemMapper orderItemMapper;
+
+    private final ReceiveGateway receiveGateway;
 
     @Override
     public void save(Order order, List<OrderItem> orderItems) {
@@ -50,13 +57,13 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public PageResponse<OrderDTO> selectPages(OrderPageQry pageQry) {
+    public PageResponse<Order> selectPages(OrderQry pageQry) {
         LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
+                .eq(pageQry.getOrderStatus() != null, Order::getOrderStatus, pageQry.getOrderStatus())
                 .orderByDesc(BaseEntity::getGmtCreate);
 
-        IPage<OrderDTO> page = orderMapper
-                .selectPage(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw)
-                .convert(orderConvertor::toOrderDTO);
+        IPage<Order> page = orderMapper
+                .selectPage(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
 
         return PageResponse.of(page);
     }
@@ -67,11 +74,21 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public List<OrderItemDTO> listOrderItems(Long orderId) {
+    public List<OrderItemDTO> selectOrderItems(Long orderId) {
+        return selectOrderItems(Lists.newArrayList(orderId));
+    }
+
+    @Override
+    public List<OrderItemDTO> selectOrderItems(List<Long> orderIds) {
         LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
-        qw.eq(OrderItem::getOrderId, orderId);
+        qw.in(OrderItem::getOrderId, orderIds);
         List<OrderItem> orderItems = orderItemMapper.selectList(qw);
         return orderConvertor.toOrderItemDTO(orderItems);
+    }
+
+    @Override
+    public List<ReceiveDTO> selectReceives(List<Long> orderIds) {
+        return receiveGateway.selectByOrderIds(orderIds);
     }
 
     @Override

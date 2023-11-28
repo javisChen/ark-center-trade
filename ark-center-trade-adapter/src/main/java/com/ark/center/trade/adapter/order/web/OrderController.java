@@ -4,8 +4,7 @@ import com.ark.center.trade.application.order.OrderAppService;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.dto.info.OrderDetailsDTO;
-import com.ark.center.trade.client.order.query.OrderPageQry;
+import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.dto.ServerResponse;
 import com.ark.component.dto.SingleResponse;
@@ -41,13 +40,13 @@ public class OrderController extends BaseController {
 
     @Operation(summary = "查询订单列表")
     @PostMapping("/pages")
-    public SingleResponse<PageResponse<OrderDTO>> queryPages(@RequestBody @Validated OrderPageQry qry) {
+    public SingleResponse<PageResponse<OrderDTO>> queryPages(@RequestBody @Validated OrderQry qry) {
         return SingleResponse.ok(orderAppService.queryPages(qry));
     }
 
     @Operation(summary = "查询订单详情")
     @GetMapping("/details")
-    public SingleResponse<OrderDetailsDTO> details(@RequestParam(value = "id")
+    public SingleResponse<OrderDTO> details(@RequestParam(value = "id")
                                                    @NotNull(message = "id不能为空") Long id) {
         return SingleResponse.ok(orderAppService.queryDetails(id));
     }

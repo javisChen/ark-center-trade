@@ -1,10 +1,10 @@
-package com.ark.center.trade.client.order.dto.info;
+package com.ark.center.trade.client.order.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class OrderChargeDTO {
+public class OrderAmountDTO {
 
     @Schema(name = "应付金额（单位：分）", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer expectAmount;
