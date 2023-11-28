@@ -4,7 +4,7 @@ import com.ark.center.commodity.client.commodity.dto.SkuDTO;
 import com.ark.center.commodity.client.commodity.query.SkuQry;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
-import com.ark.center.trade.infra.order.convertor.SkuConvertor;
+import com.ark.center.trade.infra.order.assembler.SkuConvertor;
 import com.ark.center.trade.infra.order.gateway.impl.rpc.SkuServiceApi;
 import com.ark.component.microservice.rpc.util.RpcUtils;
 import lombok.RequiredArgsConstructor;

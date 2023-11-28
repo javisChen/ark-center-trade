@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.convertor;
+package com.ark.center.trade.infra.order.assembler;
 
 import com.ark.center.commodity.client.commodity.dto.AttrDTO;
 import com.ark.center.commodity.client.commodity.dto.SkuDTO;

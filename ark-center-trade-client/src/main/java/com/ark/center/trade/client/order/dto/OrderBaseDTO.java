@@ -47,6 +47,9 @@ public class OrderBaseDTO {
     @Schema(name = "买家ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long buyerId;
 
+    @Schema(name = "买家名称", requiredMode = Schema.RequiredMode.REQUIRED)
+    private String buyerName;
+
     @Schema(name = "卖家ID", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long sellerId;
 

@@ -1,10 +1,10 @@
-package com.ark.center.trade.infra.order.assembler;
+package com.ark.center.trade.infra.order.builder;
 
 import com.ark.center.trade.client.order.dto.*;
 import com.ark.center.trade.client.receive.dto.ReceiveDTO;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.infra.order.convertor.OrderConvertor;
+import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.component.common.util.assemble.FieldsAssembler;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.function.Function;
 @Slf4j
 public class OrderBuilder {
 
-    private final OrderConvertor orderConvertor;
+    private final OrderAssembler orderAssembler;
     private final OrderGateway orderGateway;
 
     public OrderDTO toOrderDTO(Order order) {
@@ -37,7 +37,7 @@ public class OrderBuilder {
     }
 
     private List<OrderProductDTO> toOrderProducts(List<OrderItemDTO> orderItems) {
-        return orderConvertor.toOrderProductDTO(orderItems);
+        return orderAssembler.toOrderProductDTO(orderItems);
     }
 
     private OrderAmountDTO assembleOrderCharge(Order order) {
@@ -64,6 +64,7 @@ public class OrderBuilder {
         orderBaseDTO.setConfirmTime(order.getConfirmTime());
         orderBaseDTO.setBuyerRemark(order.getBuyerRemark());
         orderBaseDTO.setBuyerId(order.getBuyerId());
+        orderBaseDTO.setBuyerName(order.getBuyerName());
         orderBaseDTO.setSellerId(order.getSellerId());
         orderBaseDTO.setLogisticsCompany(order.getLogisticsCompany());
         orderBaseDTO.setLogisticsCode(order.getLogisticsCode());
@@ -93,7 +94,7 @@ public class OrderBuilder {
         FieldsAssembler.execute(profiles.getWithOrderItems(),
                 orders,
                 orderIdFunc,
-                (orderDTO, ois) -> orderDTO.setOrderProducts(toOrderProducts(ois)),
+                OrderDTO::setOrderItems,
                 orderGateway::selectOrderItems,
                 OrderItemDTO::getOrderId);
 

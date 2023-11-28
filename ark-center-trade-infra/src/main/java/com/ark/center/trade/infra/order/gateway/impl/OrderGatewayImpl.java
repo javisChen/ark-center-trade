@@ -7,7 +7,7 @@ import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.receive.gateway.ReceiveGateway;
-import com.ark.center.trade.infra.order.convertor.OrderConvertor;
+import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
 import com.ark.component.dto.PageResponse;
@@ -30,7 +30,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private final OrderMapper orderMapper;
 
-    private final OrderConvertor orderConvertor;
+    private final OrderAssembler orderAssembler;
 
     private final OrderItemMapper orderItemMapper;
 
@@ -80,7 +80,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
         qw.in(OrderItem::getOrderId, orderIds);
         List<OrderItem> orderItems = orderItemMapper.selectList(qw);
-        return orderConvertor.toOrderItemDTO(orderItems);
+        return orderAssembler.toOrderItemDTO(orderItems);
     }
 
     @Override

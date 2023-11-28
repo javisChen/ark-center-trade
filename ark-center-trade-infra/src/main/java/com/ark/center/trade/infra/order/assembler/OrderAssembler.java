@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.convertor;
+package com.ark.center.trade.infra.order.assembler;
 
 
 import com.ark.center.trade.client.order.dto.OrderDTO;
@@ -12,7 +12,7 @@ import org.mapstruct.MappingConstants;
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface OrderConvertor {
+public interface OrderAssembler {
 
     OrderDTO toOrderDTO(Order order);
 

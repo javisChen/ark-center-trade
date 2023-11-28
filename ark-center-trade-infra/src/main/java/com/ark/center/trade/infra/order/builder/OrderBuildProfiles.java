@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.assembler;
+package com.ark.center.trade.infra.order.builder;
 
 import lombok.Getter;
 import lombok.Setter;
