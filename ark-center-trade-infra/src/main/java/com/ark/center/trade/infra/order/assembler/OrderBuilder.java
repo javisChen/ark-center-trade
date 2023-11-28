@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class OrderAssembler {
+public class OrderBuilder {
 
     private final OrderConvertor orderConvertor;
     private final OrderGateway orderGateway;
@@ -70,15 +70,15 @@ public class OrderAssembler {
         return orderBaseDTO;
     }
 
-    public OrderDTO assemble(Order record, OrderAssembleProfiles profiles) {
-        return assemble(Lists.newArrayList(record), profiles).get(0);
+    public OrderDTO build(Order record, OrderBuildProfiles profiles) {
+        return build(Lists.newArrayList(record), profiles).get(0);
     }
 
-        public List<OrderDTO> assemble(List<Order> records, OrderAssembleProfiles profiles) {
+    public List<OrderDTO> build(List<Order> records, OrderBuildProfiles profiles) {
         if (CollectionUtils.isEmpty(records)) {
             return Collections.emptyList();
         }
-        log.info("Assembling orders, profiles = {}", profiles);
+        log.info("Building orders, profiles = {}", profiles);
         List<OrderDTO> orders = records.stream().map(this::toOrderDTO).toList();
 
         Function<OrderDTO, Long> orderIdFunc = orderDTO -> orderDTO.getOrderBase().getId();

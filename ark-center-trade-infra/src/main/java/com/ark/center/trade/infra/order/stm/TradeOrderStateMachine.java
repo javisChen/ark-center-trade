@@ -84,7 +84,7 @@ public class TradeOrderStateMachine implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         stateMachine = stateMachineFactory.get(TRADE_ORDER_MACHINE);
     }
 }

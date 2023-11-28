@@ -5,14 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderAssembleProfiles {
+public class OrderBuildProfiles {
 
     private Boolean withOrderItems;
     private Boolean withReceive;
 
     @Override
     public String toString() {
-        return "OrderAssembleProfiles{" +
+        return "OrderBuildProfiles{" +
                 "withOrderItems=" + withOrderItems +
                 ", withReceive=" + withReceive +
                 '}';
