@@ -1,0 +1,15 @@
+version: '3'
+services:
+  trade:
+    container_name: ark-center-trade
+    image: ark-center-trade:v1
+    restart: always
+    ports:
+      - "8085:8085"
+    env_file:
+      - start.env
+    networks:
+      - "compose_default"
+networks:
+  compose_default:
+    external: true
