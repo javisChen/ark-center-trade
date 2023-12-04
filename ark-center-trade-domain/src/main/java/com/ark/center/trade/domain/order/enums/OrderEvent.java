@@ -1,4 +1,4 @@
-package com.ark.center.trade.domain.order;
+package com.ark.center.trade.domain.order.enums;
 
 public enum OrderEvent {
 

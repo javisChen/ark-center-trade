@@ -1,7 +1,7 @@
 package com.ark.center.trade.infra.config;
 
-import com.ark.center.trade.domain.order.OrderEvent;
-import com.ark.center.trade.domain.order.OrderStatus;
+import com.ark.center.trade.domain.order.enums.OrderEvent;
+import com.ark.center.trade.domain.order.enums.OrderStatus;
 import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
 import com.ark.component.statemachine.core.StateMachine;
 import com.ark.component.statemachine.core.builder.StateMachineBuilder;

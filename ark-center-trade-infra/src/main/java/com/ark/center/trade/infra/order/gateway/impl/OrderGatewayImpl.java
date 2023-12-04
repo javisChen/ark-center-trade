@@ -1,12 +1,12 @@
 package com.ark.center.trade.infra.order.gateway.impl;
 
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
+import com.ark.center.trade.client.order.dto.OrderReceiveDTO;
 import com.ark.center.trade.client.order.query.OrderQry;
-import com.ark.center.trade.client.receive.dto.ReceiveDTO;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.domain.receive.gateway.ReceiveGateway;
+import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
 import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
@@ -34,7 +34,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private final OrderItemMapper orderItemMapper;
 
-    private final ReceiveGateway receiveGateway;
+    private final OrderReceiveGateway orderReceiveGateway;
 
     @Override
     public void save(Order order, List<OrderItem> orderItems) {
@@ -84,8 +84,8 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public List<ReceiveDTO> selectReceives(List<Long> orderIds) {
-        return receiveGateway.selectByOrderIds(orderIds);
+    public List<OrderReceiveDTO> selectReceives(List<Long> orderIds) {
+        return orderReceiveGateway.selectByOrderIds(orderIds);
     }
 
     @Override

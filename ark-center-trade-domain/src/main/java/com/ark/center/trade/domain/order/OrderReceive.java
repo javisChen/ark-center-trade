@@ -1,24 +1,15 @@
-package com.ark.center.trade.domain.receive;
+package com.ark.center.trade.domain.order;
 
+import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.ark.component.orm.mybatis.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- * 订单收货信息
- * </p>
- *
- * @author EOP
- * @since 2022-08-09
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("od_receive")
-public class Receive extends BaseEntity {
-
+public class OrderReceive extends BaseEntity {
 
     /**
      * 订单ID

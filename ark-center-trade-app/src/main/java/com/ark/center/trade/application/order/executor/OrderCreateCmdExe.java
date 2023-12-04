@@ -7,15 +7,14 @@ import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
-import com.ark.center.trade.domain.order.OrderStatus;
-import com.ark.center.trade.domain.order.PayStatus;
+import com.ark.center.trade.domain.order.OrderReceive;
+import com.ark.center.trade.domain.order.enums.OrderStatus;
+import com.ark.center.trade.domain.order.enums.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.domain.receive.gateway.ReceiveGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
-import com.ark.center.trade.domain.order.model.Receive;
 import com.ark.center.trade.domain.order.model.Sku;
-import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
-import com.ark.center.trade.infra.receive.convertor.ReceiveConvertor;
+import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
+import com.ark.center.trade.infra.order.assembler.OrderReceiveAssembler;
 import com.ark.component.common.ParamsChecker;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.exception.ExceptionFactory;
@@ -38,11 +37,9 @@ public class OrderCreateCmdExe {
 
     private final SkuGateway skuGateway;
 
-    private final ReceiveGateway receiveGateway;
+    private final OrderReceiveGateway orderReceiveGateway;
 
-    private final ReceiveConvertor receiveConvertor;
-
-    private final TradeOrderStateMachine tradeOrderStateMachine;
+    private final OrderReceiveAssembler orderReceiveAssembler;
 
     /**
      * 交易单号生成器
@@ -137,9 +134,9 @@ public class OrderCreateCmdExe {
     private void saveReceive(OrderCreateCmd reqDTO, Long orderId) {
         OrderCreateReceiveCreateCmd receiveInfo = reqDTO.getReceiveInfo();
         if (receiveInfo != null) {
-            Receive receive = receiveConvertor.convertToReceive(receiveInfo);
-            receive.setOrderId(orderId);
-            receiveGateway.save(receive);
+            OrderReceive orderReceive = orderReceiveAssembler.convertToReceive(receiveInfo);
+            orderReceive.setOrderId(orderId);
+            orderReceiveGateway.save(orderReceive);
         }
     }
 }

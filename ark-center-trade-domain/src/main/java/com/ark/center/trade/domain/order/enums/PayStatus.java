@@ -1,4 +1,4 @@
-package com.ark.center.trade.domain.order;
+package com.ark.center.trade.domain.order.enums;
 
 import com.ark.component.common.enums.BasicEnums;
 import com.ark.component.common.enums.EnumUtils;

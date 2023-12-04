@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.receive.gateway.db;
 
-import com.ark.center.trade.domain.receive.Receive;
+import com.ark.center.trade.domain.receive.UserReceive;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author EOP
  * @since 2022-08-09
  */
-public interface ReceiveMapper extends BaseMapper<Receive> {
+public interface UserReceiveMapper extends BaseMapper<UserReceive> {
 
 }

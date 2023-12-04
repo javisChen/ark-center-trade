@@ -1,7 +1,6 @@
 package com.ark.center.trade.infra.order.builder;
 
 import com.ark.center.trade.client.order.dto.*;
-import com.ark.center.trade.client.receive.dto.ReceiveDTO;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.order.assembler.OrderAssembler;
@@ -87,15 +86,16 @@ public class OrderBuilder {
         FieldsAssembler.execute(profiles.getWithReceive(),
                 orders,
                 orderIdFunc,
-                (orderDTO, receiveDTO) -> orderDTO.setOrderReceive(receiveDTO.get(0)),
                 orderGateway::selectReceives,
-                ReceiveDTO::getOrderId);
+                (orderDTO, orderReceiveDTOS) -> orderDTO.setOrderReceive(orderReceiveDTOS.get(0)),
+                OrderReceiveDTO::getOrderId
+        );
 
         FieldsAssembler.execute(profiles.getWithOrderItems(),
                 orders,
                 orderIdFunc,
-                OrderDTO::setOrderItems,
                 orderGateway::selectOrderItems,
+                OrderDTO::setOrderItems,
                 OrderItemDTO::getOrderId);
 
         return orders;

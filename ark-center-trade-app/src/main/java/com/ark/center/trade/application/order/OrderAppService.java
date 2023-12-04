@@ -10,7 +10,7 @@ import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.PayStatus;
+import com.ark.center.trade.domain.order.enums.PayStatus;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
 import com.ark.component.context.core.ServiceContext;

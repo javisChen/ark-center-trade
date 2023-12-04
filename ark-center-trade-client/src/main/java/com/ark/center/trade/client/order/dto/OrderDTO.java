@@ -1,6 +1,5 @@
 package com.ark.center.trade.client.order.dto;
 
-import com.ark.center.trade.client.receive.dto.ReceiveDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -26,7 +25,7 @@ public class OrderDTO implements Serializable {
     private OrderAmountDTO orderAmount;
 
     @Schema(name = "订单收货信息", requiredMode = Schema.RequiredMode.REQUIRED)
-    private ReceiveDTO orderReceive;
+    private OrderReceiveDTO orderReceive;
 
     @Schema(name = "订单商品信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<OrderItemDTO> orderItems;
