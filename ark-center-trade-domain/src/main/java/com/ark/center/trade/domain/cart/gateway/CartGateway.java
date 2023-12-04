@@ -2,6 +2,7 @@ package com.ark.center.trade.domain.cart.gateway;
 
 import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
 import com.ark.center.trade.domain.cart.CartItem;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 
 import java.util.List;
 
@@ -25,4 +26,5 @@ public interface CartGateway {
     void deleteByIds(List<Long> itemIds);
 
 
+    void delete(LambdaUpdateWrapper<CartItem> wrapper);
 }

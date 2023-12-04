@@ -2,6 +2,7 @@ package com.ark.center.trade.application.order.executor;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson2.JSON;
+import com.ark.center.trade.application.order.event.OrderCreatedEvent;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
@@ -22,6 +23,7 @@ import com.ark.component.security.base.user.LoginUser;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,6 +43,8 @@ public class OrderCreateCmdExe {
 
     private final OrderReceiveAssembler orderReceiveAssembler;
 
+    private final ApplicationEventPublisher eventPublisher;
+
     /**
      * 交易单号生成器
      */
@@ -57,6 +61,10 @@ public class OrderCreateCmdExe {
         Long orderId = saveOrder(order, orderItems);
         // 保存收货信息
         saveReceive(orderCreateCmd, orderId);
+
+        Long userId = ServiceContext.getCurrentUser().getUserId();
+        eventPublisher.publishEvent(new OrderCreatedEvent(userId, order));
+
         return orderId;
     }
 

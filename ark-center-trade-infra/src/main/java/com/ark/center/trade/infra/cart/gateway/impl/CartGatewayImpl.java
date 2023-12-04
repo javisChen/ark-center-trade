@@ -7,6 +7,7 @@ import com.ark.center.trade.infra.cart.convertor.CartItemConvertor;
 import com.ark.center.trade.infra.cart.gateway.db.CartItemMapper;
 import com.ark.component.context.core.ServiceContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -76,6 +77,11 @@ public class CartGatewayImpl extends ServiceImpl<CartItemMapper, CartItem> imple
     @Override
     public void deleteByIds(List<Long> itemIds) {
         LambdaQueryWrapper<CartItem> wrapper = new LambdaQueryWrapper<CartItem>().in(CartItem::getId, itemIds);
+        remove(wrapper);
+    }
+
+    @Override
+    public void delete(LambdaUpdateWrapper<CartItem> wrapper) {
         remove(wrapper);
     }
 }
