@@ -29,6 +29,11 @@ public class OrderPayOrderCreatedConsumer extends SimpleMessageHandler<PayOrderC
     @Override
     protected void handleMessage(String msgId, String sendId, PayOrderCreatedMessage body, Object o) {
         log.info("支付单生成通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
-        orderAppService.onPayOrderCreated(body);
+        try {
+            orderAppService.onPayOrderCreated(body);
+        } catch (Exception e) {
+            log.error("更新订单支付信息失败", e);
+            throw e;
+        }
     }
 }

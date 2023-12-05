@@ -3,7 +3,6 @@ package com.ark.center.trade.infra.order.builder;
 import com.ark.center.trade.client.order.dto.*;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.component.common.util.assemble.FieldsAssembler;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,6 @@ import java.util.function.Function;
 @Slf4j
 public class OrderBuilder {
 
-    private final OrderAssembler orderAssembler;
     private final OrderGateway orderGateway;
 
     public OrderDTO toOrderDTO(Order order) {
@@ -33,10 +31,6 @@ public class OrderBuilder {
         OrderAmountDTO orderAmountDTO = assembleOrderCharge(order);
         orderDTO.setOrderAmount(orderAmountDTO);
         return orderDTO;
-    }
-
-    private List<OrderProductDTO> toOrderProducts(List<OrderItemDTO> orderItems) {
-        return orderAssembler.toOrderProductDTO(orderItems);
     }
 
     private OrderAmountDTO assembleOrderCharge(Order order) {
@@ -56,7 +50,7 @@ public class OrderBuilder {
         orderBaseDTO.setOrderChannel(order.getOrderChannel());
         orderBaseDTO.setOrderStatus(order.getOrderStatus());
         orderBaseDTO.setPayStatus(order.getPayStatus());
-        orderBaseDTO.setPayTypeCode(order.getPayTypeCode());
+        orderBaseDTO.setPayType(order.getPayType());
         orderBaseDTO.setPayTradeNo(order.getPayTradeNo());
         orderBaseDTO.setPayTime(order.getPayTime());
         orderBaseDTO.setDeliverTime(order.getDeliverTime());

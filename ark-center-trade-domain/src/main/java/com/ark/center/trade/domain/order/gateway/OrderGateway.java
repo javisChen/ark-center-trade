@@ -36,4 +36,6 @@ public interface OrderGateway {
      * @return 更新影响行数
      */
     int optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder);
+
+    Order selectByTradeNo(String tradeNo);
 }

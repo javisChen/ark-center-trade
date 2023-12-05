@@ -7,6 +7,7 @@ import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
+import com.ark.center.trade.client.order.query.OrderDetailsQry;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
@@ -17,6 +18,7 @@ import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,8 +54,8 @@ public class OrderAppService {
         return orderQryExe.queryPages(orderQry);
     }
 
-    public OrderDTO queryDetails(Long id) {
-        return orderQryExe.queryDetails(id);
+    public OrderDTO queryDetails(OrderDetailsQry qry) {
+        return orderQryExe.queryDetails(qry);
     }
 
     @Transactional(rollbackFor = Throwable.class)
@@ -64,16 +66,20 @@ public class OrderAppService {
 
     @Transactional(rollbackFor = Throwable.class)
     public void onPayOrderCreated(PayOrderCreatedMessage message) {
-        Long orderId = message.getBizOrderId();
-        Order order = orderGateway.selectById(orderId);
+        String tradeNo = message.getBizTradeNo();
+        if (StringUtils.isBlank(tradeNo)) {
+            log.warn("订单号为空");
+            return;
+        }
+        Order order = orderGateway.selectByTradeNo(tradeNo);
         if (order == null) {
-            log.warn("订单不存在 {}", orderId);
+            log.warn("订单不存在 {}", tradeNo);
             return;
         }
         Order updateOrder = new Order();
-        updateOrder.setId(orderId);
+        updateOrder.setId(order.getId());
         updateOrder.setPayTradeNo(message.getPayTradeNo());
-        updateOrder.setPayTypeCode(message.getPayTypeCode());
+        updateOrder.setPayType(message.getPayTypeId());
         orderGateway.update(updateOrder);
 
     }

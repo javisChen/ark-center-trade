@@ -117,5 +117,13 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
                         .eq(Order::getOrderStatus, sourceOrder.getOrderStatus()));
     }
 
+    @Override
+    public Order selectByTradeNo(String tradeNo) {
+        return lambdaQuery()
+                .eq(Order::getTradeNo, tradeNo)
+                .last("limit 1")
+                .one();
+    }
+
 }
 
