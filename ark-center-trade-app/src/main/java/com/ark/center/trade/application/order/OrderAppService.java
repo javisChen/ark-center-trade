@@ -47,7 +47,7 @@ public class OrderAppService {
         orderQry.setBuyerId(ServiceContext.getCurrentUser().getUserId());
         orderQry.setOrderStatus(qry.getOrderStatus());
         orderQry.setPayStatus(qry.getPayStatus());
-        orderQry.setCode(qry.getCode());
+        orderQry.setTradeNo(qry.getTradeNo());
         orderQry.setCurrent(qry.getCurrent());
         orderQry.setSize(qry.getSize());
         orderQry.setWithOrderItems(true);
@@ -60,7 +60,13 @@ public class OrderAppService {
 
     @Transactional(rollbackFor = Throwable.class)
     public void orderPay(PayNotifyMessage message) {
-        tradeOrderStateMachine.pay(message.getBizOrderId(),
+        String bizTradeNo = message.getBizTradeNo();
+        Order order = orderGateway.selectByTradeNo(bizTradeNo);
+        if (order == null) {
+            log.warn("订单不存在 {}", bizTradeNo);
+            return;
+        }
+        tradeOrderStateMachine.pay(order.getId(),
                 updateOrder -> updateOrder.setPayStatus(PayStatus.PAY_SUCCESS.getValue()));
     }
 
@@ -86,7 +92,7 @@ public class OrderAppService {
 
     @Transactional(rollbackFor = Throwable.class)
     public void deliver(OrderDeliverCmd cmd) {
-        log.info("订单 [{}] 发货, Params = {}", cmd.getOrderId(), cmd);
+        log.info("Order [{}] starting deliver, params = {}", cmd.getOrderId(), cmd);
         tradeOrderStateMachine.deliver(cmd.getOrderId(),
                 updateOrder -> {
                     updateOrder.setLogisticsCode(cmd.getLogisticsCode());

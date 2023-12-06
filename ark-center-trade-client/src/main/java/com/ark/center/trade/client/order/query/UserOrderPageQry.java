@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 public class UserOrderPageQry extends PagingQuery {
 
     @Schema(name = "订单号")
-    private String code;
+    private String tradeNo;
 
     @Schema(name = "订单状态 enums[PENDING_PAY,待支付,1;PENDING_DELIVER,待发货,2;PENDING_RECEIVE,待收货,3;PENDING_EVALUATE,待评价,4;SUCCESS,交易成功,5]")
     private Integer orderStatus;

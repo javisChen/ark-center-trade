@@ -54,7 +54,7 @@ public class OrderBuilder {
         orderBaseDTO.setPayTradeNo(order.getPayTradeNo());
         orderBaseDTO.setPayTime(order.getPayTime());
         orderBaseDTO.setDeliverTime(order.getDeliverTime());
-        orderBaseDTO.setConfirmTime(order.getConfirmTime());
+        orderBaseDTO.setReceiveTime(order.getReceiveTime());
         orderBaseDTO.setBuyerRemark(order.getBuyerRemark());
         orderBaseDTO.setBuyerId(order.getBuyerId());
         orderBaseDTO.setBuyerName(order.getBuyerName());

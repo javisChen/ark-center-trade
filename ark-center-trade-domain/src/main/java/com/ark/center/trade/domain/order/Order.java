@@ -96,8 +96,14 @@ public class Order extends BaseEntity {
     /**
      * 确认收货时间
      */
-    @TableField("confirm_time")
-    private LocalDateTime confirmTime;
+    @TableField("receive_time")
+    private LocalDateTime receiveTime;
+
+    /**
+     * 完成时间
+     */
+    @TableField("completion_time")
+    private LocalDateTime completionTime;
 
     /**
      * 买家备注

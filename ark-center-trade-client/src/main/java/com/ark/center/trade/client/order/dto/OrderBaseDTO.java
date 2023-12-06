@@ -39,7 +39,10 @@ public class OrderBaseDTO {
     private LocalDateTime deliverTime;
 
     @Schema(name = "确认收货时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    private LocalDateTime confirmTime;
+    private LocalDateTime receiveTime;
+
+    @Schema(name = "订单完成时间", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private LocalDateTime completionTime;
 
     @Schema(name = "买家备注", requiredMode = Schema.RequiredMode.REQUIRED)
     private String buyerRemark;

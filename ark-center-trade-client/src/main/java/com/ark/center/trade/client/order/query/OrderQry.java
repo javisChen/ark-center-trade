@@ -4,8 +4,6 @@ import com.ark.component.dto.PagingQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.time.LocalDateTime;
 /**
  * <p>
  * 订单表
@@ -20,7 +18,7 @@ import java.time.LocalDateTime;
 public class OrderQry extends PagingQuery {
 
     @Schema(name = "订单号")
-    private String code;
+    private String tradeNo;
 
     @Schema(name = "订单类型 enums[SHOP,商城订单,1]")
     private Integer orderType;
@@ -38,31 +36,13 @@ public class OrderQry extends PagingQuery {
     private String payTypeCode;
 
     @Schema(name = "支付流水号")
-    private String paySn;
-
-    @Schema(name = "支付时间")
-    private LocalDateTime payTime;
-
-    @Schema(name = "发货时间")
-    private LocalDateTime deliverTime;
-
-    @Schema(name = "确认收货时间")
-    private LocalDateTime confirmTime;
-
-    @Schema(name = "买家备注")
-    private String buyerRemark;
+    private String payTradeNo;
 
     @Schema(name = "买家ID")
     private Long buyerId;
 
     @Schema(name = "卖家ID")
     private Long sellerId;
-
-    @Schema(name = "物流公司")
-    private String logisticsCompany;
-
-    @Schema(name = "物流单号")
-    private String logisticsCode;
 
     @Schema(name = "是否查询订单子项")
     private Boolean withOrderItems = false;
