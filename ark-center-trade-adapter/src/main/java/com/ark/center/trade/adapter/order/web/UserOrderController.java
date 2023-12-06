@@ -24,7 +24,7 @@ public class UserOrderController extends BaseController {
 
     @Operation(summary = "查询订单列表")
     @PostMapping("/pages")
-    public SingleResponse<PageResponse<OrderDTO>> queryPages(@RequestBody @Validated UserOrderPageQry qry) {
+    public SingleResponse<PageResponse<OrderDTO>> queryUserOrderPages(@RequestBody @Validated UserOrderPageQry qry) {
         return SingleResponse.ok(orderAppService.queryUserOrderPages(qry));
     }
 

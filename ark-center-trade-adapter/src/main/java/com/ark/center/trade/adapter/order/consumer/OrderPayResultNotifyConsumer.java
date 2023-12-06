@@ -29,6 +29,11 @@ public class OrderPayResultNotifyConsumer extends SimpleMessageHandler<PayNotify
     @Override
     protected void handleMessage(String msgId, String sendId, PayNotifyMessage body, Object o) {
         log.info("支付结果通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
-        orderAppService.orderPay(body);
+        try {
+            orderAppService.pay(body);
+        } catch (Exception e) {
+            log.error("处理支付结果通知失败", e);
+            throw e;
+        }
     }
 }

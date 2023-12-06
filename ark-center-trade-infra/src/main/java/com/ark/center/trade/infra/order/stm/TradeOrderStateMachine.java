@@ -43,6 +43,13 @@ public class TradeOrderStateMachine implements InitializingBean {
     }
 
     /**
+     * 确认收货
+     */
+    public void receive(Long orderId, Consumer<Order> updateOrderConsumer) {
+        execute(orderId, OrderEvent.RECEIVE, updateOrderConsumer);
+    }
+
+    /**
      * 执行订单状态变更
      *
      * @param orderId 订单id

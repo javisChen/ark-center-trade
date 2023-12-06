@@ -3,6 +3,7 @@ package com.ark.center.trade.adapter.order.web;
 import com.ark.center.trade.application.order.OrderAppService;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
+import com.ark.center.trade.client.order.command.OrderReceiveCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.query.OrderDetailsQry;
 import com.ark.center.trade.client.order.query.OrderQry;
@@ -35,6 +36,12 @@ public class OrderController extends BaseController {
     @PostMapping("/deliver")
     public ServerResponse deliver(@RequestBody @Validated OrderDeliverCmd cmd) {
         orderAppService.deliver(cmd);
+        return ServerResponse.ok();
+    }
+    @Operation(summary = "确认收货")
+    @PostMapping("/receive")
+    public ServerResponse receive(@RequestBody @Validated OrderReceiveCmd cmd) {
+        orderAppService.receive(cmd);
         return ServerResponse.ok();
     }
 
