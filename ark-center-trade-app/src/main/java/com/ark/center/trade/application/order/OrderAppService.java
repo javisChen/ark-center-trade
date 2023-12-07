@@ -105,6 +105,7 @@ public class OrderAppService {
         updateOrder.setId(order.getId());
         updateOrder.setPayTradeNo(message.getPayTradeNo());
         updateOrder.setPayType(message.getPayTypeId());
+        updateOrder.setPayStatus(PayStatus.PAYING.getValue());
         orderGateway.update(updateOrder);
 
     }

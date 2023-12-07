@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public PageResponse<Order> selectPages(OrderQry pageQry) {
         LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
+                .like(StringUtils.isNotBlank(pageQry.getTradeNo()), Order::getTradeNo, pageQry.getTradeNo())
                 .eq(pageQry.getOrderStatus() != null, Order::getOrderStatus, pageQry.getOrderStatus())
                 .orderByDesc(BaseEntity::getGmtCreate);
 
