@@ -2,7 +2,7 @@ version: '3'
 services:
   trade:
     container_name: ark-center-trade
-    image: ark-center-trade:v1
+    image: ark-center-trade:1.0.0
     restart: always
     ports:
       - "8085:8085"

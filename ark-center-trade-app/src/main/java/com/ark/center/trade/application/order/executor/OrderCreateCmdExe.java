@@ -1,6 +1,7 @@
 package com.ark.center.trade.application.order.executor;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson2.JSON;
 import com.ark.center.trade.application.order.event.OrderCreatedEvent;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
@@ -16,7 +17,6 @@ import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
 import com.ark.center.trade.infra.order.assembler.OrderReceiveAssembler;
-import com.ark.component.common.ParamsChecker;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.exception.ExceptionFactory;
 import com.ark.component.security.base.user.LoginUser;
@@ -53,8 +53,12 @@ public class OrderCreateCmdExe {
     public Long execute(OrderCreateCmd orderCreateCmd) {
         // 生成工单号
         String tradeNo = tradeNoGenerator.generate(orderCreateCmd);
+        // 查询商品信息
+        List<Sku> skus = retrieveSkus(orderCreateCmd.getOrderItems());
+        // 库存扣减
+        decreaseStock(orderCreateCmd.getOrderItems());
         // 组装订单数据
-        List<OrderItem> orderItems = assembleOrderItems(orderCreateCmd);
+        List<OrderItem> orderItems = assembleOrderItems(skus, orderCreateCmd);
         // 组装订单数据
         Order order = assembleOrder(orderCreateCmd, orderItems, tradeNo);
         // 保存订单信息
@@ -68,12 +72,19 @@ public class OrderCreateCmdExe {
         return orderId;
     }
 
-    private List<OrderItem> assembleOrderItems(OrderCreateCmd orderCreateCmd) {
+    private void decreaseStock(List<OrderCreateItemCmd> orderItems) {
+        skuGateway.decreaseStock(orderItems);
+    }
+
+    private List<OrderItem> assembleOrderItems(List<Sku> skus, OrderCreateCmd orderCreateCmd) {
+
+        Map<Long, Sku> skuMap = skus
+                .stream()
+                .collect(Collectors.toMap(Sku::getId, Function.identity()));
+
         List<OrderCreateItemCmd> orderItems = orderCreateCmd.getOrderItems();
-        List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
-        Map<Long, Sku> skuMap = querySkus(skuIds);
         List<OrderItem> orderItemList = Lists.newArrayList();
-        for (OrderCreateItemCmd itemCmd :orderItems) {
+        for (OrderCreateItemCmd itemCmd : orderItems) {
             Sku sku = skuMap.get(itemCmd.getSkuId());
             // 订单项价格 = 销售价 * 数量
             int totalAmount = sku.getSalesPrice() * itemCmd.getQuantity();
@@ -91,16 +102,14 @@ public class OrderCreateCmdExe {
         return orderItemList;
     }
 
-    private Map<Long, Sku> querySkus(List<Long> skuIds) {
+    private List<Sku> retrieveSkus(List<OrderCreateItemCmd> orderItems) {
+        List<Long> skuIds = CollUtil.map(orderItems, OrderCreateItemCmd::getSkuId, true);
         List<Sku> skuInfoList = skuGateway.querySkus(skuIds);
+        // todo 这里需要优化为列出无效商品的明细
+        Assert.isTrue(CollUtil.isNotEmpty(skuInfoList) && skuIds.size() == skuInfoList.size(),
+                () -> ExceptionFactory.userException("商品库存不足或已下架"));
+        return skuInfoList;
 
-        ParamsChecker
-                .throwIfIsTrue(CollUtil.isEmpty(skuInfoList) || skuIds.size() != skuInfoList.size(),
-                ExceptionFactory.userException("商品库存不足或已下架"));
-
-        return skuInfoList
-                .stream()
-                .collect(Collectors.toMap(Sku::getId, Function.identity()));
     }
 
     private Order assembleOrder(OrderCreateCmd orderCreateCmd, List<OrderItem> orderItems, String tradeNo) {

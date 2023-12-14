@@ -9,6 +9,7 @@ import com.ark.center.trade.infra.order.builder.OrderBuildProfiles;
 import com.ark.center.trade.infra.order.builder.OrderBuilder;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.exception.ExceptionFactory;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +27,7 @@ public class OrderQryExe {
     private final OrderBuilder orderBuilder;
 
     public PageResponse<OrderDTO> queryPages(OrderQry pageQry) {
-        PageResponse<Order> response = orderGateway.selectPages(pageQry);
+        IPage<Order> response = orderGateway.selectPages(pageQry);
         List<Order> records = response.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return PageResponse.of(new Page<>(response.getCurrent(), response.getSize()));
@@ -49,11 +50,6 @@ public class OrderQryExe {
         } else {
             throw ExceptionFactory.userException("id和tradeNo至少传入一个");
         }
-        return buildDTO(order);
-    }
-
-    public OrderDTO queryDetails(String tradeNo) {
-        Order order = orderGateway.selectByTradeNo(tradeNo);
         return buildDTO(order);
     }
 

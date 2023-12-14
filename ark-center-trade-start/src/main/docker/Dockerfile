@@ -1,10 +1,10 @@
 FROM openjdk:17-oraclelinux8
 
-RUN microdnf install -y iputils
+#RUN microdnf install -y iputils
 
 WORKDIR /app
 
-COPY target/ark-center-trade.jar /app
+COPY ark-center-trade.jar /app
 
 EXPOSE 8085
 

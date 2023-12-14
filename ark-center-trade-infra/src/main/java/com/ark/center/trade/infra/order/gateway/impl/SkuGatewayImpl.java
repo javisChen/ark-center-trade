@@ -1,11 +1,14 @@
 package com.ark.center.trade.infra.order.gateway.impl;
 
-import com.ark.center.commodity.client.commodity.dto.SkuDTO;
-import com.ark.center.commodity.client.commodity.query.SkuQry;
+import com.ark.center.product.client.goods.dto.SkuDTO;
+import com.ark.center.product.client.goods.query.SkuQry;
+import com.ark.center.product.client.stock.command.StockDecreaseCmd;
+import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.infra.order.assembler.SkuConvertor;
-import com.ark.center.trade.infra.order.gateway.impl.rpc.SkuServiceApi;
+import com.ark.center.trade.infra.order.gateway.impl.rpc.SkuRemoteApi;
+import com.ark.center.trade.infra.order.gateway.impl.rpc.StockRemoteApi;
 import com.ark.component.microservice.rpc.util.RpcUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,20 +20,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SkuGatewayImpl implements SkuGateway {
 
-    private final SkuServiceApi skuServiceApi;
+    private final SkuRemoteApi skuRemoteApi;
+
+    private final StockRemoteApi stockRemoteApi;
+
     private final SkuConvertor skuConvertor;
 
     @Override
     public List<Sku> querySkus(List<Long> skuIds) {
         SkuQry qry = new SkuQry();
         qry.setSkuIds(skuIds);
-        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuServiceApi.querySkus(qry));
+        List<SkuDTO> skuRespDTOList = RpcUtils.checkAndGetData(skuRemoteApi.querySkus(qry));
         return skuConvertor.toSku(skuRespDTOList);
     }
 
     @Override
     public Sku querySku(Long skuId) {
         return querySkus(Collections.singletonList(skuId)).get(0);
+    }
+
+    @Override
+    public void decreaseStock(List<OrderCreateItemCmd> orderItems) {
+        StockDecreaseCmd cmd = new StockDecreaseCmd();
+        List<StockDecreaseCmd.Item> items = orderItems.stream()
+                .map(item -> new StockDecreaseCmd.Item(item.getSkuId(), item.getQuantity()))
+                .toList();
+        cmd.setItems(items);
+        stockRemoteApi.decreaseStock(cmd);
     }
 
 }

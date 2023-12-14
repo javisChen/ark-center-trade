@@ -10,7 +10,6 @@ import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
 import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
-import com.ark.component.dto.PageResponse;
 import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -29,8 +28,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements OrderGateway {
 
-    private final OrderMapper orderMapper;
-
     private final OrderAssembler orderAssembler;
 
     private final OrderItemMapper orderItemMapper;
@@ -40,7 +37,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public void save(Order order, List<OrderItem> orderItems) {
 
-        orderMapper.insert(order);
+        save(order);
 
         Long orderId = order.getId();
 
@@ -55,21 +52,18 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public PageResponse<Order> selectPages(OrderQry pageQry) {
+    public IPage<Order> selectPages(OrderQry pageQry) {
         LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
                 .like(StringUtils.isNotBlank(pageQry.getTradeNo()), Order::getTradeNo, pageQry.getTradeNo())
                 .eq(pageQry.getOrderStatus() != null, Order::getOrderStatus, pageQry.getOrderStatus())
                 .orderByDesc(BaseEntity::getGmtCreate);
 
-        IPage<Order> page = orderMapper
-                .selectPage(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
-
-        return PageResponse.of(page);
+        return this.page(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
     }
 
     @Override
     public Order selectById(Long orderId) {
-        return orderMapper.selectById(orderId);
+        return getById(orderId);
     }
 
     @Override
@@ -96,7 +90,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         entity.setId(order.getId());
         entity.setPayStatus(order.getPayStatus());
         entity.setOrderStatus(order.getOrderStatus());
-        orderMapper.updateById(entity);
+        updateById(entity);
     }
 
     @Override
@@ -107,13 +101,13 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public int update(Order order) {
-        return orderMapper.updateById(order);
+    public boolean update(Order order) {
+        return updateById(order);
     }
 
     @Override
-    public int optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder) {
-        return orderMapper.update(updateOrder,
+    public boolean optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder) {
+        return update(updateOrder,
                 new LambdaUpdateWrapper<Order>()
                         .eq(BaseEntity::getId, sourceOrder.getId())
                         .eq(Order::getOrderStatus, sourceOrder.getOrderStatus()));

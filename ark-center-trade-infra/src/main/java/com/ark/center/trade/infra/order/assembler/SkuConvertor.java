@@ -1,7 +1,8 @@
 package com.ark.center.trade.infra.order.assembler;
 
-import com.ark.center.commodity.client.commodity.dto.AttrDTO;
-import com.ark.center.commodity.client.commodity.dto.SkuDTO;
+
+import com.ark.center.product.client.goods.dto.AttrDTO;
+import com.ark.center.product.client.goods.dto.SkuDTO;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.order.model.SkuAttr;
 import org.mapstruct.Mapper;

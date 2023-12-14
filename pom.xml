@@ -66,7 +66,7 @@
             <!-- 商品服务 -->
             <dependency>
                 <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-commodity-client</artifactId>
+                <artifactId>ark-center-product-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
