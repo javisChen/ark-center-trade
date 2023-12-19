@@ -3,7 +3,7 @@ package com.ark.center.trade.infra.order.builder;
 import com.ark.center.trade.client.order.dto.*;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
-import com.ark.component.common.util.assemble.FieldsAssembler;
+import com.ark.component.common.util.assemble.DataProcessor;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,20 +77,23 @@ public class OrderBuilder {
 
         Function<OrderDTO, Long> orderIdFunc = orderDTO -> orderDTO.getOrderBase().getId();
 
-        FieldsAssembler.execute(profiles.getWithReceive(),
-                orders,
-                orderIdFunc,
-                orderGateway::selectReceives,
-                (orderDTO, orderReceiveDTOS) -> orderDTO.setOrderReceive(orderReceiveDTOS.get(0)),
-                OrderReceiveDTO::getOrderId
-        );
+        DataProcessor<OrderDTO> dataProcessor = new DataProcessor<>(orders);
 
-        FieldsAssembler.execute(profiles.getWithOrderItems(),
-                orders,
-                orderIdFunc,
-                orderGateway::selectOrderItems,
-                OrderDTO::setOrderItems,
-                OrderItemDTO::getOrderId);
+        if (profiles.getWithReceive()) {
+            dataProcessor.keySelect(orderIdFunc)
+                    .query(orderGateway::selectReceives)
+                    .keyBy(OrderReceiveDTO::getOrderId)
+                    .object()
+                    .process(OrderDTO::setOrderReceive);
+        }
+
+        if (profiles.getWithOrderItems()) {
+            dataProcessor.keySelect(orderIdFunc)
+                    .query(orderGateway::selectOrderItems)
+                    .keyBy(OrderItemDTO::getOrderId)
+                    .collection()
+                    .process(OrderDTO::setOrderItems);
+        }
 
         return orders;
     }

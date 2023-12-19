@@ -30,5 +30,4 @@ public class OrderDTO implements Serializable {
     @Schema(name = "订单商品信息", requiredMode = Schema.RequiredMode.REQUIRED)
     private List<OrderItemDTO> orderItems;
 
-
 }

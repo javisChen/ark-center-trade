@@ -73,9 +73,9 @@ public class TradeOrderStateMachine implements InitializingBean {
             updateOrderConsumer.accept(updateOrder);
         }
 
-        int updated = orderGateway.optimisticLockUpdateOrderStatusAndOthers(sourceOrder, updateOrder);
+        boolean updated = orderGateway.optimisticLockUpdateOrderStatusAndOthers(sourceOrder, updateOrder);
 
-        if (updated == 0) {
+        if (updated) {
             log.warn("订单 [{}] 已发生改变，更新失败", orderId);
         }
 
