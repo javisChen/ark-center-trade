@@ -77,7 +77,7 @@ public class OrderBuilder {
 
         Function<OrderDTO, Long> orderIdFunc = orderDTO -> orderDTO.getOrderBase().getId();
 
-        DataProcessor<OrderDTO> dataProcessor = new DataProcessor<>(orders);
+        DataProcessor<OrderDTO> dataProcessor = DataProcessor.create(orders);
 
         if (profiles.getWithReceive()) {
             dataProcessor.keySelect(orderIdFunc)
