@@ -2,7 +2,7 @@ package com.ark.center.trade.infra.order.gateway.impl;
 
 import com.ark.center.product.client.goods.dto.SkuDTO;
 import com.ark.center.product.client.goods.query.SkuQry;
-import com.ark.center.product.client.stock.command.StockDecreaseCmd;
+import com.ark.center.product.client.inventory.command.StockLockCmd;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
@@ -41,12 +41,12 @@ public class SkuGatewayImpl implements SkuGateway {
 
     @Override
     public void decreaseStock(List<OrderCreateItemCmd> orderItems) {
-        StockDecreaseCmd cmd = new StockDecreaseCmd();
-        List<StockDecreaseCmd.Item> items = orderItems.stream()
-                .map(item -> new StockDecreaseCmd.Item(item.getSkuId(), item.getQuantity()))
+        StockLockCmd cmd = new StockLockCmd();
+        List<StockLockCmd.Item> items = orderItems.stream()
+                .map(item -> new StockLockCmd.Item(item.getSkuId(), item.getQuantity()))
                 .toList();
         cmd.setItems(items);
-        stockRemoteApi.decreaseStock(cmd);
+        stockRemoteApi.lock(cmd);
     }
 
 }
