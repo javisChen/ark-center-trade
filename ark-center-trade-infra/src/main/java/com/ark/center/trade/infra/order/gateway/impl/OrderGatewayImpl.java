@@ -56,7 +56,7 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
                 .like(StringUtils.isNotBlank(pageQry.getTradeNo()), Order::getTradeNo, pageQry.getTradeNo())
                 .eq(pageQry.getOrderStatus() != null, Order::getOrderStatus, pageQry.getOrderStatus())
-                .orderByDesc(BaseEntity::getGmtCreate);
+                .orderByDesc(BaseEntity::getCreateTime);
 
         return this.page(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
     }

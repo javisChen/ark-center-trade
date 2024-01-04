@@ -49,7 +49,7 @@ public class UserReceiveGatewayImpl implements UserReceiveGateway {
 
         LambdaQueryWrapper<UserReceive> qw = Wrappers.lambdaQuery(UserReceive.class)
                 .eq(qry.getUserId() != null, UserReceive::getUserId, qry.getUserId())
-                .orderByDesc(BaseEntity::getGmtCreate);
+                .orderByDesc(BaseEntity::getCreateTime);
 
         IPage<ReceiveDTO> page = userReceiveMapper
                 .selectPage(new Page<>(qry.getCurrent(), qry.getSize()), qw)

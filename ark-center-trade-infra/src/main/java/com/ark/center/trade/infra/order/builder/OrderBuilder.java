@@ -43,7 +43,7 @@ public class OrderBuilder {
 
     private OrderBaseDTO assembleOrderBase(Order order) {
         OrderBaseDTO orderBaseDTO = new OrderBaseDTO();
-        orderBaseDTO.setCreateTime(order.getGmtCreate());
+        orderBaseDTO.setCreateTime(order.getCreateTime());
         orderBaseDTO.setId(order.getId());
         orderBaseDTO.setTradeNo(order.getTradeNo());
         orderBaseDTO.setOrderType(order.getOrderType());

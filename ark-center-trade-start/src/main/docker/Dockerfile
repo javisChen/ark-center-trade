@@ -1,4 +1,4 @@
-FROM openjdk:17-oraclelinux8
+FROM openjdk:21-oraclelinux8
 
 #RUN microdnf install -y iputils
 
