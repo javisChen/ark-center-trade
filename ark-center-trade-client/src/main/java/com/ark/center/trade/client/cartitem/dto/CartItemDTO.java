@@ -28,7 +28,7 @@ public class CartItemDTO implements Serializable {
     private Long skuId;
 
     @Schema(description = "商品名称", requiredMode = Schema.RequiredMode.REQUIRED)
-    private String productName;
+    private String skuName;
 
     @Schema(description = "SKU单价", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer price;

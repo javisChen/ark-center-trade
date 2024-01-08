@@ -8,7 +8,7 @@ public class OrderProductDTO {
     /**
      * 商品名称
      */
-    private String productName;
+    private String skuName;
 
     /**
      * SKU单价
