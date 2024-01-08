@@ -46,7 +46,7 @@ public class CartItemDTO implements Serializable {
     private String picUrl;
 
     @Schema(description = "SKU销售参数JSON", requiredMode = Schema.RequiredMode.REQUIRED)
-    private String specData;
+    private String specs;
 
     @Schema(description = "是否选中 enums[YES,是,1;NO,否,0]", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean checked = false;

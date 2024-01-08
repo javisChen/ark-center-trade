@@ -72,6 +72,6 @@ public class OrderItemDTO implements Serializable {
      * SKU销售参数JSON
      */
     @Schema(name = "SKU销售参数JSON")
-    private String specData;
+    private String specs;
 
 }

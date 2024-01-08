@@ -36,8 +36,8 @@ public class CartItem extends BaseEntity {
     /**
      * 商品名称
      */
-    @TableField("product_name")
-    private String productName;
+    @TableField("sku_name")
+    private String skuName;
 
     /**
      * SKU单价
@@ -70,10 +70,10 @@ public class CartItem extends BaseEntity {
     private String picUrl;
 
     /**
-     * SKU销售参数JSON
+     * SKU规格参数JSON
      */
-    @TableField("spec_data")
-    private String specData;
+    @TableField("specs")
+    private String specs;
 
     /**
      * 是否选中 enums[YES,是,1;NO,否,0]

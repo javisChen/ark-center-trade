@@ -33,8 +33,8 @@ public class OrderItem extends BaseEntity {
     /**
      * 商品名称
      */
-    @TableField("product_name")
-    private String productName;
+    @TableField("sku_name")
+    private String skuName;
 
     /**
      * SKU ID
@@ -73,9 +73,9 @@ public class OrderItem extends BaseEntity {
     private String picUrl;
 
     /**
-     * SKU销售参数JSON
+     * SKU规格参数JSON
      */
-    @TableField("spec_data")
-    private String specData;
+    @TableField("specs")
+    private String specs;
 
 }

@@ -89,14 +89,14 @@ public class OrderCreateCmdExe {
             // 订单项价格 = 销售价 * 数量
             int totalAmount = sku.getSalesPrice() * itemCmd.getQuantity();
             OrderItem orderItem = new OrderItem();
-            orderItem.setProductName(sku.getSpuName());
+            orderItem.setSkuName(sku.getSkuName());
             orderItem.setSkuId(itemCmd.getSkuId());
             orderItem.setPrice(sku.getSalesPrice());
             orderItem.setQuantity(itemCmd.getQuantity());
             orderItem.setExpectAmount(totalAmount);
             orderItem.setActualAmount(totalAmount);
             orderItem.setPicUrl(sku.getMainPicture());
-            orderItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
+            orderItem.setSpecs(JSON.toJSONString(sku.getSpecs()));
             orderItemList.add(orderItem);
         }
         return orderItemList;

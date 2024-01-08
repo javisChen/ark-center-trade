@@ -3,8 +3,6 @@ package com.ark.center.trade.domain.order.model;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 public class Sku {
@@ -15,11 +13,10 @@ public class Sku {
      */
     private Long id;
 
-
     /**
      * 商品名称
      */
-    private String spuName;
+    private String skuName;
 
     /**
      * 销售价（单位：分）
@@ -49,9 +46,6 @@ public class Sku {
     /**
      * SKU规格属性列表
      */
-    private List<SkuAttr> specList;
+    private List<SkuAttr> specs;
 
-    public Map<String, Object> specListToMap() {
-        return this.specList.stream().collect(Collectors.toMap(SkuAttr::getAttrName, SkuAttr::getAttrValue));
-    }
 }

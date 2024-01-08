@@ -38,6 +38,6 @@ public class OrderProductDTO {
     /**
      * 商品属性
      */
-    private String specData;
+    private String specs;
 
 }

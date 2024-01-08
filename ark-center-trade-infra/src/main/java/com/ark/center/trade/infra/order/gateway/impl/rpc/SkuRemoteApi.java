@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(
         name = "${ark.center.product.service.name:product}",
-        path = "/v1/sku",
+        path = "/v1/inner",
         url = "${ark.center.product.service.uri:}",
         dismiss404 = true,
-        configuration = {FeignCommonErrorDecoder.class}
+        configuration = FeignCommonErrorDecoder.class
 )
 public interface SkuRemoteApi extends SkuApi {
 

@@ -46,13 +46,13 @@ public class CartAppService {
         CartItem cartItem = new CartItem();
         cartItem.setBuyerId(currentUserId);
         cartItem.setSkuId(skuId);
-        cartItem.setProductName(sku.getSpuName());
+        cartItem.setSkuName(sku.getSkuName());
         cartItem.setPrice(sku.getSalesPrice());
         cartItem.setQuantity(1);
         cartItem.setExpectAmount(sku.getSalesPrice());
         cartItem.setActualAmount(sku.getSalesPrice());
         cartItem.setPicUrl(sku.getMainPicture());
-        cartItem.setSpecData(JSON.toJSONString(sku.getSpecList()));
+        cartItem.setSpecs(JSON.toJSONString(sku.getSpecs()));
         cartItem.setChecked(true);
         return cartItem;
     }
