@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Component
@@ -28,12 +29,12 @@ public class OrderBuilder {
         orderDTO.setOrderBase(orderBaseDTO);
 
         // 订单费用信息
-        OrderAmountDTO orderAmountDTO = assembleOrderCharge(order);
+        OrderAmountDTO orderAmountDTO = assembleOrderAmount(order);
         orderDTO.setOrderAmount(orderAmountDTO);
         return orderDTO;
     }
 
-    private OrderAmountDTO assembleOrderCharge(Order order) {
+    private OrderAmountDTO assembleOrderAmount(Order order) {
         OrderAmountDTO orderAmountDTO = new OrderAmountDTO();
         orderAmountDTO.setExpectAmount(order.getExpectAmount());
         orderAmountDTO.setActualAmount(order.getActualAmount());
@@ -65,7 +66,9 @@ public class OrderBuilder {
     }
 
     public OrderDTO build(Order record, OrderBuildProfiles profiles) {
-        return build(Lists.newArrayList(record), profiles).get(0);
+        return Optional.ofNullable(build(Lists.newArrayList(record), profiles))
+                .map(List::getFirst)
+                .orElse(null);
     }
 
     public List<OrderDTO> build(List<Order> records, OrderBuildProfiles profiles) {
