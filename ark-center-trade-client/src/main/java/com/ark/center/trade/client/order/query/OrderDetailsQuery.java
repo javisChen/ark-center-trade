@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(name = "OrderDetailsQry", description = "获取订单详情")
-public class OrderDetailsQry {
+public class OrderDetailsQuery {
 
     @Schema(name = "订单id")
     private Long id;

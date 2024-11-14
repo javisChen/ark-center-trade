@@ -2,7 +2,7 @@ package com.ark.center.trade.adapter.order.web;
 
 import com.ark.center.trade.application.order.OrderAppService;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.query.OrderDetailsQry;
+import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.dto.SingleResponse;
@@ -30,7 +30,7 @@ public class UserOrderController extends BaseController {
 
     @Operation(summary = "查询订单详情")
     @GetMapping("/details")
-    public SingleResponse<OrderDTO> details(OrderDetailsQry qry) {
+    public SingleResponse<OrderDTO> details(OrderDetailsQuery qry) {
         return SingleResponse.ok(orderAppService.queryDetails(qry));
     }
 

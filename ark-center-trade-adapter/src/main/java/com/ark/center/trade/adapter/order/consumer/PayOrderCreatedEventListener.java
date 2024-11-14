@@ -22,13 +22,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class OrderPayOrderCreatedConsumer extends SimpleMessageHandler<PayOrderCreatedMessage> {
+public class PayOrderCreatedEventListener extends SimpleMessageHandler<PayOrderCreatedMessage> {
 
     private final OrderAppService orderAppService;
 
     @Override
     protected void handleMessage(String msgId, String sendId, PayOrderCreatedMessage body, Object o) {
-        log.info("支付单生成通知 -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
+        log.info("Received Message -> msgId = {}, sendId = {}, body = {}", msgId, sendId, body);
         try {
             orderAppService.onPayOrderCreated(body);
         } catch (Exception e) {

@@ -8,7 +8,7 @@ import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.command.OrderReceiveCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.query.OrderDetailsQry;
+import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
@@ -67,7 +67,7 @@ public class OrderAppService {
     /**
      * 查询订单详情
      */
-    public OrderDTO queryDetails(OrderDetailsQry qry) {
+    public OrderDTO queryDetails(OrderDetailsQuery qry) {
         return orderQryExe.queryDetails(qry);
     }
 

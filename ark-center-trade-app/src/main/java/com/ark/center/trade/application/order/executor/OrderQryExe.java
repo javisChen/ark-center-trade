@@ -1,7 +1,7 @@
 package com.ark.center.trade.application.order.executor;
 
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.query.OrderDetailsQry;
+import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.gateway.OrderGateway;
@@ -41,12 +41,12 @@ public class OrderQryExe {
         return PageResponse.of(response.getCurrent(), response.getSize(), response.getTotal(), orders);
     }
 
-    public OrderDTO queryDetails(OrderDetailsQry qry) {
+    public OrderDTO queryDetails(OrderDetailsQuery query) {
         Order order;
-        if (qry.getId() != null) {
-            order = orderGateway.selectById(qry.getId());
-        } else if (StringUtils.isNotBlank(qry.getTradeNo())){
-            order = orderGateway.selectByTradeNo(qry.getTradeNo());
+        if (query.getId() != null) {
+            order = orderGateway.selectById(query.getId());
+        } else if (StringUtils.isNotBlank(query.getTradeNo())){
+            order = orderGateway.selectByTradeNo(query.getTradeNo());
         } else {
             throw ExceptionFactory.userException("id和tradeNo至少传入一个");
         }

@@ -24,7 +24,7 @@ public class OrderItemDTO implements Serializable {
      * 订单号
      */
     @Schema(name = "订单号")
-    private String tradeNo;
+    private String orderNo;
 
     /**
      * 商品名称

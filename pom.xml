@@ -71,11 +71,11 @@
             </dependency>
 
             <!-- 支付服务 -->
-            <dependency>
-                <groupId>com.ark.center</groupId>
-                <artifactId>ark-center-pay-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.ark.center</groupId>-->
+<!--                <artifactId>ark-center-pay-client</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
 
             <!-- MQ -->
             <dependency>

@@ -1,7 +1,7 @@
 package com.ark.center.trade.client.order;
 
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.query.OrderDetailsQry;
+import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.component.dto.SingleResponse;
 import com.ark.component.microservice.rpc.exception.FeignCommonErrorDecoder;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,6 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface OrderApi {
 
     @GetMapping({"/details"})
-    SingleResponse<OrderDTO> queryDetails(@SpringQueryMap OrderDetailsQry qry);
+    SingleResponse<OrderDTO> queryDetails(@SpringQueryMap OrderDetailsQuery qry);
 
 }

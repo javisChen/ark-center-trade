@@ -39,12 +39,6 @@
             <artifactId>ark-center-product-client</artifactId>
         </dependency>
 
-        <!-- 支付服务 -->
-        <dependency>
-            <groupId>com.ark.center</groupId>
-            <artifactId>ark-center-pay-client</artifactId>
-        </dependency>
-
         <!-- 服务基本组件 -->
         <dependency>
             <groupId>com.ark.microservice</groupId>
