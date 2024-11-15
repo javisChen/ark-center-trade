@@ -2,7 +2,7 @@ package com.ark.center.trade.infra.order.builder;
 
 import com.ark.center.trade.client.order.dto.*;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.common.util.assemble.DataProcessor;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 @Slf4j
 public class OrderBuilder {
 
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
 
     public OrderDTO toOrderDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
@@ -84,7 +84,7 @@ public class OrderBuilder {
 
         if (profiles.getWithReceive()) {
             dataProcessor.keySelect(orderIdFunc)
-                    .query(orderGateway::selectReceives)
+                    .query(orderService::selectReceives)
                     .keyBy(OrderReceiveDTO::getOrderId)
                     .object()
                     .process(OrderDTO::setOrderReceive);
@@ -92,7 +92,7 @@ public class OrderBuilder {
 
         if (profiles.getWithOrderItems()) {
             dataProcessor.keySelect(orderIdFunc)
-                    .query(orderGateway::selectOrderItems)
+                    .query(orderService::selectOrderItems)
                     .keyBy(OrderItemDTO::getOrderId)
                     .collection()
                     .process(OrderDTO::setOrderItems);

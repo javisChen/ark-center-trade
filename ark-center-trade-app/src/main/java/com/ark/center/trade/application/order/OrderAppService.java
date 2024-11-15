@@ -13,7 +13,7 @@ import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.enums.PayStatus;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
@@ -32,7 +32,7 @@ public class OrderAppService {
 
     private final OrderCreateCmdExe orderCreateCmdExe;
     private final OrderQryExe orderQryExe;
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
     private final TradeOrderStateMachine tradeOrderStateMachine;
 
     @Transactional(rollbackFor = Throwable.class)
@@ -77,7 +77,7 @@ public class OrderAppService {
     @Transactional(rollbackFor = Throwable.class)
     public void pay(PayNotifyMessage message) {
         String bizTradeNo = message.getBizTradeNo();
-        Order order = orderGateway.selectByTradeNo(bizTradeNo);
+        Order order = orderService.selectByTradeNo(bizTradeNo);
         if (order == null) {
             log.warn("订单不存在 {}", bizTradeNo);
             return;
@@ -96,7 +96,7 @@ public class OrderAppService {
             log.warn("订单号为空");
             return;
         }
-        Order order = orderGateway.selectByTradeNo(tradeNo);
+        Order order = orderService.selectByTradeNo(tradeNo);
         if (order == null) {
             log.warn("订单不存在 {}", tradeNo);
             return;
@@ -106,7 +106,7 @@ public class OrderAppService {
         updateOrder.setPayTradeNo(message.getPayTradeNo());
         updateOrder.setPayType(message.getPayTypeId());
         updateOrder.setPayStatus(PayStatus.PAYING.getValue());
-        orderGateway.update(updateOrder);
+        orderService.updateById(updateOrder);
 
     }
 

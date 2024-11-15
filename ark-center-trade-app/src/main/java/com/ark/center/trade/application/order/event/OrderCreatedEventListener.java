@@ -2,7 +2,7 @@ package com.ark.center.trade.application.order.event;
 
 import com.ark.center.trade.domain.cart.service.CartService;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.infra.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderCreatedEventListener implements ApplicationListener<OrderCreatedEvent> {
 
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
     private final CartService cartService;
 
     public void onApplicationEvent(@NotNull OrderCreatedEvent event) {

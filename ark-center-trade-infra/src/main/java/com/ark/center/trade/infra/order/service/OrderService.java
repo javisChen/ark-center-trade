@@ -1,18 +1,16 @@
-package com.ark.center.trade.infra.order.gateway.impl;
+package com.ark.center.trade.infra.order.service;
 
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.client.order.dto.OrderReceiveDTO;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.OrderItem;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
 import com.ark.center.trade.infra.order.assembler.OrderAssembler;
-import com.ark.center.trade.infra.order.gateway.db.OrderItemMapper;
-import com.ark.center.trade.infra.order.gateway.db.OrderMapper;
+import com.ark.center.trade.infra.order.db.OrderItemMapper;
+import com.ark.center.trade.infra.order.db.OrderMapper;
 import com.ark.component.orm.mybatis.base.BaseEntity;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,7 +24,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements OrderGateway {
+public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
     private final OrderAssembler orderAssembler;
 
@@ -34,7 +32,6 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private final OrderReceiveGateway orderReceiveGateway;
 
-    @Override
     public void save(Order order, List<OrderItem> orderItems) {
 
         save(order);
@@ -51,7 +48,6 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
 
     }
 
-    @Override
     public IPage<Order> selectPages(OrderQry pageQry) {
         LambdaQueryWrapper<Order> qw = Wrappers.lambdaQuery(Order.class)
                 .like(StringUtils.isNotBlank(pageQry.getTradeNo()), Order::getTradeNo, pageQry.getTradeNo())
@@ -61,17 +57,14 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         return this.page(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
     }
 
-    @Override
     public Order selectById(Long orderId) {
         return getById(orderId);
     }
 
-    @Override
     public List<OrderItemDTO> selectOrderItems(Long orderId) {
         return selectOrderItems(Lists.newArrayList(orderId));
     }
 
-    @Override
     public List<OrderItemDTO> selectOrderItems(List<Long> orderIds) {
         LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
         qw.in(OrderItem::getOrderId, orderIds);
@@ -79,12 +72,10 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         return orderAssembler.toOrderItemDTO(orderItems);
     }
 
-    @Override
     public List<OrderReceiveDTO> selectReceives(List<Long> orderIds) {
         return orderReceiveGateway.selectByOrderIds(orderIds);
     }
 
-    @Override
     public void updateOrderPayStatus(Order order) {
         Order entity = new Order();
         entity.setId(order.getId());
@@ -93,27 +84,24 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, Order> implements
         updateById(entity);
     }
 
-    @Override
     public List<OrderItem> selectItemsByOrderId(Long orderId) {
         LambdaQueryWrapper<OrderItem> qw = new LambdaQueryWrapper<>();
         qw.eq(OrderItem::getOrderId, orderId);
         return orderItemMapper.selectList(qw);
     }
 
-    @Override
     public boolean update(Order order) {
         return updateById(order);
     }
 
-    @Override
     public boolean optimisticLockUpdateOrderStatusAndOthers(Order sourceOrder, Order updateOrder) {
-        return update(updateOrder,
-                new LambdaUpdateWrapper<Order>()
-                        .eq(BaseEntity::getId, sourceOrder.getId())
-                        .eq(Order::getOrderStatus, sourceOrder.getOrderStatus()));
+        return lambdaUpdate()
+                .set(Order::getOrderStatus, updateOrder.getOrderStatus())
+                .eq(BaseEntity::getId, sourceOrder.getId())
+                .eq(Order::getOrderStatus, sourceOrder.getOrderStatus())
+                .update();
     }
 
-    @Override
     public Order selectByTradeNo(String tradeNo) {
         return lambdaQuery()
                 .eq(Order::getTradeNo, tradeNo)

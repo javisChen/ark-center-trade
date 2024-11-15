@@ -1,6 +1,7 @@
 package com.ark.center.trade.client.pay;
 
 import com.ark.center.trade.client.pay.command.PayOrderCreateCommand;
+import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.component.dto.SingleResponse;
 import com.ark.component.microservice.rpc.exception.FeignCommonErrorDecoder;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface PayApi {
 
     @Operation(summary = "创建支付单")
-    @PostMapping("/order/create")
-    SingleResponse<com.ark.center.trade.client.pay.dto.PayOrderCreateDTO> createPayOrder(@RequestBody
+    @PostMapping("/orders")
+    SingleResponse<PayOrderCreateDTO> createPayOrder(@RequestBody
                                                                                          @Validated PayOrderCreateCommand command);
 }

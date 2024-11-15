@@ -36,7 +36,7 @@ public class SkuGatewayImpl implements SkuGateway {
 
     @Override
     public Sku querySku(Long skuId) {
-        return querySkus(Collections.singletonList(skuId)).get(0);
+        return querySkus(Collections.singletonList(skuId)).getFirst();
     }
 
     @Override

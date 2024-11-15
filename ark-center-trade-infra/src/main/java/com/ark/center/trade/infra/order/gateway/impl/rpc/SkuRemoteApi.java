@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @FeignClient(
         name = "${ark.center.product.service.name:product}",
-        path = "/v1/inner",
+        path = "/v1/skus",
         url = "${ark.center.product.service.uri:}",
         dismiss404 = true,
         configuration = FeignCommonErrorDecoder.class

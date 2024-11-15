@@ -1,12 +1,11 @@
 package com.ark.center.trade.adapter.pay.web;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.ark.center.pay.api.dto.request.PayOrderPageQueryReqDTO;
-import com.ark.center.pay.api.dto.response.PayOrderCreateDTO;
 import com.ark.center.trade.application.pay.PayCommandHandler;
 import com.ark.center.trade.application.pay.PayQueryService;
 import com.ark.center.trade.client.pay.PayApi;
 import com.ark.center.trade.client.pay.command.PayOrderCreateCommand;
+import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.center.trade.client.pay.query.PayOrderPageQuery;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.dto.SingleResponse;
@@ -32,7 +31,7 @@ import java.util.Map;
 @Schema(name = "支付管理", description = "支付管理")
 @Validated
 @RestController
-@RequestMapping("/v1/pay")
+@RequestMapping("/v1/pay-orders")
 @RequiredArgsConstructor
 public class PayController extends BaseController implements PayApi {
 
@@ -40,28 +39,28 @@ public class PayController extends BaseController implements PayApi {
     private final PayQueryService payQueryService;
 
     @Operation(summary = "创建支付单")
-    @PostMapping("/order/create")
-    public SingleResponse<com.ark.center.trade.client.pay.dto.PayOrderCreateDTO> createPayOrder(@RequestBody @Validated PayOrderCreateCommand command) {
+    @PostMapping("/create")
+    public SingleResponse<PayOrderCreateDTO> createPayOrder(@RequestBody @Validated PayOrderCreateCommand command) {
         return SingleResponse.ok(payCommandHandler.createPayOrder(command));
     }
 
     @Operation(summary = "获取支付单状态")
-    @GetMapping("/order/status")
-    public SingleResponse<Integer> getPayOrderStatus(@RequestParam Long id) {
+    @GetMapping("/status")
+    public SingleResponse<Integer> queryPayOrderStatus(@RequestParam Long id) {
         return SingleResponse.ok(payQueryService.getPayOrderStatus(id));
     }
 
     @Operation(summary = "订单通知")
     @PostMapping("/notify")
-    public SingleResponse<Map<String, Object>> notify(@RequestBody JSONObject reqDTO) {
+    public SingleResponse<Map<String, Object>> handleNotify(@RequestBody JSONObject reqDTO) {
         Map<String, Object> notify = payCommandHandler.handleNotify(reqDTO);
         return SingleResponse.ok(notify);
     }
 
     @Operation(summary = "查询支付订单表分页列表")
     @PostMapping("/page")
-    public SingleResponse<PageResponse<PayOrderCreateDTO>> pageList(@RequestBody @Validated PayOrderPageQuery query) {
-        return SingleResponse.ok(payQueryService.getPageList(query));
+    public SingleResponse<PageResponse<PayOrderCreateDTO>> queryPages(@RequestBody @Validated PayOrderPageQuery query) {
+        return SingleResponse.ok(payQueryService.queryPages(query));
     }
 
     @Operation(summary = "查询支付订单表详情",

@@ -1,6 +1,6 @@
 package com.ark.center.trade.application.pay;
 
-import com.ark.center.pay.api.dto.response.PayOrderCreateDTO;
+import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.center.trade.client.pay.query.PayOrderPageQuery;
 import com.ark.component.dto.PageResponse;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +14,7 @@ public class PayQueryService {
         return null;
     }
 
-    public PageResponse<PayOrderCreateDTO> getPageList(PayOrderPageQuery queryDTO) {
+    public PageResponse<PayOrderCreateDTO> queryPages(PayOrderPageQuery queryDTO) {
         return null;
     }
 

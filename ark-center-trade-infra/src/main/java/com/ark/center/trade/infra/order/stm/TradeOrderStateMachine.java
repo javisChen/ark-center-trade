@@ -3,7 +3,7 @@ package com.ark.center.trade.infra.order.stm;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.enums.OrderEvent;
 import com.ark.center.trade.domain.order.enums.OrderStatus;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.exception.ExceptionFactory;
 import com.ark.component.statemachine.core.StateMachine;
 import com.ark.component.statemachine.core.StateMachineFactory;
@@ -20,10 +20,9 @@ import java.util.function.Consumer;
 public class TradeOrderStateMachine implements InitializingBean {
 
     private final StateMachineFactory stateMachineFactory;
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
 
     public final static String TRADE_ORDER_MACHINE = "trade_order";
-
 
     private StateMachine<OrderStatus, OrderEvent> stateMachine;
 
@@ -57,7 +56,7 @@ public class TradeOrderStateMachine implements InitializingBean {
      * @param updateOrderConsumer 如果需要更新其他order的字段，可以通过该consumer来set值进去
      */
     private void execute(Long orderId, OrderEvent event, Consumer<Order> updateOrderConsumer) {
-        Order sourceOrder = orderGateway.selectById(orderId);
+        Order sourceOrder = orderService.selectById(orderId);
         if (sourceOrder == null) {
             log.warn("订单不存在 {}", orderId);
             return;
@@ -73,7 +72,7 @@ public class TradeOrderStateMachine implements InitializingBean {
             updateOrderConsumer.accept(updateOrder);
         }
 
-        boolean updated = orderGateway.optimisticLockUpdateOrderStatusAndOthers(sourceOrder, updateOrder);
+        boolean updated = orderService.optimisticLockUpdateOrderStatusAndOthers(sourceOrder, updateOrder);
 
         if (updated) {
             log.warn("订单 [{}] 已发生改变，更新失败", orderId);

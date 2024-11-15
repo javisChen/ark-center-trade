@@ -1,4 +1,4 @@
-package com.ark.center.trade.infra.order.gateway.db;
+package com.ark.center.trade.infra.order.db;
 
 import com.ark.center.trade.domain.order.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

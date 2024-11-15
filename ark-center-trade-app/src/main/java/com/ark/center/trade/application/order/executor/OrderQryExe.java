@@ -4,9 +4,9 @@ import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.infra.order.builder.OrderBuildProfiles;
 import com.ark.center.trade.infra.order.builder.OrderBuilder;
+import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.dto.PageResponse;
 import com.ark.component.exception.ExceptionFactory;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,12 +22,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderQryExe {
 
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
 
     private final OrderBuilder orderBuilder;
 
     public PageResponse<OrderDTO> queryPages(OrderQry pageQry) {
-        IPage<Order> response = orderGateway.selectPages(pageQry);
+        IPage<Order> response = orderService.selectPages(pageQry);
         List<Order> records = response.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return PageResponse.of(new Page<>(response.getCurrent(), response.getSize()));
@@ -44,9 +44,9 @@ public class OrderQryExe {
     public OrderDTO queryDetails(OrderDetailsQuery query) {
         Order order;
         if (query.getId() != null) {
-            order = orderGateway.selectById(query.getId());
+            order = orderService.selectById(query.getId());
         } else if (StringUtils.isNotBlank(query.getTradeNo())){
-            order = orderGateway.selectByTradeNo(query.getTradeNo());
+            order = orderService.selectByTradeNo(query.getTradeNo());
         } else {
             throw ExceptionFactory.userException("id和tradeNo至少传入一个");
         }

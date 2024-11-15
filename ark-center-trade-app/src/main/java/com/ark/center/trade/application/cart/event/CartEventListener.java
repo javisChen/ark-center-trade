@@ -4,7 +4,7 @@ import com.ark.center.trade.application.order.event.OrderCreatedEvent;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.domain.cart.service.CartService;
 import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
+import com.ark.center.trade.infra.order.service.OrderService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class CartEventListener {
 
-    private final OrderGateway orderGateway;
+    private final OrderService orderGateway;
     private final CartService cartService;
 
     /**

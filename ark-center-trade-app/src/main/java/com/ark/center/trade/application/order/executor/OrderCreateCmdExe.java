@@ -12,11 +12,11 @@ import com.ark.center.trade.domain.order.OrderItem;
 import com.ark.center.trade.domain.order.OrderReceive;
 import com.ark.center.trade.domain.order.enums.OrderStatus;
 import com.ark.center.trade.domain.order.enums.PayStatus;
-import com.ark.center.trade.domain.order.gateway.OrderGateway;
 import com.ark.center.trade.domain.order.gateway.SkuGateway;
 import com.ark.center.trade.domain.order.model.Sku;
 import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
 import com.ark.center.trade.infra.order.assembler.OrderReceiveAssembler;
+import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.exception.ExceptionFactory;
 import com.ark.component.security.base.user.LoginUser;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderCreateCmdExe {
 
-    private final OrderGateway orderGateway;
+    private final OrderService orderService;
 
     private final SkuGateway skuGateway;
 
@@ -144,7 +144,7 @@ public class OrderCreateCmdExe {
     }
 
     private Long saveOrder(Order order, List<OrderItem> orderItems) {
-        orderGateway.save(order, orderItems);
+        orderService.save(order, orderItems);
         return order.getId();
     }
 
