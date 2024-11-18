@@ -1,7 +1,7 @@
 package com.ark.center.trade.adapter.pay.web;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.ark.center.trade.application.pay.PayCommandHandler;
+import com.ark.center.trade.application.pay.PayOrderCommandHandler;
 import com.ark.center.trade.application.pay.PayQueryService;
 import com.ark.center.trade.client.pay.PayApi;
 import com.ark.center.trade.client.pay.command.PayOrderCreateCommand;
@@ -33,15 +33,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/v1/pay-orders")
 @RequiredArgsConstructor
-public class PayController extends BaseController implements PayApi {
+public class PayOrderController extends BaseController implements PayApi {
 
-    private final PayCommandHandler payCommandHandler;
+    private final PayOrderCommandHandler payOrderCommandHandler;
     private final PayQueryService payQueryService;
 
     @Operation(summary = "创建支付单")
     @PostMapping("/create")
     public SingleResponse<PayOrderCreateDTO> createPayOrder(@RequestBody @Validated PayOrderCreateCommand command) {
-        return SingleResponse.ok(payCommandHandler.createPayOrder(command));
+        return SingleResponse.ok(payOrderCommandHandler.createPayOrder(command));
     }
 
     @Operation(summary = "获取支付单状态")
@@ -53,7 +53,7 @@ public class PayController extends BaseController implements PayApi {
     @Operation(summary = "订单通知")
     @PostMapping("/notify")
     public SingleResponse<Map<String, Object>> handleNotify(@RequestBody JSONObject reqDTO) {
-        Map<String, Object> notify = payCommandHandler.handleNotify(reqDTO);
+        Map<String, Object> notify = payOrderCommandHandler.handleNotify(reqDTO);
         return SingleResponse.ok(notify);
     }
 

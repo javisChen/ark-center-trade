@@ -1,9 +1,6 @@
 package com.ark.center.trade.infra.pay.service;
 
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.IdUtil;
-import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.pay.command.PayOrderCreateCommand;
 import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.center.trade.client.pay.mq.PayNotifyMessage;
 import com.ark.center.trade.infra.pay.PayOrderDO;
@@ -42,39 +39,6 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrderDO> imp
     private final MessageTemplate messageTemplate;
     private final OrderServiceFacade orderServiceFacade;
     private final ApplicationEventPublisher eventPublisher;
-
-    public PayOrderCreateDTO createPayOrder(PayOrderCreateCommand createCmd) {
-        log.info("生成支付单,入参：{}", createCmd);
-        String payTypeCode = createCmd.getPayTypeCode();
-        Integer payTypeId = createCmd.getPayTypeId();
-        String bizTradeNo = createCmd.getBizTradeNo();
-        String payTradeNo = IdUtil.getSnowflakeNextIdStr();
-
-        OrderDTO order = orderServiceFacade.queryOrder(bizTradeNo);
-        Assert.notNull(order, () -> ExceptionFactory.userException("交易单" + bizTradeNo + "不存在"));
-        log.info("交易单信息：{}", order.getOrderBase());
-
-        PayOrderDO payOrderDO = new PayOrderDO();
-        payOrderDO.setBizTradeNo(bizTradeNo);
-        payOrderDO.setPayTradeNo(payTradeNo);
-        payOrderDO.setPayTypeCode(payTypeCode);
-        payOrderDO.setPayTypeId(payTypeId);
-        payOrderDO.setAmount(order.getOrderAmount().getActualAmount());
-        payOrderDO.setDescription(createCmd.getDescription());
-        payOrderDO.setStatus(PayOrderDO.Status.PENDING_PAY.getValue());
-        save(payOrderDO);
-
-        PayOrderCreateDTO dto = new PayOrderCreateDTO();
-        Long payOrderId = payOrderDO.getId();
-        dto.setPayOrderId(payOrderId);
-        dto.setBizTradeNo(bizTradeNo);
-        dto.setPayTypeCode(payTypeCode);
-
-        // 发布事件
-        eventPublisher.publishEvent(new PayOrderCreatedEvent(this, payOrderDO));
-
-        return dto;
-    }
 
     public PageResponse<PayOrderCreateDTO> getPageList(PayOrderPageQueryReqDTO queryDTO) {
         IPage<PayOrderCreateDTO> page = lambdaQuery()

@@ -31,7 +31,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class PayCommandHandler {
+public class PayOrderCommandHandler {
 
     private final OrderQryExe orderQryExe;
     private final OrderAppService orderAppService;
