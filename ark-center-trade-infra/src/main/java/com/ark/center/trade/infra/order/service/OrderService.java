@@ -102,7 +102,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
                 .update();
     }
 
-    public Order selectByTradeNo(String tradeNo) {
+    public Order byNo(String tradeNo) {
         return lambdaQuery()
                 .eq(Order::getTradeNo, tradeNo)
                 .last("limit 1")

@@ -14,7 +14,7 @@ import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.enums.PayStatus;
 import com.ark.center.trade.infra.order.service.OrderService;
-import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
+import com.ark.center.trade.infra.order.stm.OrderStateMachine;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class OrderAppService {
     private final OrderCreateCmdExe orderCreateCmdExe;
     private final OrderQryExe orderQryExe;
     private final OrderService orderService;
-    private final TradeOrderStateMachine tradeOrderStateMachine;
+    private final OrderStateMachine orderStateMachine;
 
     @Transactional(rollbackFor = Throwable.class)
     public Long createOrder(OrderCreateCmd orderCreateCmd) {
@@ -77,12 +77,12 @@ public class OrderAppService {
     @Transactional(rollbackFor = Throwable.class)
     public void pay(PayNotifyMessage message) {
         String bizTradeNo = message.getBizTradeNo();
-        Order order = orderService.selectByTradeNo(bizTradeNo);
+        Order order = orderService.byNo(bizTradeNo);
         if (order == null) {
             log.warn("订单不存在 {}", bizTradeNo);
             return;
         }
-        tradeOrderStateMachine.pay(order.getId(),
+        orderStateMachine.pay(order.getId(),
                 updateOrder -> {
                     updateOrder.setPayTime(LocalDateTime.now());
                     updateOrder.setPayStatus(PayStatus.PAY_SUCCESS.getValue());
@@ -96,7 +96,7 @@ public class OrderAppService {
             log.warn("订单号为空");
             return;
         }
-        Order order = orderService.selectByTradeNo(tradeNo);
+        Order order = orderService.byNo(tradeNo);
         if (order == null) {
             log.warn("订单不存在 {}", tradeNo);
             return;
@@ -113,7 +113,7 @@ public class OrderAppService {
     @Transactional(rollbackFor = Throwable.class)
     public void deliver(OrderDeliverCmd cmd) {
         log.info("Order [{}] starting deliver, params = {}", cmd.getOrderId(), cmd);
-        tradeOrderStateMachine.deliver(cmd.getOrderId(),
+        orderStateMachine.deliver(cmd.getOrderId(),
                 updateOrder -> {
                     updateOrder.setDeliverTime(LocalDateTime.now());
                     updateOrder.setLogisticsCode(cmd.getLogisticsCode());
@@ -124,7 +124,7 @@ public class OrderAppService {
 
     public void receive(OrderReceiveCmd cmd) {
         log.info("Order [{}] starting receive", cmd.getOrderId());
-        tradeOrderStateMachine.receive(cmd.getOrderId(),
+        orderStateMachine.receive(cmd.getOrderId(),
                 updateOrder -> {
                     updateOrder.setReceiveTime(LocalDateTime.now());
                 });

@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class TradeOrderStateMachine implements InitializingBean {
+public class OrderStateMachine implements InitializingBean {
 
     private final StateMachineFactory stateMachineFactory;
     private final OrderService orderService;

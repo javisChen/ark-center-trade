@@ -1,8 +1,7 @@
-package com.ark.center.trade.adapter.pay.event;
+package com.ark.center.trade.application.pay.event;
 
 import com.alibaba.fastjson2.JSON;
 import com.ark.center.trade.client.pay.common.PayConst;
-import com.ark.center.trade.application.pay.event.PayOrderCreatedEvent;
 import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.center.trade.client.pay.mq.PayOrderCreatedMessage;
 import com.ark.component.mq.MsgBody;

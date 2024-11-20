@@ -2,6 +2,7 @@ package com.ark.center.trade.client.pay.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Schema(description = "PayOrderCreateRespDTO")
+@ToString
 public class PayOrderCreateDTO implements Serializable {
 
     @Schema(description = "支付单ID", requiredMode = Schema.RequiredMode.REQUIRED)

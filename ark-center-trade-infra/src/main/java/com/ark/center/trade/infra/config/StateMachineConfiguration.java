@@ -2,7 +2,7 @@ package com.ark.center.trade.infra.config;
 
 import com.ark.center.trade.domain.order.enums.OrderEvent;
 import com.ark.center.trade.domain.order.enums.OrderStatus;
-import com.ark.center.trade.infra.order.stm.TradeOrderStateMachine;
+import com.ark.center.trade.infra.order.stm.OrderStateMachine;
 import com.ark.component.statemachine.core.StateMachine;
 import com.ark.component.statemachine.core.builder.StateMachineBuilder;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ public class StateMachineConfiguration {
         return StateMachineBuilder.<OrderStatus, OrderEvent>newBuilder()
                 // 状态机基本配置
                 .withConfiguration(configurationBuilder -> configurationBuilder
-                        .machineId(TradeOrderStateMachine.TRADE_ORDER_MACHINE)
+                        .machineId(OrderStateMachine.TRADE_ORDER_MACHINE)
                 )
                 // 状态配置
                 .withStates(stateBuilder -> stateBuilder

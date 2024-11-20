@@ -29,7 +29,7 @@ public class CartEventListener {
     public void onOrderCreated(@NotNull OrderCreatedEvent event) {
 
         Order order = event.getOrder();
-        log.info("Order {} created，try to clear carts", order.getId());
+        log.info("Order {} created，try to empty cart", order.getId());
 
         clearCarts(order);
     }
