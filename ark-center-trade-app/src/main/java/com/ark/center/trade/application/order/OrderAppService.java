@@ -1,7 +1,5 @@
 package com.ark.center.trade.application.order;
 
-import com.ark.center.pay.api.dto.mq.PayNotifyMessage;
-import com.ark.center.pay.api.dto.mq.PayOrderCreatedMessage;
 import com.ark.center.trade.application.order.executor.OrderCreateCmdExe;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
@@ -11,6 +9,7 @@ import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
 import com.ark.center.trade.client.order.query.UserOrderPageQry;
+import com.ark.center.trade.client.pay.mq.PayOrderChangedEventDTO;
 import com.ark.center.trade.domain.order.Order;
 import com.ark.center.trade.domain.order.enums.PayStatus;
 import com.ark.center.trade.infra.order.service.OrderService;
@@ -19,7 +18,6 @@ import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,14 +70,13 @@ public class OrderAppService {
     }
 
     /**
-     * 订单支付
+     * 支付单状态发生变更
      */
     @Transactional(rollbackFor = Throwable.class)
-    public void pay(PayNotifyMessage message) {
-        String bizTradeNo = message.getBizTradeNo();
-        Order order = orderService.byNo(bizTradeNo);
+    public void onPayOrderStatusChanged(PayOrderChangedEventDTO eventDTO) {
+        String bizTradeNo = eventDTO.getBizTradeNo();
+        Order order = orderService.byTradeNo(bizTradeNo);
         if (order == null) {
-            log.warn("订单不存在 {}", bizTradeNo);
             return;
         }
         orderStateMachine.pay(order.getId(),
@@ -89,22 +86,19 @@ public class OrderAppService {
                 });
     }
 
+    /**
+     * 支付单已创建
+     */
     @Transactional(rollbackFor = Throwable.class)
-    public void onPayOrderCreated(PayOrderCreatedMessage message) {
+    public void onPayOrderCreated(PayOrderChangedEventDTO message) {
         String tradeNo = message.getBizTradeNo();
-        if (StringUtils.isBlank(tradeNo)) {
-            log.warn("订单号为空");
-            return;
-        }
-        Order order = orderService.byNo(tradeNo);
+        Order order = orderService.byTradeNo(tradeNo);
         if (order == null) {
-            log.warn("订单不存在 {}", tradeNo);
             return;
         }
         Order updateOrder = new Order();
         updateOrder.setId(order.getId());
         updateOrder.setPayTradeNo(message.getPayTradeNo());
-        updateOrder.setPayType(message.getPayTypeId());
         updateOrder.setPayStatus(PayStatus.PAYING.getValue());
         orderService.updateById(updateOrder);
 

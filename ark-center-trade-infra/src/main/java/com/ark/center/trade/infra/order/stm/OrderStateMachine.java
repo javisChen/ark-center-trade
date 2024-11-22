@@ -56,7 +56,7 @@ public class OrderStateMachine implements InitializingBean {
      * @param updateOrderConsumer 如果需要更新其他order的字段，可以通过该consumer来set值进去
      */
     private void execute(Long orderId, OrderEvent event, Consumer<Order> updateOrderConsumer) {
-        Order sourceOrder = orderService.selectById(orderId);
+        Order sourceOrder = orderService.byId(orderId);
         if (sourceOrder == null) {
             log.warn("订单不存在 {}", orderId);
             return;

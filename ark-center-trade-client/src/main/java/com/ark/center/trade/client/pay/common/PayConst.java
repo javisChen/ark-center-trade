@@ -2,19 +2,20 @@ package com.ark.center.trade.client.pay.common;
 
 public interface PayConst {
 
-    /**
-     * MQ定义
-     */
-    String MQ_TOPIC_PAY = "topic_pay";
-
-    String MQ_TAG_PAY_NOTIFY = "tag_pay_notify";
-
-    String MQ_CG_TAG_PAY_NOTIFY = "cg_pay_pay_notify";
+    String TOPIC_PAY = "topic_pay";
 
     /**
-     * 支付单生成通知
+     * 支付单状态变更
      */
-    String MQ_TAG_PAY_ORDER_CREATED_EVENT = "tag_pay_order_created";
+    String TAG_PAY_ORDER_STATUS_CHANGED = "TAG_PAY_ORDER_STATUS_CHANGED";
 
+    String CG_TAG_PAY_ORDER_STATUS_CHANGED = "TAG_PAY_ORDER_STATUS_CHANGED";
+
+    /**
+     * 支付单已生成
+     */
+    String TAG_PAY_ORDER_CREATED = "TAG_PAY_ORDER_CREATED";
+
+    String CG_TAG_PAY_ORDER_CREATED = "CG_PAY_TAG_PAY_ORDER_CREATED";
 
 }

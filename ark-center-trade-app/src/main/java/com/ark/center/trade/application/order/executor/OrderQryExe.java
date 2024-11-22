@@ -44,9 +44,9 @@ public class OrderQryExe {
     public OrderDTO queryDetails(OrderDetailsQuery query) {
         Order order;
         if (query.getId() != null) {
-            order = orderService.selectById(query.getId());
+            order = orderService.byId(query.getId());
         } else if (StringUtils.isNotBlank(query.getTradeNo())){
-            order = orderService.byNo(query.getTradeNo());
+            order = orderService.byTradeNo(query.getTradeNo());
         } else {
             throw ExceptionFactory.userException("id和tradeNo至少传入一个");
         }

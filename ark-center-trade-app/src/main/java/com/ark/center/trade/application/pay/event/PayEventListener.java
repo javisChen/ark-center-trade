@@ -1,16 +1,17 @@
 package com.ark.center.trade.application.pay.event;
 
+
 import com.alibaba.fastjson2.JSON;
 import com.ark.center.trade.client.pay.common.PayConst;
 import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
-import com.ark.center.trade.client.pay.mq.PayOrderCreatedMessage;
+import com.ark.center.trade.client.pay.mq.PayOrderChangedEventDTO;
 import com.ark.component.mq.MsgBody;
 import com.ark.component.mq.SendConfirm;
 import com.ark.component.mq.SendResult;
 import com.ark.component.mq.integration.MessageTemplate;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -32,14 +33,13 @@ public class PayEventListener {
 
         PayOrderCreateDTO payOrder = event.getPayOrder();
 
-        PayOrderCreatedMessage message = new PayOrderCreatedMessage();
+        PayOrderChangedEventDTO message = new PayOrderChangedEventDTO();
         message.setBizTradeNo(payOrder.getBizTradeNo());
-        message.setPayOrderId(payOrder.getPayOrderId());
         message.setPayTradeNo(payOrder.getPayTradeNo());
         message.setPayTypeCode(payOrder.getPayTypeCode());
         message.setPayTypeCode(payOrder.getPayTypeCode());
 
-        messageTemplate.asyncSend(PayConst.MQ_TOPIC_PAY, PayConst.MQ_TAG_PAY_ORDER_CREATED_EVENT, MsgBody.of(message), new SendConfirm() {
+        messageTemplate.asyncSend(PayConst.TOPIC_PAY, PayConst.TAG_PAY_ORDER_CREATED, MsgBody.of(message), new SendConfirm() {
             @Override
             public void onSuccess(SendResult sendResult) {
                 log.info("Message [pay created] Published successfully. body = [{}]", JSON.toJSONString(message));

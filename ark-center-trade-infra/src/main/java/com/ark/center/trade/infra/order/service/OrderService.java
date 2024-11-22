@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
     private final OrderAssembler orderAssembler;
@@ -57,7 +59,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         return this.page(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
     }
 
-    public Order selectById(Long orderId) {
+    public Order byId(Long orderId) {
         return getById(orderId);
     }
 
@@ -102,11 +104,19 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
                 .update();
     }
 
-    public Order byNo(String tradeNo) {
-        return lambdaQuery()
+    public Order byTradeNo(String tradeNo) {
+        if (StringUtils.isBlank(tradeNo)) {
+            log.warn("TradeNo cannot be blank");
+            return null;
+        }
+        Order order = lambdaQuery()
                 .eq(Order::getTradeNo, tradeNo)
                 .last("limit 1")
                 .one();
+        if (order == null) {
+            log.warn("Order {} does not exist", tradeNo);
+        }
+        return order;
     }
 
 }

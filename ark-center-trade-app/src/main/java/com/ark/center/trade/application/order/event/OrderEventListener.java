@@ -24,17 +24,17 @@ public class OrderEventListener {
     private final OrderStateMachine orderStateMachine;
 
     /**
-     * 订单生成后，把用户对应的购物车商品删除。
-     * 把该事件监听放在cart模块，与order解耦
+     * 监听
+     * @param event
      */
     @EventListener
-    public void onOrderCreated(@NotNull PayOrderCreatedEvent event) {
+    public void onPayOrderCreated(@NotNull PayOrderCreatedEvent event) {
 
         PayOrderCreateDTO dto = event.getPayOrder();
         log.info("Order {} paid", dto);
 
         String bizTradeNo = dto.getBizTradeNo();
-        Order order = orderService.byNo(bizTradeNo);
+        Order order = orderService.byTradeNo(bizTradeNo);
         orderStateMachine.pay(order.getId(), null);
 
     }

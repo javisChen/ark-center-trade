@@ -11,28 +11,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单支付单生成成功后通知
+ * 订单支付成功后通知
  */
 @MQMessageListener(
         mq = MQType.ROCKET,
-        consumerGroup = PayConst.CG_TAG_PAY_ORDER_CREATED,
+        consumerGroup = PayConst.CG_TAG_PAY_ORDER_STATUS_CHANGED,
         topic = PayConst.TOPIC_PAY,
-        tags = PayConst.TAG_PAY_ORDER_CREATED
+        tags = PayConst.TAG_PAY_ORDER_STATUS_CHANGED
 )
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class PayOrderCreatedEventListener extends SimpleMessageHandler<PayOrderChangedEventDTO> {
+public class PayOrderStatusChangedEventListener extends SimpleMessageHandler<PayOrderChangedEventDTO> {
 
     private final OrderAppService orderAppService;
 
     @Override
     protected void handleMessage(String msgId, String sendId, PayOrderChangedEventDTO eventDTO, Object o) {
-        log.info("Received [PayOrderCreated] message -> msgId = {}, sendId = {}, eventDTO = {}", msgId, sendId, eventDTO);
+        log.info("Received [PayOrderChanged] message -> msgId = {}, sendId = {}, eventDTO = {}", msgId, sendId, eventDTO);
         String bizTradeNo = eventDTO.getBizTradeNo();
         try {
-            orderAppService.onPayOrderCreated(eventDTO);
-            log.info("Order {} has been updated successfully", bizTradeNo);
+            orderAppService.onPayOrderStatusChanged(eventDTO);
+            log.info("Order {} has been updated Successfully", bizTradeNo);
         } catch (Exception e) {
             log.error("Failed to update order {}", bizTradeNo, e);
             throw e;

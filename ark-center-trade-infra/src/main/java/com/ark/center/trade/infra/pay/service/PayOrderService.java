@@ -72,14 +72,14 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrderDO> imp
 //        return Maps.newHashMap();
 //    }
 
-    private PayOrderDO getByTradeNo(String payTradeNo) {
+    public PayOrderDO getByTradeNo(String payTradeNo) {
         return lambdaQuery()
                 .eq(PayOrderDO::getPayTradeNo, payTradeNo)
                 .last("limit 1")
                 .one();
     }
 
-    private void updatePayOrderStatus(Long payOrderId, Integer status) {
+    public void updatePayOrderStatus(Long payOrderId, Integer status) {
         lambdaUpdate()
                 .eq(BaseEntity::getId, payOrderId)
                 .set(PayOrderDO::getStatus, PayOrderDO.Status.PAY_SUCCESS.getValue())
