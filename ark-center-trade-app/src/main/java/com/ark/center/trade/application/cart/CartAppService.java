@@ -1,15 +1,15 @@
 package com.ark.center.trade.application.cart;
 
 import com.alibaba.fastjson.JSON;
-import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemCheckCmd;
+import com.ark.center.trade.client.cartitem.command.CartItemCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemDeleteCmd;
 import com.ark.center.trade.client.cartitem.command.CartItemUpdateCmd;
 import com.ark.center.trade.client.cartitem.dto.CartItemDTO;
-import com.ark.center.trade.domain.cart.CartItem;
-import com.ark.center.trade.domain.cart.gateway.CartGateway;
-import com.ark.center.trade.domain.order.gateway.SkuGateway;
-import com.ark.center.trade.domain.order.model.Sku;
+import com.ark.center.trade.infra.cart.CartItem;
+import com.ark.center.trade.infra.cart.service.CartService;
+import com.ark.center.trade.infra.order.gateway.SkuGateway;
+import com.ark.center.trade.infra.order.model.Sku;
 import com.ark.component.context.core.ServiceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 public class CartAppService {
 
-    private final CartGateway cartGateway;
+    private final CartService cartService;
 
     private final SkuGateway skuGateway;
 
@@ -31,14 +31,14 @@ public class CartAppService {
     public void save(CartItemCmd cmd) {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
         Long skuId = cmd.getSkuId();
-        CartItem cartItem = cartGateway.selectItem(currentUserId, skuId);
+        CartItem cartItem = cartService.selectItem(currentUserId, skuId);
         if (cartItem == null) {
             Sku sku = skuGateway.querySku(skuId);
             log.info("Add to cart item, sku = {}", sku);
             cartItem = createCartItem(currentUserId, skuId, sku);
-            cartGateway.insert(cartItem);
+            cartService.insert(cartItem);
         } else {
-            cartGateway.updateQuantity(cartItem.getId(), cartItem.getQuantity() + 1);
+            cartService.updateQuantity(cartItem.getId(), cartItem.getQuantity() + 1);
         }
     }
 
@@ -58,26 +58,26 @@ public class CartAppService {
     }
 
     public void checkCartItem(CartItemCheckCmd cmd) {
-        CartItem cartItem = cartGateway.selectById(cmd.getCartItemId());
+        CartItem cartItem = cartService.selectById(cmd.getCartItemId());
         if (cartItem != null) {
-            cartGateway.updateChecked(cartItem, cmd.getChecked());
+            cartService.updateChecked(cartItem, cmd.getChecked());
         }
     }
 
     public List<CartItemDTO> queryUserItems() {
         Long currentUserId = ServiceContext.getCurrentUser().getUserId();
-        return cartGateway.selectByBuyer(currentUserId);
+        return cartService.selectByBuyer(currentUserId);
     }
 
     public void updateCartItemQuantity(CartItemUpdateCmd cmd) {
-        CartItem cartItem = cartGateway.selectById(cmd.getCartItemId());
+        CartItem cartItem = cartService.selectById(cmd.getCartItemId());
         if (cartItem != null) {
-            cartGateway.updateQuantity(cartItem.getId(), cmd.getQuantity());
+            cartService.updateQuantity(cartItem.getId(), cmd.getQuantity());
         }
     }
 
     public void deleteCartItems(CartItemDeleteCmd cmd) {
-        cartGateway.deleteByIds(cmd.getCartItemIds());
+        cartService.deleteByIds(cmd.getCartItemIds());
     }
 
 }

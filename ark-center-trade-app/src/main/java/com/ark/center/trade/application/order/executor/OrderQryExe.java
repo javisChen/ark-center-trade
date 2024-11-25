@@ -3,7 +3,7 @@ package com.ark.center.trade.application.order.executor;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
-import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.infra.order.Order;
 import com.ark.center.trade.infra.order.builder.OrderBuildProfiles;
 import com.ark.center.trade.infra.order.builder.OrderBuilder;
 import com.ark.center.trade.infra.order.service.OrderService;

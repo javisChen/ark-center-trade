@@ -1,7 +1,7 @@
 package com.ark.center.trade.infra.order.builder;
 
 import com.ark.center.trade.client.order.dto.*;
-import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.infra.order.Order;
 import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.common.util.assemble.DataProcessor;
 import com.google.common.collect.Lists;

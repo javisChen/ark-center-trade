@@ -1,6 +1,6 @@
 package com.ark.center.trade.infra.order.db;
 
-import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.infra.order.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

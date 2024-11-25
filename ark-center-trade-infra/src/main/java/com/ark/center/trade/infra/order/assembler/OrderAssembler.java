@@ -4,8 +4,8 @@ package com.ark.center.trade.infra.order.assembler;
 import com.ark.center.trade.client.order.dto.OrderDTO;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.client.order.dto.OrderProductDTO;
-import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.OrderItem;
+import com.ark.center.trade.infra.order.Order;
+import com.ark.center.trade.infra.order.OrderItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

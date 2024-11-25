@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @MapperScan(basePackages = {
-        "com.ark.center.trade.infra.*.gateway.db",
+        "com.ark.center.trade.infra.*.db",
 })
 @SpringBootApplication
 @EnableFeignClients()

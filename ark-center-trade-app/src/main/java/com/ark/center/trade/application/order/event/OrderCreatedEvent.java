@@ -1,6 +1,6 @@
 package com.ark.center.trade.application.order.event;
 
-import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.infra.order.Order;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;

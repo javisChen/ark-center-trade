@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.ark.center.trade.application.pay.PayOrderCommandHandler;
 import com.ark.center.trade.application.pay.PayQueryService;
 import com.ark.center.trade.client.pay.PayApi;
-import com.ark.center.trade.client.pay.command.PayOrderCreateCommand;
 import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
 import com.ark.center.trade.client.pay.query.PayOrderPageQuery;
 import com.ark.component.dto.PageResponse;
@@ -38,11 +37,11 @@ public class PayOrderController extends BaseController implements PayApi {
     private final PayOrderCommandHandler payOrderCommandHandler;
     private final PayQueryService payQueryService;
 
-    @Operation(summary = "创建支付单")
-    @PostMapping("/create")
-    public SingleResponse<PayOrderCreateDTO> createPayOrder(@RequestBody @Validated PayOrderCreateCommand command) {
-        return SingleResponse.ok(payOrderCommandHandler.createPayOrder(command));
-    }
+//    @Operation(summary = "创建支付单")
+//    @PostMapping("/create")
+//    public SingleResponse<PayOrderCreateDTO> createPayOrder(@RequestBody @Validated PayOrderCreateCommand command) {
+//        return SingleResponse.ok(payOrderCommandHandler.createPayOrder(command));
+//    }
 
     @Operation(summary = "获取支付单状态")
     @GetMapping("/status")

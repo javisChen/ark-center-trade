@@ -3,9 +3,8 @@ package com.ark.center.trade.infra.order.service;
 import com.ark.center.trade.client.order.dto.OrderItemDTO;
 import com.ark.center.trade.client.order.dto.OrderReceiveDTO;
 import com.ark.center.trade.client.order.query.OrderQry;
-import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.OrderItem;
-import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
+import com.ark.center.trade.infra.order.Order;
+import com.ark.center.trade.infra.order.OrderItem;
 import com.ark.center.trade.infra.order.assembler.OrderAssembler;
 import com.ark.center.trade.infra.order.db.OrderItemMapper;
 import com.ark.center.trade.infra.order.db.OrderMapper;
@@ -32,7 +31,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
     private final OrderItemMapper orderItemMapper;
 
-    private final OrderReceiveGateway orderReceiveGateway;
+    private final OrderReceiveService orderReceiveService;
 
     public void save(Order order, List<OrderItem> orderItems) {
 
@@ -55,7 +54,6 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
                 .like(StringUtils.isNotBlank(pageQry.getTradeNo()), Order::getTradeNo, pageQry.getTradeNo())
                 .eq(pageQry.getOrderStatus() != null, Order::getOrderStatus, pageQry.getOrderStatus())
                 .orderByDesc(BaseEntity::getCreateTime);
-
         return this.page(new Page<>(pageQry.getCurrent(), pageQry.getSize()), qw);
     }
 
@@ -75,7 +73,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
     }
 
     public List<OrderReceiveDTO> selectReceives(List<Long> orderIds) {
-        return orderReceiveGateway.selectByOrderIds(orderIds);
+        return orderReceiveService.selectByOrderIds(orderIds);
     }
 
     public void updateOrderPayStatus(Order order) {

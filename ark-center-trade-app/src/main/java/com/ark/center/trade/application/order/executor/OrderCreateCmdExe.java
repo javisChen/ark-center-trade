@@ -7,15 +7,15 @@ import com.ark.center.trade.application.order.event.OrderCreatedEvent;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderCreateItemCmd;
 import com.ark.center.trade.client.order.command.OrderCreateReceiveCreateCmd;
-import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.OrderItem;
-import com.ark.center.trade.domain.order.OrderReceive;
-import com.ark.center.trade.domain.order.enums.OrderStatus;
-import com.ark.center.trade.domain.order.enums.PayStatus;
-import com.ark.center.trade.domain.order.gateway.SkuGateway;
-import com.ark.center.trade.domain.order.model.Sku;
-import com.ark.center.trade.domain.receive.gateway.OrderReceiveGateway;
+import com.ark.center.trade.infra.order.Order;
+import com.ark.center.trade.infra.order.OrderItem;
+import com.ark.center.trade.infra.order.OrderReceive;
 import com.ark.center.trade.infra.order.assembler.OrderReceiveAssembler;
+import com.ark.center.trade.infra.order.constants.OrderStatus;
+import com.ark.center.trade.infra.order.constants.PayStatus;
+import com.ark.center.trade.infra.order.gateway.SkuGateway;
+import com.ark.center.trade.infra.order.model.Sku;
+import com.ark.center.trade.infra.order.service.OrderReceiveService;
 import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.exception.ExceptionFactory;
@@ -39,7 +39,7 @@ public class OrderCreateCmdExe {
 
     private final SkuGateway skuGateway;
 
-    private final OrderReceiveGateway orderReceiveGateway;
+    private final OrderReceiveService orderReceiveService;
 
     private final OrderReceiveAssembler orderReceiveAssembler;
 
@@ -153,7 +153,7 @@ public class OrderCreateCmdExe {
         if (receiveInfo != null) {
             OrderReceive orderReceive = orderReceiveAssembler.convertToReceive(receiveInfo);
             orderReceive.setOrderId(orderId);
-            orderReceiveGateway.save(orderReceive);
+            orderReceiveService.save(orderReceive);
         }
     }
 }

@@ -2,7 +2,7 @@ package com.ark.center.trade.application.order.event;
 
 import com.ark.center.trade.application.pay.event.PayOrderCreatedEvent;
 import com.ark.center.trade.client.pay.dto.PayOrderCreateDTO;
-import com.ark.center.trade.domain.order.Order;
+import com.ark.center.trade.infra.order.Order;
 import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.center.trade.infra.order.stm.OrderStateMachine;
 import jakarta.validation.constraints.NotNull;

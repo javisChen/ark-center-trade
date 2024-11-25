@@ -1,8 +1,8 @@
 package com.ark.center.trade.infra.order.stm;
 
-import com.ark.center.trade.domain.order.Order;
-import com.ark.center.trade.domain.order.enums.OrderEvent;
-import com.ark.center.trade.domain.order.enums.OrderStatus;
+import com.ark.center.trade.infra.order.Order;
+import com.ark.center.trade.infra.order.constants.OrderEvent;
+import com.ark.center.trade.infra.order.constants.OrderStatus;
 import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.component.exception.ExceptionFactory;
 import com.ark.component.statemachine.core.StateMachine;

@@ -3,7 +3,7 @@ package com.ark.center.trade.application.user;
 import com.ark.center.trade.client.receive.cmd.ReceiveCmd;
 import com.ark.center.trade.client.receive.dto.ReceiveDTO;
 import com.ark.center.trade.client.receive.query.UserReceivePageQry;
-import com.ark.center.trade.domain.receive.gateway.UserReceiveGateway;
+import com.ark.center.trade.infra.receive.gateway.UserReceiveGateway;
 import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
