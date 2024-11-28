@@ -2,7 +2,7 @@ package com.ark.center.trade.client.pay.common;
 
 public interface PayConst {
 
-    String TOPIC_PAY = "topic_pay";
+    String TOPIC_PAY = "TOPIC_PAY";
 
     /**
      * 支付单状态变更
