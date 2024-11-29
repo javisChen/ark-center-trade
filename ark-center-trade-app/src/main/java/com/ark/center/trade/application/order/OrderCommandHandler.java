@@ -6,15 +6,12 @@ import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.command.OrderReceiveCmd;
 import com.ark.center.trade.client.order.dto.OrderDTO;
-import com.ark.center.trade.client.order.query.OrderDetailsQuery;
 import com.ark.center.trade.client.order.query.OrderQry;
-import com.ark.center.trade.client.order.query.UserOrderPageQry;
 import com.ark.center.trade.client.pay.mq.PayOrderChangedEventDTO;
 import com.ark.center.trade.infra.order.Order;
 import com.ark.center.trade.infra.order.constants.PayStatus;
 import com.ark.center.trade.infra.order.service.OrderService;
 import com.ark.center.trade.infra.order.stm.OrderStateMachine;
-import com.ark.component.context.core.ServiceContext;
 import com.ark.component.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +23,7 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OrderAppService {
+public class OrderCommandHandler {
 
     private final OrderCreateCmdExe orderCreateCmdExe;
     private final OrderQryExe orderQryExe;
@@ -47,33 +44,12 @@ public class OrderAppService {
         return orderQryExe.queryPages(qry);
     }
 
-    /**
-     * 查询用户的订单列表
-     */
-    public PageResponse<OrderDTO> queryUserOrderPages(UserOrderPageQry qry) {
-        OrderQry orderQry = new OrderQry();
-        orderQry.setBuyerId(ServiceContext.getCurrentUser().getUserId());
-        orderQry.setOrderStatus(qry.getOrderStatus());
-        orderQry.setPayStatus(qry.getPayStatus());
-        orderQry.setTradeNo(qry.getTradeNo());
-        orderQry.setCurrent(qry.getCurrent());
-        orderQry.setSize(qry.getSize());
-        orderQry.setWithOrderItems(true);
-        return orderQryExe.queryPages(orderQry);
-    }
-
-    /**
-     * 查询订单详情
-     */
-    public OrderDTO queryDetails(OrderDetailsQuery qry) {
-        return orderQryExe.queryDetails(qry);
-    }
 
     /**
      * 支付单状态发生变更
      */
     @Transactional(rollbackFor = Throwable.class)
-    public void onPayOrderStatusChanged(PayOrderChangedEventDTO eventDTO) {
+    public void handlePayOrderStatusChanged(PayOrderChangedEventDTO eventDTO) {
         String bizTradeNo = eventDTO.getBizTradeNo();
         Order order = orderService.byTradeNo(bizTradeNo);
         if (order == null) {

@@ -3,7 +3,7 @@ package com.ark.center.trade.application.pay;
 import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.ark.center.trade.application.order.OrderAppService;
+import com.ark.center.trade.application.order.OrderQueryService;
 import com.ark.center.trade.application.order.executor.OrderQryExe;
 import com.ark.center.trade.client.pay.common.PayConst;
 import com.ark.center.trade.client.pay.mq.PayOrderChangedEventDTO;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class PayOrderCommandHandler {
 
     private final OrderQryExe orderQryExe;
-    private final OrderAppService orderAppService;
+    private final OrderQueryService orderQueryService;
     private final OrderService orderService;
     private final PayOrderService payOrderService;
     private final ApplicationEventPublisher eventPublisher;

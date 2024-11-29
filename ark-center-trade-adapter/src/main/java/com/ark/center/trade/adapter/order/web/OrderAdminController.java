@@ -1,6 +1,7 @@
 package com.ark.center.trade.adapter.order.web;
 
-import com.ark.center.trade.application.order.OrderAppService;
+import com.ark.center.trade.application.order.OrderCommandHandler;
+import com.ark.center.trade.application.order.OrderQueryService;
 import com.ark.center.trade.client.order.command.OrderCreateCmd;
 import com.ark.center.trade.client.order.command.OrderDeliverCmd;
 import com.ark.center.trade.client.order.command.OrderReceiveCmd;
@@ -24,38 +25,39 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/admin/order")
 public class OrderAdminController extends BaseController {
 
-    private final OrderAppService orderAppService;
+    private final OrderQueryService orderQueryService;
+    private final OrderCommandHandler orderCommandHandler;
 
     @Operation(summary = "创建订单")
     @PostMapping("/create")
     public SingleResponse<Long> create(@RequestBody @Validated OrderCreateCmd cmd) {
-        return SingleResponse.ok(orderAppService.createOrder(cmd));
+        return SingleResponse.ok(orderCommandHandler.createOrder(cmd));
     }
 
     @Operation(summary = "订单发货")
     @PostMapping("/deliver")
     public ServerResponse deliver(@RequestBody @Validated OrderDeliverCmd cmd) {
-        orderAppService.deliver(cmd);
+        orderCommandHandler.deliver(cmd);
         return ServerResponse.ok();
     }
 
     @Operation(summary = "确认收货")
     @PostMapping("/receive")
     public ServerResponse receive(@RequestBody @Validated OrderReceiveCmd cmd) {
-        orderAppService.receive(cmd);
+        orderCommandHandler.receive(cmd);
         return ServerResponse.ok();
     }
 
     @Operation(summary = "查询订单列表")
     @PostMapping("/pages")
     public SingleResponse<PageResponse<OrderDTO>> queryPages(@RequestBody @Validated OrderQry qry) {
-        return SingleResponse.ok(orderAppService.queryPages(qry));
+        return SingleResponse.ok(orderQueryService.queryPages(qry));
     }
 
     @Operation(summary = "查询订单详情")
     @GetMapping("/details")
     public SingleResponse<OrderDTO> details(OrderDetailsQuery qry) {
-        return SingleResponse.ok(orderAppService.queryDetails(qry));
+        return SingleResponse.ok(orderQueryService.queryDetails(qry));
     }
 
 

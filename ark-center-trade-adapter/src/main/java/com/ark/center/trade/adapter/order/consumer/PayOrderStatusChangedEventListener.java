@@ -1,6 +1,6 @@
 package com.ark.center.trade.adapter.order.consumer;
 
-import com.ark.center.trade.application.order.OrderAppService;
+import com.ark.center.trade.application.order.OrderCommandHandler;
 import com.ark.center.trade.client.pay.common.PayConst;
 import com.ark.center.trade.client.pay.mq.PayOrderChangedEventDTO;
 import com.ark.component.mq.MQType;
@@ -24,14 +24,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PayOrderStatusChangedEventListener extends SimpleMessageHandler<PayOrderChangedEventDTO> {
 
-    private final OrderAppService orderAppService;
+    private final OrderCommandHandler orderCommandHandler;
 
     @Override
     protected void handleMessage(String msgId, String sendId, PayOrderChangedEventDTO eventDTO, Object o) {
         log.info("Received [PayOrderChanged] message -> msgId = {}, sendId = {}, eventDTO = {}", msgId, sendId, eventDTO);
         String bizTradeNo = eventDTO.getBizTradeNo();
         try {
-            orderAppService.onPayOrderStatusChanged(eventDTO);
+            orderCommandHandler.handlePayOrderStatusChanged(eventDTO);
             log.info("Order {} has been updated Successfully", bizTradeNo);
         } catch (Exception e) {
             log.error("Failed to update order {}", bizTradeNo, e);
